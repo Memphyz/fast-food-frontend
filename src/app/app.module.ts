@@ -3,9 +3,10 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './features/components/components.module';
 import { SharedModule } from './features/shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { faker } from '@faker-js/faker';
 
 @NgModule({
   declarations: [
@@ -23,4 +24,13 @@ import { BrowserModule } from '@angular/platform-browser';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+  public static injector: Injector;
+
+  constructor(private readonly injector: Injector) {
+    AppModule.injector = this.injector
+    console.log(faker.company.companyName())
+
+  }
+}
