@@ -1,7 +1,7 @@
-import { ComponentsModule } from './../features/components/components.module';
-import { SharedModule } from './../features/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ComponentsModule } from './features/components/components.module';
+import { SharedModule } from './features/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
