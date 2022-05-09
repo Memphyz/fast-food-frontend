@@ -1,4 +1,5 @@
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './login/register/register.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,13 +11,17 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '**',
+    path: '*',
     redirectTo: 'home',
     pathMatch: 'full'
   },
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ]
 

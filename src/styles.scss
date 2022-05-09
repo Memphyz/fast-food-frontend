@@ -1,12 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
+// Font Awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+// MDB SCSS
+@import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
+
+// BOOTSTRAP
+@import "~bootstrap/dist/css/bootstrap.css";
+
 body,
 html {
   padding: 0;
   margin: 0;
+  background-color: var(--bg);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  transition: all 0.5s;
 }
 
 :root {
   --primary: #ff6363;
   --secondary: #ff4646;
+  --bg: #e1e1e1;
+  --mobile: 768px;
+  --disabled: #7e7e7e;
+  --primary-light: #f57a7a;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";

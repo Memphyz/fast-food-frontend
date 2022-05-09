@@ -1,17 +1,47 @@
-<header>
+<header *ngIf="!show">
   <div class="header-content">
-    <div class="left">
-      <div class="logo"
-        [routerLink]="['/home']"
-        routerLinkActive="router-link-active">
+    <ng-container *ngIf="mobile else desktop">
+      <div class="left">
+        <button type="button"
+          (click)="checkbox.click()"
+          title="open"
+          class="open"></button>
+        <div class="logo"
+          [routerLink]="['/home']"
+          routerLinkActive="router-link-active">
+        </div>
       </div>
-    </div>
-    <div class="right">
-      <button class="outline">Cadastrar</button>
-      <button>Entrar</button>
-    </div>
+    </ng-container>
+    <ng-template #desktop>
+      <div class="left">
+        <div class="logo"
+          [routerLink]="['/home']"
+          routerLinkActive="router-link-active">
+        </div>
+      </div>
+      <div class="right">
+        <ng-container *ngFor="let button of leftButtons">
+          <button [routerLink]="button.routerlink"
+            [class]="button.class">{{button.label}}</button>
+        </ng-container>
+      </div>
+    </ng-template>
+
   </div>
 </header>
+<input #checkbox
+  hidden
+  class="header-input"
+  type="checkbox"
+  title="toggle">
+<div class="collapse">
+  <div class="collapse-content">
+    <button type="button"
+      (click)="checkbox.click()"
+      title="close"
+      class="close"></button>
+  </div>
+</div>
 <div class="fast-content">
   <ng-content></ng-content>
 </div>
