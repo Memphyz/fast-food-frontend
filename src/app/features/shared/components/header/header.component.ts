@@ -1,4 +1,4 @@
-import { HeaderButton } from './../../../core/interfaces/header-button.interface';
+import { HeaderButton } from './../../../../core/interfaces/header-button.interface';
 import { Component, HostListener } from '@angular/core';
 
 @Component({
@@ -9,7 +9,9 @@ import { Component, HostListener } from '@angular/core';
 export class HeaderComponent {
 
   public get show(): boolean {
-    return window.location.pathname.includes('register') || window.location.pathname.includes('login')
+    return window.location.pathname.includes('register')
+      || window.location.pathname.includes('sign-in')
+      || window.location.pathname.includes('forgot-password');
   }
 
   public mobile = window.innerWidth < 768;
@@ -23,7 +25,7 @@ export class HeaderComponent {
       },
       {
         label: 'Entrar',
-        routerlink: ['/login']
+        routerlink: ['/sign-in']
       }
     ]
   }

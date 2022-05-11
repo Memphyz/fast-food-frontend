@@ -1,0 +1,10 @@
+:host {
+  margin: 20px 0px 0px 0px;
+}
+
+:host([disabled="true"]),
+:host(.disabled) {
+  filter: opacity(0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}

@@ -15,6 +15,14 @@ export abstract class AbstractService<Model> {
     return this.httpClient.get<T>(this.BASE_URL + this.endpont)
   }
 
+  public post<T>(body: T): Observable<void> {
+    return this.httpClient.post<void>(this.BASE_URL + this.endpont, body);
+  }
+
+  public save<T>(body: T): Observable<void> {
+    return this.post(body);
+  }
+
   public findAll(): Observable<Model[]> {
     return this.get();
   }

@@ -44,8 +44,8 @@
       max-width: 100%;
       position: absolute;
       right: 0;
-      left: 15vw;
-      top: 10%;
+      left: calc(15vw - 100px);
+      top: 15vh;
     }
   }
 }

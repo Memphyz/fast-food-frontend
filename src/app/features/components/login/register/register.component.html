@@ -1,14 +1,65 @@
 <div class="register-container">
-  <form>
-    <mdb-form-control>
-      <input mdbInput
-        type="text"
-        id="typeText"
-        class="form-control" />
-      <label mdbLabel
-        class="form-label"
-        for="typeText">Text input</label>
-    </mdb-form-control>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <fast-input label="Nome"
+          errorMessage
+          placeholder="Informe o nome"
+          formControlName="name"></fast-input>
+      </div>
+      <div class="col-12 col-lg-6">
+        <fast-input label="Sobrenome"
+          errorMessage
+          placeholder="Informe o sobrenome"
+          formControlName="surname"></fast-input>
+      </div>
+    </div>
+    <div class="row">
+      <fast-input formControlName="email"
+        type="email"
+        errorMessage
+        label="E-mail"
+        placeholder="Informe o E-mail"></fast-input>
+    </div>
+    <div class="row">
+      <fast-input formControlName="password"
+        type="password"
+        errorMessage
+        label="Senha"
+        placeholder="Informe a senha"></fast-input>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 col-lg-6">
+        <fast-date-picker formControlName="born"
+          errorMessage
+          [customErrors]="{dataInvalida: 'Data de nascimento inválida'}"
+          ngDefaultControl
+          label="Data de nascimento"
+          placeholder="Informe a data de nascimento">
+        </fast-date-picker>
+      </div>
+      <div class="col-12 col-lg-6">
+        <fast-input formControlName="cpf"
+          type="text"
+          errorMessage
+          field="CPF"
+          label="CPF"
+          mask="000.000.000-00"
+          placeholder="Informe o CPF"></fast-input>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-6">
+        <button type="button"
+          class="outline w-100 ml-4 mr-4"
+          [routerLink]="['../', 'home']">Voltar</button>
+      </div>
+      <div class="col-6">
+        <button type="button"
+          class="w-100 ml-4 mr-4"
+          (click)="btnSave()">Cadastrar</button>
+      </div>
+    </div>
   </form>
 </div>
 <div class="illus">

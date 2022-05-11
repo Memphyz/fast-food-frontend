@@ -1,0 +1,20 @@
+{{dateModel | json}}
+<input class="form-control"
+  hidden
+  placeholder="yyyy-mm-dd"
+  name="dp"
+  [disabled]="disabled"
+  ngbDatepicker
+  [(ngModel)]="dateModel"
+  #d="ngbDatepicker">
+<fast-input #inputRef
+  [label]="label"
+  [(ngModel)]="visibleValue"
+  (ngModelChange)="onTypeDate()"
+  ngbDatepicker
+  [class.ng-touched]="control.touched"
+  [class.ng-invalid]="control.invalid"
+  [disabled]="disabled"
+  (click)="d.toggle()"
+  [placeholder]="placeholder"
+  mask="00/00/0000"></fast-input>

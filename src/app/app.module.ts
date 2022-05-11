@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { faker } from '@faker-js/faker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -62,7 +61,6 @@ export class AppModule {
 
   constructor(private readonly injector: Injector) {
     AppModule.injector = this.injector
-    console.log(faker.company.companyName())
 
   }
 }

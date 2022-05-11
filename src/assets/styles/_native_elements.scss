@@ -4,12 +4,89 @@ button {
   outline: unset;
   border: 1px solid var(--secondary);
   background-color: var(--primary);
-  border-radius: 6px;
+  border-radius: 6px !important;
   padding: 0px 10px;
   color: white;
 
   &.outline {
     color: unset;
     background-color: transparent;
+  }
+}
+
+input {
+  min-height: 40px !important;
+}
+
+mdb-form-control > .form-label {
+  top: 3px !important;
+}
+
+fast-input.ng-invalid.ng-touched > mdb-form-control {
+  label {
+    color: var(--primary) !important;
+  }
+  .form-notch div {
+    border-width: 1px !important;
+    border-color: var(--primary) !important;
+    animation: 1s border-animation;
+  }
+}
+
+mdb-form-control > input:focus ~ {
+  .form-label {
+    color: var(--primary) !important;
+  }
+  .form-notch div {
+    border-color: var(--primary) !important;
+  }
+}
+
+ngb-datepicker {
+  position: absolute;
+  inset: unset !important;
+  margin: unset !important;
+  transform: unset !important;
+  top: calc(100% + 10px) !important;
+  animation: fadeIn 0.5s;
+
+  ngb-dp-weekday {
+    font-family: "lucky" !important;
+  }
+
+  .ngb-dp-arrow-btn {
+    gap: 10px;
+  }
+
+  .ngb-dp-navigation-chevron {
+    position: relative;
+    bottom: 7px;
+  }
+
+  .ngb-dp-arrow-btn:hover {
+    background-color: unset;
+  }
+
+  div.ngb-dp-header,
+  div.ngb-dp-content
+    > div.ngb-dp-month
+    > ngb-datepicker-month
+    > div.ngb-dp-weekdays {
+    background-color: white !important;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: white;
+    top: -8px;
+    transform: rotate(45deg);
+    left: 15px;
+    border-radius: 4px;
+    border-bottom: 0;
+    border-right: 0;
   }
 }
