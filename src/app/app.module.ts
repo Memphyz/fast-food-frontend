@@ -1,11 +1,14 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpRequestInterceptor } from './core/interceptors/http-request.interceptor';
 import { ComponentsModule } from './features/components/components.module';
 import { SharedModule } from './features/shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -22,6 +25,7 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,9 +33,11 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CommonModule,
     ComponentsModule,
+    HttpClientModule,
     SharedModule,
     FormsModule,
     MdbAccordionModule,
@@ -50,9 +56,21 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
     MdbTooltipModule,
     MdbValidationModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      preventDuplicates: true,
+      countDuplicates: true,
+      includeTitleDuplicates: true,
+      progressAnimation: 'decreasing',
+      progressBar: true
+    })
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

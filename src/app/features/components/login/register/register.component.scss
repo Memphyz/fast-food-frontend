@@ -4,21 +4,25 @@
   display: flex;
   align-items: center;
   gap: 50px;
-  position: absolute;
   padding: 60px;
   max-width: 1600px;
-  left: 0;
+  overflow: hidden;
 
   &::after {
     content: "";
-    position: absolute;
+    position: fixed;
     min-width: 130vw;
     min-height: 130vw;
     right: 0;
-    background: var(--primary-light);
+    background-color: var(--primary-light);
     z-index: 10;
     border-radius: 100% 100%;
     transform: translate(60%, 0%);
+    @media screen and (max-width: 768px) {
+      min-width: 230vw;
+      min-height: 230vw;
+      transform: translate(25%, -35%);
+    }
   }
   .register-container {
     width: 100%;
@@ -34,18 +38,24 @@
   }
 
   .illus {
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     position: relative;
     z-index: 1000;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+
     img {
       width: 100vw;
       max-width: 100%;
+      min-width: 365px;
       position: absolute;
-      right: 0;
+      left: 10vw;
       left: calc(15vw - 100px);
-      top: 15vh;
+      top: calc(20% - 10vh);
     }
   }
 }

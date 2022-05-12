@@ -1,6 +1,7 @@
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InputComponent } from './components/input/input.component';
+import { SwitchComponent } from './components/switch/switch.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,12 +52,13 @@ import { NgxMaskModule } from 'ngx-mask';
     MdbValidationModule,
     NgbModule,
   ],
-  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent],
+  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent],
   declarations: [
     HeaderComponent,
     InputComponent,
     ErrorMessageDirective,
     DatePickerComponent,
+    SwitchComponent,
   ],
 })
 export class SharedModule {}

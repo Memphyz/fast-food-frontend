@@ -33,6 +33,7 @@
               "src/assets/styles/_fonts.scss",
               "src/assets/styles/_native_elements.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css",
               {
                 "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
               }

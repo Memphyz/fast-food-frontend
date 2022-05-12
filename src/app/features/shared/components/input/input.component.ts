@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit, Optional, Self } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms';
+import { uniqueId } from 'lodash';
 import { noop } from 'rxjs';
 
 type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week';
@@ -17,6 +18,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public maxLength!: string;
   @Input() public mask!: string;
   @Input() public type: InputType = 'text';
+
+  public readonly id = window.btoa(uniqueId());
 
   @HostBinding('class.disabled')
   public disabled: boolean;

@@ -24,7 +24,7 @@ export class RegisterComponent {
   constructor(private readonly userService: UserService, private readonly router: Router) {}
 
   public btnSave(): void {
-    this.userService.save({ ...this.form.value, born: '11-12-2001' } as User).subscribe();
+    this.userService.save({ ...this.form.value } as User).subscribe();
 
   }
 

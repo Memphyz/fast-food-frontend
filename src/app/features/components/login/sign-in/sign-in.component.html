@@ -1,1 +1,54 @@
-<p>sign-in works!</p>
+<div class="register-container">
+  <form [formGroup]="form">
+    <div class="row mt-3">
+      <ng-container *ngIf="form.get('option').value else cpfRef">
+        <div class="col-12">
+          <fast-input formControlName="email"
+            type="email"
+            errorMessage
+            label="E-mail"
+            placeholder="Informe o E-mail"></fast-input>
+        </div>
+      </ng-container>
+      <ng-template #cpfRef>
+        <div class="col-12">
+          <fast-input formControlName="cpf"
+            type="text"
+            errorMessage
+            field="CPF"
+            label="CPF"
+            mask="000.000.000-00"
+            placeholder="Informe o CPF"></fast-input>
+        </div>
+      </ng-template>
+
+    </div>
+    <div class="row">
+      <fast-input formControlName="password"
+        type="password"
+        errorMessage
+        label="Senha"
+        placeholder="Informe a senha"></fast-input>
+    </div>
+    <div class="row">
+      <fast-switch label="Entre com e-mail"
+        formControlName="option"></fast-switch>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12 col-md-6">
+        <button type="button"
+          class="outline w-100 ml-4 mr-4"
+          [routerLink]="['../', 'home']">Voltar</button>
+      </div>
+      <div class="col-12 col-md-6 mt-3 mt-md-0">
+        <button type="button"
+          class="w-100 ml-4 mr-4"
+          (click)="btnLogin()">Entrar</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="illus">
+  <img src="./../../../../../assets/images/illus/Blogging Minimalistic/blogging.svg"
+    alt="register_illus">
+</div>

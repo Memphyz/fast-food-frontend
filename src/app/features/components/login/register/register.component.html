@@ -7,7 +7,7 @@
           placeholder="Informe o nome"
           formControlName="name"></fast-input>
       </div>
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-6 mt-3 mt-md-0">
         <fast-input label="Sobrenome"
           errorMessage
           placeholder="Informe o sobrenome"
@@ -38,7 +38,7 @@
           placeholder="Informe a data de nascimento">
         </fast-date-picker>
       </div>
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-6 mt-3 mt-md-0">
         <fast-input formControlName="cpf"
           type="text"
           errorMessage
@@ -49,12 +49,12 @@
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <button type="button"
           class="outline w-100 ml-4 mr-4"
           [routerLink]="['../', 'home']">Voltar</button>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6 mt-3 mt-md-0">
         <button type="button"
           class="w-100 ml-4 mr-4"
           (click)="btnSave()">Cadastrar</button>
