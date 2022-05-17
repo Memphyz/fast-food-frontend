@@ -1,7 +1,8 @@
 import { User } from '../../models/user.model';
 import { AbstractService } from './../../../features/shared/abstracts/service.abstract';
+import { UserToken } from './../../interfaces/user-token.interface';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
@@ -9,9 +10,13 @@ export class UserService extends AbstractService<User> {
 
   protected endpont = '/user';
 
-  public login(body) {
+  public login(body): Observable<UserToken> {
     this.urlSuffix = '/login'
-    return this.post(body).pipe(tap(() => this.urlSuffix = ''))
+    return this.post(body).pipe(tap((userToken: any): void => {
+      localStorage.setItem('user', userToken.user);
+      localStorage.setItem('token', userToken.token);
+      this.urlSuffix = '';
+    })) as Observable<UserToken>
   }
 
 }

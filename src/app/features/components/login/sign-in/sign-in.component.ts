@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
   }
 
   public btnLogin(): void {
-    this.userService.login(this.form.value).subscribe(() => {
+    this.userService.login(this.form.value).subscribe((): void => {
       this.router.navigate(['../', 'home'])
     })
   }

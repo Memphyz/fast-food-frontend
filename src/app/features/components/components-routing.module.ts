@@ -1,3 +1,4 @@
+import { LoginGuard } from './../../core/guards/logged.guard';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
@@ -22,10 +23,12 @@ const routes: Routes = [
   },
   {
     path: 'register',
+    canActivate: [LoginGuard],
     component: RegisterComponent
   },
   {
     path: 'sign-in',
+    canActivate: [LoginGuard],
     component: SignInComponent
   }
 ]

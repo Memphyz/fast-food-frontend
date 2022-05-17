@@ -1,0 +1,37 @@
+.overlay-container > .toast-container {
+  max-width: calc(100% - 10vw);
+  .ngx-toastr {
+    width: 100%;
+    border-radius: 15px;
+    padding: 15px !important;
+
+    &.toast-success {
+      background: linear-gradient(
+        57deg,
+        var(--bs-cyan),
+        var(--bs-pink)
+      ) !important;
+    }
+    &.toast-info {
+      background: linear-gradient(
+        57deg,
+        var(--bs-info),
+        var(--bs-pink)
+      ) !important;
+    }
+    &.toast-error {
+      background: linear-gradient(
+        57deg,
+        var(--bs-danger),
+        var(--bs-pink)
+      ) !important;
+    }
+    &.toast-warning {
+      background: linear-gradient(
+        57deg,
+        var(--bs-warning),
+        var(--bs-pink)
+      ) !important;
+    }
+  }
+}

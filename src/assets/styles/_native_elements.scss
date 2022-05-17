@@ -90,3 +90,11 @@ ngb-datepicker {
     border-right: 0;
   }
 }
+
+ngx-spinner > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+}

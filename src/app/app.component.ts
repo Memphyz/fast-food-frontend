@@ -1,3 +1,4 @@
+import { template } from './features/shared/spinner';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  public readonly spinner = template;
+
 }
