@@ -80,7 +80,6 @@ export class AppModule {
   public static injector: Injector;
 
   constructor(private readonly injector: Injector) {
-    AppModule.injector = this.injector
-
+    AppModule.injector = this.injector;
   }
 }
