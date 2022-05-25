@@ -30,7 +30,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       return of(error)
     }), filter((response) => response instanceof HttpResponse), tap((response: HttpResponse<any>): void => {
       this.spinner.hide();
-      this.toastr.success(response.body?.message, response.body.title)
+      (response.body?.message || response.body?.title) && this.toastr.success(response.body?.message, response.body?.title)
     }))
   }
 

@@ -6,17 +6,21 @@ import { SignInComponent } from './login/sign-in/sign-in.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
     SignInComponent,
+    RestaurantComponent,
   ],
   imports: [
     ComponentsRoutingModule,
     FormsModule,
     CommonModule,
+    InfiniteScrollModule,
     ReactiveFormsModule,
     SharedModule,
   ],

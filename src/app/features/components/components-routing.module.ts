@@ -2,6 +2,7 @@ import { LoginGuard } from './../../core/guards/logged.guard';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -30,6 +31,10 @@ const routes: Routes = [
     path: 'sign-in',
     canActivate: [LoginGuard],
     component: SignInComponent
+  },
+  {
+    path: 'restaurant/:id',
+    component: RestaurantComponent
   }
 ]
 

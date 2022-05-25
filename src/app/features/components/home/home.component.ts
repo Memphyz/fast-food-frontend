@@ -1,9 +1,10 @@
-import { Payments } from './../../../core/enums/payment.enum';
+import { Restaurant } from './../../../core/interfaces/restaurant.interface';
+import {
+  RestaurantService
+} from './../../../core/services/restaurant/restaurant.service';
 import { UserService } from './../../../core/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
-import faker from '@faker-js/faker';
-import { map } from 'rxjs';
-import { Restaurant } from 'src/app/core/interfaces/restaurant.interface';
+import { UnspashService } from 'src/app/core/services/unsplash/unsplash.service';
 
 @Component({
   selector: 'fast-home',
@@ -12,39 +13,29 @@ import { Restaurant } from 'src/app/core/interfaces/restaurant.interface';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private readonly userService: UserService) {}
+  public restaurants: Restaurant[] = [];
+  public page = 0;
 
-  public async ngOnInit(): Promise<void> {
-    this.userService.findAll().pipe(map((user) => user.map(us => us['id']))).subscribe({
-      next: (users) => {
-        users.forEach((user) => {
-          const restaurant: Partial<Restaurant> = {
-            name: `${faker.name.middleName()} ${faker.company.companySuffix()}`,
-            freight: +faker.random.numeric(2, { allowLeadingZeros: true }),
-            active: faker.random.boolean(),
-            address: {
-              street: faker.address.streetName(),
-              number: +faker.random.numeric(3, { allowLeadingZeros: true }),
-              city: faker.address.city(),
-              state: faker.address.state(),
-              district: faker.name.middleName(),
-              neighborhood: faker.address.cityPrefix(),
-              postalCode: faker.address.zipCode('########'),
-            },
-            open: '0900',
-            close: '2200',
-            kitchen: faker.name.jobTitle(),
-            payments: [Payments.CASH, Payments.DEBIT_CARD, Payments.CREDIT_CARD],
-            owners: [user],
-            products: [],
-          }
-          console.log(restaurant);
+  constructor(private readonly restaurantService: RestaurantService, private readonly userService: UserService, private readonly unspashService: UnspashService) {}
 
-        })
+  public ngOnInit(): void {
+    this.fetch();
+
+  }
+
+  public scroll() {
+    this.page++;
+    this.fetch();
+  }
+
+  private fetch(): void {
+    this.restaurantService.findAll({ page: this.page, limit: 10 }).subscribe({
+      next: (restaurants) => {
+        console.log(restaurants);
+
+        this.restaurants.push(...restaurants);
       }
     })
-
-
   }
 
 }

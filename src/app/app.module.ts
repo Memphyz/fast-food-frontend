@@ -25,6 +25,7 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -53,6 +54,7 @@ import { ToastrModule } from 'ngx-toastr';
     MdbRangeModule,
     NgxSpinnerModule,
     MdbRippleModule,
+    InfiniteScrollModule,
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,

@@ -34,9 +34,12 @@ export interface Additional {
 export interface Restaurant {
   name: string;
   freight: number;
+  id: string;
+  rate: number;
   kitchen: string;
   address: Address;
   active: boolean;
+  photo: string;
   open: string;
   close: string;
   payments: Payments[];

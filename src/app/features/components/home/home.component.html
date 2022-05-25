@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="fast-container-home justify-content-center align-items-center p-3"
+  infiniteScroll
+  [infiniteScrollDistance]="0.5"
+  [infiniteScrollThrottle]="100"
+  [fromRoot]="true"
+  (scrolled)="scroll()">
+  <ng-container *ngFor="let restaurant of restaurants">
+    <div class="fast-restaurant"
+      [routerLink]="['../', 'restaurant', restaurant.id]">
+      <div class="fast-image"
+        style="background-image: url({{restaurant.photo}});">
+      </div>
+      <div class="fast-info">
+        <div class="name">
+          <label for="{{restaurant.name}}">
+            {{restaurant.name}}
+          </label>
+          <div class="fast-rate">{{restaurant.rate | number: '1.1-2'}}</div>
+        </div>
+
+        <div class="fast-description">
+          {{restaurant.kitchen}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
