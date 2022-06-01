@@ -1,1 +1,29 @@
-<pre>{{restaurant | json}}</pre>
+<ng-container *ngIf="restaurant else skeleton">
+  <div class="header"
+    style="background-image: url({{restaurant.photo}});">
+    <div class="fast-name">
+      {{restaurant.name}}
+      <div class="fast-rate">{{restaurant.rate | number: '1.1-2'}}</div>
+      <div class="fast-info"
+        (click)="btnInfo()"></div>
+    </div>
+  </div>
+  <fast-filter placeholder="Pesquisar por produto"></fast-filter>
+
+  <div class="fast-produtos">
+    <div class="fast-produto"
+      *ngFor="let product of restaurant.products">
+      <div class="fast-produto-img"
+        style="background-image: url({{product.photo}});"></div>
+      <div class="fast-produto-name">{{product.name}}</div>
+      <div class="fast-produto-price">{{product.price | number: '1.2-2'}}</div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #skeleton>
+  <div skeleton
+    class="header"></div>
+  <div skeleton
+    class="filter"></div>
+</ng-template>

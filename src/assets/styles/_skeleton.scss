@@ -1,0 +1,11 @@
+*[skeleton] {
+  background-color: #eee !important;
+  background: linear-gradient(110deg, #ececec 8%, #e4e4e4 18%, #ececec 33%);
+  background-size: 200% 100% !important;
+  animation: 1.5s loading linear infinite;
+}
+@keyframes loading {
+  to {
+    background-position-x: -200%;
+  }
+}

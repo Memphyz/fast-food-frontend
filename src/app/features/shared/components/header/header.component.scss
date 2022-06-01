@@ -10,7 +10,7 @@
     width: 100%;
     display: flex;
     position: fixed;
-    z-index: 5000;
+    z-index: 1020;
     align-items: center;
     justify-content: center;
 
@@ -74,7 +74,7 @@
           background-size: contain;
           min-width: 80px;
           min-height: 80px;
-          bottom: -35px;
+          bottom: -20px;
 
           @media screen and (max-width: 768px) {
             left: 0;

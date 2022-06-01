@@ -1,0 +1,49 @@
+:host {
+  max-height: 700px;
+  overflow: auto;
+
+  .fast-info {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 5px;
+    border: 1px solid var(--bg);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .fast-status > label {
+    position: relative;
+    width: -moz-fit-content;
+    width: fit-content;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: calc(100% + 5px);
+      right: 0;
+      background-color: var(--status);
+      border-radius: 50%;
+      opacity: 0.5;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  .fast-owners {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .fast-owner {
+      padding: 10px;
+      border: 1px solid var(--bg);
+      border-radius: 5px;
+    }
+  }
+}

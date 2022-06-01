@@ -42,6 +42,7 @@ export abstract class AbstractService<Model> {
   }
 
   public findAll(params?: object): Observable<Model[]> {
+    this.resetSuffix();
     return this.get(params);
   }
 

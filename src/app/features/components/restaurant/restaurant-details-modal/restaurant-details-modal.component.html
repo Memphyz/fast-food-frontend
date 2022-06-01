@@ -1,0 +1,32 @@
+<div class="fast-info fast-status">
+  <label for="status"
+    class="font-weight-normal"
+    [style]="restaurant.active ? '--status: #198754' : '--status: #7e7e7e'">
+    {{restaurant.active ? 'Ativo' : 'Inativo'}}
+  </label>
+</div>
+<div class="fast-info">
+  <label for="descricao">Descrição</label>
+  <span>{{restaurant.kitchen}}</span>
+</div>
+<div class="fast-info">
+  <label for="fechamento">Horário de Funcionamento</label>
+  <span>Das {{restaurant.open | mask: '00:00'}} ás {{restaurant.close | mask:
+    '00:00'}}</span>
+</div>
+<div class="fast-info">
+  <label for="frete">Frete</label>
+  <span>{{restaurant.freight ? (restaurant.freight | currency) : 'Grátis'}}</span>
+</div>
+<div class="fast-info">
+  <label for="responsáveis">Responsáveis</label>
+  <div class="fast-owners">
+    <div class="fast-owner"
+      *ngFor="let owner of owners">
+      <label class="fast-owner-name">{{owner.name}} {{owner.surname}}</label>
+      <div class="fast-owner-email">E-mail: {{owner.email}}</div>
+      <div class="fast-owner-cpf">CPF: {{owner.cpf}}</div>
+      <div class="fast-owner-cpf">Nascimento: {{owner.born | date: 'dd/MM/yyyy'}}</div>
+    </div>
+  </div>
+</div>

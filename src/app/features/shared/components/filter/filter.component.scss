@@ -1,0 +1,17 @@
+:host {
+  form {
+    margin: 15px 0px;
+    position: relative;
+    fast-icon {
+      position: absolute;
+      z-index: 100;
+      top: 7px;
+      left: 10px;
+    }
+    input {
+      padding-left: 40px;
+      position: relative;
+      width: 100% !important;
+    }
+  }
+}

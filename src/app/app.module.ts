@@ -25,6 +25,7 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
@@ -59,6 +60,7 @@ import { ToastrModule } from 'ngx-toastr';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    ModalModule,
     ReactiveFormsModule,
     NgbModule,
     ToastrModule.forRoot({
@@ -74,7 +76,7 @@ import { ToastrModule } from 'ngx-toastr';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
-  }],
+  }, BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

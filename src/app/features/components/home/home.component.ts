@@ -31,8 +31,6 @@ export class HomeComponent implements OnInit {
   private fetch(): void {
     this.restaurantService.findAll({ page: this.page, limit: 10 }).subscribe({
       next: (restaurants) => {
-        console.log(restaurants);
-
         this.restaurants.push(...restaurants);
       }
     })

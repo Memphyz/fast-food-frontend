@@ -17,6 +17,10 @@
       overflow: hidden;
       cursor: pointer;
 
+      &.closed {
+        filter: opacity(0.5);
+      }
+
       &:hover {
         transform: scale(1.05);
       }

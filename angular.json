@@ -31,6 +31,7 @@
               "src/styles.scss",
               "src/assets/styles/_global.scss",
               "src/assets/styles/_fonts.scss",
+              "src/assets/styles/_skeleton.scss",
               "src/assets/styles/_toastr.scss",
               "src/assets/styles/_native_elements.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
