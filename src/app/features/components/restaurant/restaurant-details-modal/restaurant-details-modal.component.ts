@@ -16,8 +16,6 @@ export class RestaurantDetailsModalComponent implements OnInit {
   constructor(private readonly userService: UserService) {}
 
   public ngOnInit(): void {
-    console.log(this.restaurant);
-
     this.userService.findAll({ ids: this.restaurant.owners, anon: true }).subscribe((users) => this.owners.push(...users))
   }
 }

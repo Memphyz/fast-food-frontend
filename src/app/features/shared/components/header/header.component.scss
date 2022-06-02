@@ -78,6 +78,7 @@
 
           @media screen and (max-width: 768px) {
             left: 0;
+            top: -43px;
             right: 0;
           }
         }
@@ -117,6 +118,7 @@
     height: 100%;
     display: flex;
     background: white;
+    z-index: 1050;
 
     .collapse-content {
       width: 100%;
