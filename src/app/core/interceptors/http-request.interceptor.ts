@@ -20,7 +20,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(requisition).pipe(catchError((error): Observable<any> => {
       if (!error.status) {
         this.spinner.hide();
-        this.toastr.error('Houve um problema durante a tentativa de entrar em contato com o servidor', 'Tente novamente mais tarde');
+        const msg = window.navigator.onLine ? 'Houve um problema durante a tentativa de entrar em contato com o servidor' : 'Aparentemente você está sem conexão com a internet';
+        const title = window.navigator.onLine ? 'Tente novamente mais tarde' : 'Verifique sua conexão com a internet';
+        this.toastr.error(msg, title);
         console.error(error);
         return of(error);
       }

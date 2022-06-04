@@ -28,7 +28,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,10 @@ export class AppModule {
 
   public static injector: Injector;
 
-  constructor(private readonly injector: Injector) {
+  constructor(private readonly injector: Injector, private readonly toastr: ToastrService) {
     AppModule.injector = this.injector;
+    window.addEventListener('online', () => this.toastr.success('Não criemos pânico! sua rede internet voltou a funcionar normalmente!', 'Voltamos!'));
+    window.addEventListener('offline', () => this.toastr.error('Más noticias, seu navegador desconectou da rede internet, que tal dar uma olhadinha antes de continuar navegando?', 'Desconectado!'));
   }
+
 }
