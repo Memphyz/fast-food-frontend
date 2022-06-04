@@ -71,4 +71,49 @@
     height: 40px;
     width: 100%;
   }
+
+  .fast-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+
+    .fast-produto {
+      border: 1px solid var(--bg);
+      border-radius: 5px;
+      padding: 10px 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+
+      .fast-produto-info {
+        display: flex;
+        gap: 10px;
+
+        .fast-produto-img {
+          width: 60px;
+          height: 60px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          border: 2px solid var(--primary);
+          border-radius: 50%;
+          display: flex;
+          flex-shrink: 0;
+
+          &.skeleton {
+            opacity: 0;
+            background: unset;
+          }
+        }
+
+        .fast-produto-name {
+          font-size: 1.25em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 290px;
+        }
+      }
+    }
+  }
 }

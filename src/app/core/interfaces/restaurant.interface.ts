@@ -26,6 +26,7 @@ export interface Product {
 export interface Additional {
   unitPrice: number,
   total: number,
+  description: string,
   quantity: number,
   name: string,
   notes: string

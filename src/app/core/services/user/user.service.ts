@@ -15,6 +15,7 @@ export class UserService extends AbstractService<User> {
     return this.post(body).pipe(tap((userToken: any): void => {
       localStorage.setItem('user', userToken.user);
       localStorage.setItem('token', userToken.token);
+      localStorage.setItem('id', userToken.id);
       this.urlSuffix = '';
     })) as Observable<UserToken>
   }

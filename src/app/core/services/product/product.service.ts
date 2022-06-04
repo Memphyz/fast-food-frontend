@@ -6,7 +6,7 @@ import { AbstractService } from 'src/app/features/shared/abstracts/service.abstr
 @Injectable({ providedIn: 'root' })
 export class ProductService extends AbstractService<Product> {
 
-  protected endpont: string = 'products';
+  protected endpont: string = '/product';
 
   constructor() {
     super();

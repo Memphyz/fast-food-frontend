@@ -1,12 +1,14 @@
 import { HeaderButton } from './../../../../core/interfaces/header-button.interface';
-import { Component, HostListener } from '@angular/core';
+import { user } from './../../utils/local-storage';
+import { loggedHeaderButtons, unloggedHeaderButtons } from './header';
+import { Component, DoCheck, HostListener } from '@angular/core';
 
 @Component({
   selector: 'fast-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements DoCheck {
 
   public get show(): boolean {
     return window.location.pathname.includes('register')
@@ -14,20 +16,19 @@ export class HeaderComponent {
       || window.location.pathname.includes('forgot-password');
   }
 
+  public leftButtons: HeaderButton[] = [
+
+  ]
+
   public mobile = window.innerWidth < 768;
 
-  public get leftButtons(): HeaderButton[] {
-    return [
-      {
-        label: 'Cadastrar',
-        routerlink: ['/register'],
-        class: 'outline'
-      },
-      {
-        label: 'Entrar',
-        routerlink: ['/sign-in']
-      }
-    ]
+  public ngDoCheck(): void {
+    const current = user();
+    if (current) {
+      this.leftButtons = loggedHeaderButtons;
+      return undefined;
+    }
+    this.leftButtons = unloggedHeaderButtons;
   }
 
   @HostListener('window:resize')

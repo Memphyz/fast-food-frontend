@@ -24,15 +24,15 @@ export abstract class AbstractService<Model> {
     })
   }
 
-  public post<T>(body: T): Observable<void> {
-    return this.httpClient.post<void>(this.BASE_URL + this.endpont + this.urlSuffix, body, {
+  public post<T>(body: T): Observable<any> {
+    return this.httpClient.post<any>(this.BASE_URL + this.endpont + this.urlSuffix, body, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
   }
 
-  public save<T>(body: T): Observable<void> {
+  public save<T>(body: T): Observable<any> {
     return this.post(body);
   }
 
@@ -43,6 +43,12 @@ export abstract class AbstractService<Model> {
 
   public findAll(params?: object): Observable<Model[]> {
     this.resetSuffix();
+    return this.get(params);
+  }
+
+  public findAllById(params: object & { id: any }): Observable<Model[]> {
+    this.resetSuffix();
+    this.urlSuffix = `/${params.id}`;
     return this.get(params);
   }
 

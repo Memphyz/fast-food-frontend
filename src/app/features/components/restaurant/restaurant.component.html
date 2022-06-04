@@ -12,10 +12,12 @@
 
   <div class="fast-produtos">
     <div class="fast-produto"
-      *ngFor="let product of restaurant.products">
-      <div class="fast-produto-img"
-        style="background-image: url({{product.photo}});"></div>
-      <div class="fast-produto-name">{{product.name}}</div>
+      *ngFor="let product of products">
+      <div class="fast-produto-info">
+        <div class="fast-produto-img"
+          style="background-image: url({{product.image}});"></div>
+        <div class="fast-produto-name">{{product.name}}</div>
+      </div>
       <div class="fast-produto-price">{{product.price | number: '1.2-2'}}</div>
     </div>
   </div>
@@ -26,4 +28,15 @@
     class="header"></div>
   <div skeleton
     class="filter"></div>
+  <div class="fast-produtos">
+    <div class="fast-produto"
+      skeleton
+      *ngFor="let product of skeletons">
+      <div class="fast-produto-info">
+        <div class="fast-produto-img skeleton"></div>
+        <div class="fast-produto-name"></div>
+      </div>
+      <div class="fast-produto-price"></div>
+    </div>
+  </div>
 </ng-template>

@@ -22,7 +22,8 @@
       <div class="right">
         <ng-container *ngFor="let button of leftButtons">
           <button [routerLink]="button.routerlink"
-            [class]="button.class">{{button.label}}</button>
+            [class]="button.class"
+            (click)="button.onClick ? button.onClick() : null">{{button.label}}</button>
         </ng-container>
       </div>
     </ng-template>
