@@ -46,7 +46,7 @@ export abstract class AbstractService<Model> {
     return this.get(params);
   }
 
-  public findAllById(params: object & { id: any }): Observable<Model[]> {
+  public findAllById(params: ({ [key: string]: any } & { id: any })): Observable<Model[]> {
     this.resetSuffix();
     this.urlSuffix = `/${params.id}`;
     return this.get(params);

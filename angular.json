@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["crypto-js"],
             "outputPath": "dist/fast-food-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,6 +33,7 @@
               "src/assets/styles/_global.scss",
               "src/assets/styles/_fonts.scss",
               "src/assets/styles/_skeleton.scss",
+              "src/assets/styles/_modals.scss",
               "src/assets/styles/_toastr.scss",
               "src/assets/styles/_native_elements.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

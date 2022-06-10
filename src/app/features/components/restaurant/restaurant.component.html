@@ -10,17 +10,29 @@
   </div>
   <fast-filter placeholder="Pesquisar por produto"></fast-filter>
 
-  <div class="fast-produtos">
-    <div class="fast-produto"
-      *ngFor="let product of products">
-      <div class="fast-produto-info">
-        <div class="fast-produto-img"
-          style="background-image: url({{product.image}});"></div>
-        <div class="fast-produto-name">{{product.name}}</div>
+  <div class="fast-produtos"
+    infiniteScroll
+    [infiniteScrollDistance]="0.5"
+    [infiniteScrollThrottle]="100"
+    [fromRoot]="true"
+    (scrolled)="scroll()">
+    <ng-container *ngFor="let product of products">
+      <div class="fast-produto"
+        (click)="btnProduct(product)">
+        <div class="fast-produto-info">
+          <div class="fast-produto-img"
+            style="background-image: url({{product.image}});"></div>
+          <div class="fast-product-name-info">
+            <div class="fast-produto-name">{{product.name}}</div>
+            <div class="fast-product-description">{{product.description}}</div>
+          </div>
+        </div>
+        <code
+          class="fast-produto-price"><strong> {{product.price | currency}}</strong></code>
       </div>
-      <div class="fast-produto-price">{{product.price | number: '1.2-2'}}</div>
-    </div>
+    </ng-container>
   </div>
+
 </ng-container>
 
 <ng-template #skeleton>

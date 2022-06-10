@@ -1,0 +1,41 @@
+<div class="fast-product-container">
+  <div class="fast-product-details">
+    <div class="fast-product-name">
+      {{product.name}}
+      <code class="fast-product-price">
+        <strong>
+          {{product.price | currency}}
+        </strong>
+      </code>
+    </div>
+    <div class="fast-product-description">
+      {{product.description}}
+    </div>
+    <div *ngIf="product.additionals?.length"
+      class="fast-addictionals">
+      <div class="fast-addictional"
+        *ngFor="let addictional of product.additionals">
+        <div class="fast-addictional-info">
+          <div class="fast-addictional-name">
+            {{addictional.name}}
+
+            <code>
+              <strong>
+                {{addictional.unitPrice | currency}}
+              </strong>
+            </code>
+          </div>
+          <div class="fast-addictional-description">
+            {{addictional.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="fast-add">
+  <button class="outline"
+    (click)="btnClose()">Cancelar</button>
+  <button>Adicionar ao carrinho</button>
+</div>
