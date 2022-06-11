@@ -11,6 +11,8 @@
     <div class="fast-product-description">
       {{product.description}}
     </div>
+    <h5 class="mt-4"
+      *ngIf="product.additionals?.length">Adicionais:</h5>
     <div *ngIf="product.additionals?.length"
       class="fast-addictionals">
       <div class="fast-addictional"
@@ -18,7 +20,6 @@
         <div class="fast-addictional-info">
           <div class="fast-addictional-name">
             {{addictional.name}}
-
             <code>
               <strong>
                 {{addictional.unitPrice | currency}}
@@ -29,13 +30,38 @@
             {{addictional.description}}
           </div>
         </div>
+        <div class="fast-choice">
+          <fast-icon icon="minus"
+            [size]="18"
+            color="var(--primary)"
+            (click)="btnMinusAdictional(addictional)">
+          </fast-icon>
+          <div class="fast-quantity">
+            {{addictional.quantity}}
+          </div>
+          <fast-icon icon="plus"
+            [size]="18"
+            color="var(--primary)"
+            (click)="btnAddAdictional(addictional)">
+          </fast-icon>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
 <div class="fast-add">
-  <button class="outline"
-    (click)="btnClose()">Cancelar</button>
-  <button>Adicionar ao carrinho</button>
+  <div class="fast-value-detail">
+    Valor total:
+    <code>
+      <strong>
+        {{(total || product.price) | currency}}
+      </strong>
+    </code>
+  </div>
+  <div class="fast-buttons">
+    <button class="outline"
+      (click)="btnClose()">Cancelar</button>
+    <button (click)="btnAdd()">Adicionar ao carrinho</button>
+  </div>
 </div>

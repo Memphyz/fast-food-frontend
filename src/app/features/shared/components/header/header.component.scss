@@ -3,6 +3,19 @@
   flex-direction: column;
   width: 100%;
 
+  button {
+    position: relative;
+    &::after {
+      content: var(--badge);
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+
   header {
     background-color: white;
     min-height: 80px;

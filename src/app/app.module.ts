@@ -89,4 +89,8 @@ export class AppModule {
     window.addEventListener('offline', () => this.toastr.error('Más noticias, seu navegador desconectou da rede internet, que tal dar uma olhadinha antes de continuar navegando?', 'Desconectado!'));
   }
 
+  public static get<T>(token: T): any {
+    return this.injector.get(token) as T;
+  }
+
 }

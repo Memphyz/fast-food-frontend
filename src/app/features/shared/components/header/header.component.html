@@ -23,7 +23,13 @@
         <ng-container *ngFor="let button of leftButtons">
           <button [routerLink]="button.routerlink"
             [class]="button.class"
-            (click)="button.onClick ? button.onClick() : null">{{button.label}}</button>
+            [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : null"
+            (click)="button.onClick ? button.onClick() : null">{{button.label}}
+            <fast-icon *ngIf="button.icon"
+              [icon]="button.icon"
+              [size]="20"
+              color="white"></fast-icon>
+          </button>
         </ng-container>
       </div>
     </ng-template>

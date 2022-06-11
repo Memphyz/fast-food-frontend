@@ -27,6 +27,7 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NgxMaskModule } from 'ngx-mask';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { NgxMaskModule } from 'ngx-mask';
     SwitchComponent,
     FilterComponent,
     IconComponent,
+    CartComponent,
   ],
 })
 export class SharedModule {}
