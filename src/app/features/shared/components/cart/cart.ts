@@ -13,8 +13,13 @@ export class Cart {
     sessionStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  public static items(): string {
+  public static itemsLengthString(): string {
     const cart: ICart = JSON.parse(sessionStorage.getItem('cart'));
-    return `"${cart?.products?.length.toString()}"`;
+    return `"${(cart?.products?.length || '').toString()}"`;
+  }
+
+  public static cart(): ICart {
+    const cart: ICart = JSON.parse(sessionStorage.getItem('cart'));
+    return cart;
   }
 }

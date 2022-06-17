@@ -1,1 +1,48 @@
-<p>cart works!</p>
+<header>
+  <h2 class="d-flex justify-content-center">
+    Carrinho
+  </h2>
+</header>
+<table class="fast-products">
+  <ul class="p-0">
+    <li class="fast-product"
+      *ngFor="let product of cart.products">
+      <input #toggle
+        (click)="log('teste')"
+        type="checkbox"
+        label="toggle"
+        title="adicionais">
+      <div class="fast-product-basic-info-container">
+        <div class="fast-product-image-container">
+          <div class="fast-product-image"
+            [style]="'background-image: url(' + product.image + ');'"></div>
+        </div>
+        <div class="fast-product-additional-info-container">
+          <div class="fast-product-name">
+            {{product.name}}
+            <code>
+                <strong>
+                  {{product.price | currency}}
+                </strong>
+              </code>
+          </div>
+          <div class="fast-product-description">{{product.description}}</div>
+          <div class="fast-additionals">
+            <input #toggle
+              type="checkbox"
+              label="toggle"
+              title="adicionais"
+              hidden>
+            <legend class="fast-additional-toggle-container d-flex align-items-center">
+              <span>
+                Adicionais
+              </span>
+              <fast-icon icon="square-arrow-right"
+                [size]="18"></fast-icon>
+            </legend>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</table>

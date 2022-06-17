@@ -25,7 +25,7 @@ export const loggedHeaderButtons: HeaderButton[] = [
   },
   {
     icon: 'cart',
-    badgeCalc: Cart.items,
+    badgeCalc: Cart.itemsLengthString,
     onClick: () => {
       const modalService: BsModalService = AppModule.get(BsModalService);
       modalService.show(CartComponent)

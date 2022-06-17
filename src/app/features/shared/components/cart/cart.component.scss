@@ -1,0 +1,87 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .fast-products {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--bg);
+    border-radius: 5px;
+    padding: 10px;
+
+    :first-child {
+      padding-top: 0px !important;
+    }
+
+    :last-child {
+      border-bottom: unset !important;
+      padding-bottom: 0px !important;
+    }
+
+    .fast-product {
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px dashed var(--bs-gray-300);
+      padding: 10px 0px;
+
+      .fast-product-basic-info-container {
+        display: flex;
+        gap: 20px;
+
+        .fast-product-additional-info-container {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .fast-product-name {
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .fast-product-description {
+            border: 1px solid var(--bs-gray-300);
+            padding: 5px;
+            border-radius: 5px;
+            background-color: var(--bs-gray-200);
+          }
+
+          .fast-additionals {
+            input[type="checkbox"]:checked
+              ~ .fast-additional-toggle-container
+              > fast-icon {
+              transform: rotate(90deg);
+            }
+            .fast-additional-toggle-container {
+              gap: 10px;
+              fast-icon {
+                cursor: pointer;
+                pointer-events: all;
+                transition: 0.5s all;
+                position: relative;
+                top: 3px;
+              }
+            }
+          }
+        }
+
+        .fast-product-image-container {
+          width: -moz-fit-content;
+          width: fit-content;
+
+          .fast-product-image {
+            width: 80px;
+            height: 80px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 1000px;
+          }
+        }
+      }
+    }
+  }
+}

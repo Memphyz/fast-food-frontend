@@ -23,7 +23,7 @@
         <ng-container *ngFor="let button of leftButtons">
           <button [routerLink]="button.routerlink"
             [class]="button.class"
-            [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : null"
+            [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : ''"
             (click)="button.onClick ? button.onClick() : null">{{button.label}}
             <fast-icon *ngIf="button.icon"
               [icon]="button.icon"
