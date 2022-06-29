@@ -1,6 +1,6 @@
-import { ICart } from './../../../../core/interfaces/cart.interface';
 import { Cart } from './cart';
 import { Component } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'fast-cart',
@@ -9,11 +9,9 @@ import { Component } from '@angular/core';
 })
 export class CartComponent {
 
-  public get cart(): ICart {
-    return Cart.cart();
-  }
+  public cart = Cart.cart();
 
-  public log(item): void {
-    console.log(item)
+  constructor(public readonly modalRef: BsModalRef) {
+
   }
 }
