@@ -13,12 +13,13 @@
             <div class="fast-product-image"
               [style]="'background-image: url(' + product.image + ');'"></div>
           </div>
-          <div class="fast-product-additional-info-container">
+          <div class="fast-product-additional-info-container"
+            [class.mb-5]="!product.additionals?.length">
             <div class="fast-product-name">
               {{product.name}}
               <code>
                   <strong>
-                    {{product.price | currency}}
+                    {{productTotalPrice(product) | currency}}
                   </strong>
                 </code>
             </div>
@@ -39,11 +40,20 @@
                   [size]="18"></fast-icon>
               </legend>
               <table class="fast-additionals-container">
-                <ul class="p-0">
-                  <li *ngFor="let adictional of product.additionals">
-                    {{adictional.name}}
-                  </li>
-                </ul>
+                <tr>
+                  <th>Nome</th>
+                  <th>Quantidade</th>
+                  <th class="fast-ellipsis">Preço unitário</th>
+                  <th>Total</th>
+                </tr>
+                <tr *ngFor="let adictional of product.additionals"
+                  class="fast-additional-item">
+                  <th class="fast-ellipsis">{{adictional.name}}</th>
+                  <th>{{adictional.quantity}}</th>
+                  <th><code><strong>{{adictional.unitPrice | currency}}</strong></code>
+                  </th>
+                  <th> <code><strong>{{adictional.total | currency}}</strong></code></th>
+                </tr>
               </table>
             </div>
           </div>
@@ -52,12 +62,17 @@
     </ul>
   </table>
   <div class="fast-payment-method">
-
+    <h3 class="d-flex justify-content-center">Pagamento</h3>
+    <code><strong>{{cart.total | currency}}</strong></code>
   </div>
 
 </main>
 <footer>
-  <div class="d-flex align-content-around justify-content-center w-100">
+  <div class="
+      d-flex
+      align-content-around
+      justify-content-center
+      w-100">
     <button type="button"
       class="outline w-50"
       (click)="modalRef.hide()">Fechar</button>

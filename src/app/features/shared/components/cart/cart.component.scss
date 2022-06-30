@@ -3,14 +3,19 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  max-height: 80vh;
 
   main {
-    display: flex;
+    display: grid;
     gap: 20px;
+    overflow: hidden;
+    grid-template-columns: calc(65% - 10px) calc(35% - 10px);
     .fast-products {
+      overflow: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      width: 100%;
       border: 1px solid var(--bg);
       border-radius: 5px;
       padding: 10px;
@@ -65,39 +70,65 @@
                 }
                 & ~ table {
                   display: block !important;
+                  border: 1px dashed var(--bs-gray-200) !important;
+                  animation: 0.8s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-down
+                    both;
+                  height: unset;
 
-                  ul {
+                  tr {
                     animation: 0.8s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-down
                       both;
-
+                    height: unset !important;
                     @keyframes wipe-in-down {
                       from {
                         clip-path: inset(0 0 100% 0);
                       }
                       to {
                         clip-path: inset(0 0 0 0);
+                        height: unset !important;
                       }
                     }
+                  }
+                  tr.fast-additional-item {
+                    padding: 10px 0px !important;
                   }
                 }
               }
 
               table {
-                ul {
+                border-radius: 5px;
+                margin-left: 15px;
+                padding: 10px;
+                animation: 0.8s cubic-bezier(0.25, 1, 0.3, 1) wipe-out-down both;
+                height: 0px;
+                tr {
                   list-style-type: none;
-                  margin-left: 15px;
+                  width: 100%;
+                  display: flex;
+                  gap: 10px;
                   animation: 0.8s cubic-bezier(0.25, 1, 0.3, 1) wipe-out-down
                     both;
+                  height: 0px;
 
                   @keyframes wipe-out-down {
                     from {
-                      height: unset;
                       clip-path: inset(0 0 0 0);
                     }
                     to {
                       clip-path: inset(0 0 100% 0);
-                      height: 0px;
+                      height: 0px !important;
                     }
+                  }
+
+                  th {
+                    width: 100%;
+                  }
+                }
+                tr.fast-additional-item {
+                  border-bottom: 1px dashed var(--bs-gray-200);
+                  border-radius: 5px;
+                  th {
+                    font-weight: normal !important;
                   }
                 }
               }
@@ -128,10 +159,53 @@
               background-size: cover;
               background-repeat: no-repeat;
               border-radius: 1000px;
+              position: relative;
+
+              &:hover {
+                &::after {
+                  content: "";
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 1000;
+                  background-color: rgba(0, 0, 0, 0.5);
+                  border-radius: 1000px;
+                  left: 0;
+                }
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 1002;
+                  border-radius: 1000px;
+                  display: flex;
+                  -webkit-mask-image: url(./../../../../../assets/images/icons/edit-square.svg);
+                  mask-image: url(./../../../../../assets/images/icons/edit-square.svg);
+                  justify-content: center;
+                  align-items: center;
+                  background-color: white;
+                  -webkit-mask-size: 25px;
+                  mask-size: 25px;
+                  -webkit-mask-repeat: no-repeat;
+                  mask-repeat: no-repeat;
+                  -webkit-mask-position: center;
+                  mask-position: center;
+                  cursor: pointer;
+                }
+              }
             }
           }
         }
       }
+    }
+
+    .fast-payment-method {
+      width: 100%;
+      border: 1px solid var(--bs-gray-200);
+      border-radius: 5px;
+      padding: 10px;
     }
   }
 
