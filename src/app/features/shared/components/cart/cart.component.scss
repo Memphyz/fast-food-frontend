@@ -203,9 +203,41 @@
 
     .fast-payment-method {
       width: 100%;
+      overflow: auto;
       border: 1px solid var(--bs-gray-200);
       border-radius: 5px;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .fast-payments {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .fast-payment {
+          padding: 10px;
+          border: 1px solid var(--bg);
+          border-radius: 6px;
+          cursor: pointer;
+
+          &.selected {
+            background-color: var(--bs-gray-200);
+            border-width: 2px !important;
+          }
+
+          * {
+            cursor: pointer;
+          }
+
+          span {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+          }
+        }
+      }
     }
   }
 

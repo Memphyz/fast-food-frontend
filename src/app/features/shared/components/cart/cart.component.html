@@ -63,7 +63,29 @@
   </table>
   <div class="fast-payment-method">
     <h3 class="d-flex justify-content-center">Pagamento</h3>
-    <code><strong>{{cart.total | currency}}</strong></code>
+    <div class="fast-payments">
+      <ng-container *ngFor="let payment of payments; let index = index">
+        <div class="fast-payment"
+          [class.selected]="selected?.type === payment.type"
+          (click)="selected = payment">
+          <span>
+            <fast-icon [icon]="payment.icon"
+              [size]="18"
+              [color]="payment.color"></fast-icon><label
+              for="{{payment.name}}">{{payment.name}}</label>
+          </span>
+        </div>
+      </ng-container>
+
+      <div class="fast-card-details">
+
+      </div>
+
+    </div>
+    <span class="d-flex justify-content-between">
+      <strong for="total">Total: </strong>
+      <code><strong>{{cart.total | currency}}</strong></code>
+    </span>
   </div>
 
 </main>
@@ -77,6 +99,7 @@
       class="outline w-50"
       (click)="modalRef.hide()">Fechar</button>
     <button type="button"
+      [disabled]="selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD' ? form.invalid : !selected"
       class="primary w-50">Pagar</button>
   </div>
 </footer>

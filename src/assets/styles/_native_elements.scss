@@ -8,6 +8,13 @@ button {
   padding: 0px 10px;
   color: white;
 
+  &[disabled] {
+    background-color: var(--bs-gray-500);
+    border: 1px solid var(--bs-gray-500);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
   &.outline {
     color: unset;
     background-color: transparent;
