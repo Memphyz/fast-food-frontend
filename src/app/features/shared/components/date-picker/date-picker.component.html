@@ -1,20 +1,20 @@
 {{dateModel | json}}
 <input class="form-control"
-  hidden
-  placeholder="yyyy-mm-dd"
-  name="dp"
+  #inputRef
+  style="visibility: hidden;"
   [disabled]="disabled"
-  ngbDatepicker
-  [(ngModel)]="dateModel"
-  #d="ngbDatepicker">
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  (onShown)="openCalendar($event)"
+  [bsConfig]="{ isAnimated: true, adaptivePosition: true, dateInputFormat: onlyMonth ? 'MM/YYYY': 'DD/MM/YYYY',  showWeekNumbers: false, useUtc: true, initCurrentTime: true, containerClass: 'theme-red' }"
+  placement="bottom"
+  (bsValueChange)="onTypeDate($event)"
+  bsDatepicker>
 <fast-input #inputRef
   [label]="label"
-  [(ngModel)]="visibleValue"
-  (ngModelChange)="onTypeDate()"
-  ngbDatepicker
+  [(ngModel)]="inputRef.value"
   [class.ng-touched]="control.touched"
   [class.ng-invalid]="control.invalid"
-  [disabled]="disabled"
-  (click)="d.toggle()"
+  (click)="inputRef.click()"
   [placeholder]="placeholder"
-  mask="00/00/0000"></fast-input>
+  [mask]="onlyMonth ? '00/0000' : '00/00/0000'"></fast-input>

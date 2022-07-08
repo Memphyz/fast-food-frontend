@@ -28,12 +28,15 @@ export const loggedHeaderButtons: HeaderButton[] = [
     badgeCalc: Cart.itemsLengthString,
     onClick: () => {
       const modalService: BsModalService = AppModule.get(BsModalService);
-      modalService.show(CartComponent, {
-        animated: true,
-        backdrop: true,
-        class: 'modal-dialog-centered fast-cart justify-content-center',
-        ignoreBackdropClick: true
-      })
+      if (Cart.cart().products) {
+        modalService.show(CartComponent, {
+          animated: true,
+          backdrop: true,
+          class: 'modal-dialog-centered fast-cart justify-content-center',
+          ignoreBackdropClick: true
+        });
+      }
+
     }
   }
 ];

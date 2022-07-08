@@ -2,18 +2,21 @@ import { detectCardFlag } from '../../utils/card-flag.utils';
 import { Payment } from './../../../../core/interfaces/payment.interface';
 import { Product } from './../../../../core/interfaces/product.interface';
 import { Cart } from './cart';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
+@UntilDestroy()
 @Component({
   selector: 'fast-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
 
   public cart = Cart.cart();
+  public flag: string;
   public payments: Payment[] = [
     {
       name: 'Pix',
@@ -40,19 +43,24 @@ export class CartComponent {
       color: '#d22f2f'
     },
   ]
-
+  public today: Date = new Date();
+  public get maxDate(): Date {
+    return new Date(this.today.getFullYear() + 20, this.today.getMonth(), this.today.getDate())
+  }
   public form = new FormBuilder().group({
-    card: [undefined, [Validators.pattern(/^[0,9]{, 16}/), Validators.required, Validators.minLength(12)]],
-    day: [undefined, [Validators.pattern(/^[0,9]{, 2}/), Validators.required, Validators.minLength(2)]],
-    year: [undefined, [Validators.pattern(/^[0,9]{, 4}/), Validators.required, Validators.minLength(4)]],
-    name: [undefined, [Validators.pattern(/^\w/), Validators.required, Validators.minLength(2)]]
+    card: [undefined, [Validators.required, Validators.minLength(16), Validators.pattern(/^\d/)]],
+    limit: [undefined, Validators.required],
+    cvc: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
+    name: [undefined, [Validators.required, Validators.minLength(2)]]
   })
 
   public selected: Payment;
 
   constructor(public readonly modalRef: BsModalRef) {
-    console.log(detectCardFlag('6504985259328334'));
+  }
 
+  public ngOnInit(): void {
+    this.form.get('card').valueChanges.pipe(untilDestroyed(this)).subscribe((card: string): string => this.flag = detectCardFlag(card))
   }
 
   public productTotalPrice(product: Product): number {

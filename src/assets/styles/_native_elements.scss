@@ -49,6 +49,10 @@ mdb-form-control > input:focus ~ {
   }
 }
 
+bs-datepicker-navigation-view button {
+  min-height: unset !important;
+}
+
 ngb-datepicker {
   position: absolute;
   inset: unset !important;

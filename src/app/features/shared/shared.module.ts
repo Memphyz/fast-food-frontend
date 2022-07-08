@@ -1,3 +1,4 @@
+import { CartComponent } from './components/cart/cart.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -26,8 +27,8 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
-import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { CartComponent } from './components/cart/cart.component';
     CommonModule,
     FormsModule,
     NgxMaskModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
     MdbAccordionModule,

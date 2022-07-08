@@ -67,7 +67,7 @@
       <ng-container *ngFor="let payment of payments; let index = index">
         <div class="fast-payment"
           [class.selected]="selected?.type === payment.type"
-          (click)="selected = payment">
+          (click)="selected = payment; form.markAllAsTouched()">
           <span>
             <fast-icon [icon]="payment.icon"
               [size]="18"
@@ -77,9 +77,41 @@
         </div>
       </ng-container>
 
-      <div class="fast-card-details">
-
-      </div>
+      <form [formGroup]="form"
+        *ngIf="selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD'"
+        class="fast-card-details mt-3">
+        <div class="row">
+          <div class="col-12">
+            <fast-input formControlName="card"
+              errorMessage
+              mask="0000 0000 0000 0000"
+              label="Número do cartão"></fast-input>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <fast-date-picker formControlName="limit"
+              label="Mês do vencimento"
+              [minDate]="today"
+              [onlyMonth]="true"
+              [maxDate]="maxDate"
+              errorMessage
+              mask="00"></fast-date-picker>
+          </div>
+          <div class="col-6">
+            <fast-input label="CVC"
+              formControlName="cvc"
+              errorMessage></fast-input>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <fast-input label="Nome"
+              formControlName="name"
+              errorMessage></fast-input>
+          </div>
+        </div>
+      </form>
 
     </div>
     <span class="d-flex justify-content-between">
