@@ -38,6 +38,7 @@
     "ngx-mask": "^13.1.15",
     "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.3.0",
+    "qrcode-pix": "^4.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.11.6"

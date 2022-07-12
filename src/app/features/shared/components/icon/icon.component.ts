@@ -9,6 +9,10 @@ export class IconComponent {
 
   @Input() public icon: string;
 
+  public get url(): string {
+    return `url(./../../../../../assets/images/icons/${this.icon}.svg)`
+  }
+
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
   @Input() public size = 25;
@@ -28,6 +32,11 @@ export class IconComponent {
   @HostBinding('style.mask-image')
   @HostBinding('style.-webkit-mask-image')
   public get path(): string {
-    return this.color === 'default' ? undefined : `url(./../../../../../assets/images/icons/${this.icon}.svg)`;
+    return this.color !== 'default' && this.url;
+  }
+
+  @HostBinding('style.background-image')
+  public get pathDefault(): string {
+    return this.color === 'default' && this.url;
   }
 }

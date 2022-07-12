@@ -1,7 +1,21 @@
 :host {
   margin: 20px 0px 0px 0px;
+  position: relative;
+}
+fast-icon {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  z-index: 10;
 }
 
+input.left-icon {
+  padding-left: 40px;
+
+  &:not(:focus) ~ label {
+    margin-left: 30px !important;
+  }
+}
 :host([disabled="true"]),
 :host(.disabled) {
   filter: opacity(0.5);

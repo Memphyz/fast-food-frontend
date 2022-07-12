@@ -67,7 +67,7 @@
       <ng-container *ngFor="let payment of payments; let index = index">
         <div class="fast-payment"
           [class.selected]="selected?.type === payment.type"
-          (click)="selected = payment; form.markAllAsTouched()">
+          (click)="selected = payment; form.markAllAsTouched(); generatePix()">
           <span>
             <fast-icon [icon]="payment.icon"
               [size]="18"
@@ -76,7 +76,6 @@
           </span>
         </div>
       </ng-container>
-
       <form [formGroup]="form"
         *ngIf="selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD'"
         class="fast-card-details mt-3">
@@ -84,6 +83,8 @@
           <div class="col-12">
             <fast-input formControlName="card"
               errorMessage
+              [color]="'default'"
+              [leftIcon]="flag || selected.icon"
               mask="0000 0000 0000 0000"
               label="Número do cartão"></fast-input>
           </div>
@@ -112,7 +113,19 @@
           </div>
         </div>
       </form>
-
+      <form *ngIf="selected?.type === 'PIX'">
+        <div class="code">
+          <img src="{{pix?.image}}"
+            alt="code">
+          <label for="code"
+            (click)="copy()"
+            class="ellipsis">
+            {{pix?.payload()}}
+            <fast-icon icon="copy"
+              [size]="18"></fast-icon>
+          </label>
+        </div>
+      </form>
     </div>
     <span class="d-flex justify-content-between">
       <strong for="total">Total: </strong>

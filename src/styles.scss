@@ -44,6 +44,13 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--bg);
 }
+bs-datepicker-container {
+  transition: unset;
+
+  * {
+    transition: unset;
+  }
+}
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {

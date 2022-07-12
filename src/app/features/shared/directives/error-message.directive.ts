@@ -111,10 +111,12 @@ export class ErrorMessageDirective
       this.errorMessageWrapperElement,
       this.errorMessageElement
     );
-    this.renderer.appendChild(
-      this.el.nativeElement,
-      this.errorMessageWrapperElement
-    );
+    setTimeout((): void => {
+      this.renderer.appendChild(
+        this.el.nativeElement,
+        this.errorMessageWrapperElement
+      );
+    })
     this.created = true;
   }
 }

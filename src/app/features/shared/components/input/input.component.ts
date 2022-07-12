@@ -17,6 +17,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public minLength!: string;
   @Input() public maxLength!: string;
   @Input() public mask!: string;
+  @Input() public leftIcon!: string;
+  @Input() public color!: string;
   @Input() public type: InputType = 'text';
 
   public readonly id = window.btoa(uniqueId());

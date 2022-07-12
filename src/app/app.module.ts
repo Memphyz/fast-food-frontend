@@ -87,6 +87,8 @@ export class AppModule {
     AppModule.injector = this.injector;
     window.addEventListener('online', () => this.toastr.success('Não criemos pânico! sua rede internet voltou a funcionar normalmente!', 'Voltamos!'));
     window.addEventListener('offline', () => this.toastr.error('Más noticias, seu navegador desconectou da rede internet, que tal dar uma olhadinha antes de continuar navegando?', 'Desconectado!'));
+    (window as any).global = window;
+    window.global.Buffer = window.global.Buffer || require('buffer').Buffer;
   }
 
   public static get<T>(token: T): any {
