@@ -1,6 +1,8 @@
 export interface Payment {
   name: string;
-  type: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'CHECK' | 'PIX',
+  type: PaymentTypes,
   icon: string;
   color: string;
 }
+
+export type PaymentTypes = 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'CHECK' | 'PIX'
