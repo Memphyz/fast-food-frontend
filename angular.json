@@ -23,7 +23,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["crypto-js"],
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "lodash",
+              "buffer",
+              "qrcode-pix"
+            ],
             "outputPath": "dist/fast-food-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
