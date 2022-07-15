@@ -4,6 +4,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { HeaderComponent } from './components/header/header.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
+import { SelectComponent } from './components/select/select.component';
 import { SwitchComponent } from './components/switch/switch.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
 import { CommonModule } from '@angular/common';
@@ -57,7 +58,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MdbValidationModule,
     NgbModule,
   ],
-  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent],
+  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent],
   declarations: [
     HeaderComponent,
     InputComponent,
@@ -67,6 +68,7 @@ import { NgxMaskModule } from 'ngx-mask';
     FilterComponent,
     IconComponent,
     CartComponent,
+    SelectComponent,
   ],
 })
 export class SharedModule {}

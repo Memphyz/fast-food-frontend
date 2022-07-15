@@ -3,7 +3,7 @@ import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms
 import { uniqueId } from 'lodash';
 import { noop } from 'rxjs';
 
-type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week';
+type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | 'select';
 
 @Component({
   selector: 'fast-input',
@@ -18,6 +18,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public maxLength!: string;
   @Input() public mask!: string;
   @Input() public leftIcon!: string;
+  @Input() public readonly!: boolean;
   @Input() public color!: string;
   @Input() public type: InputType = 'text';
 
