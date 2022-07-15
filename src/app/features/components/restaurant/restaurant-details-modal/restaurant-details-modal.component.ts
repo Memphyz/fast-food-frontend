@@ -1,5 +1,5 @@
-import { Restaurant } from './../../../../core/interfaces/restaurant.interface';
-import { User } from './../../../../core/models/user.model';
+import { IRestaurant } from './../../../../core/interfaces/restaurant.interface';
+import { IUser } from './../../../../core/models/user.model';
 import { UserService } from './../../../../core/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantDetailsModalComponent implements OnInit {
 
-  public readonly restaurant: Restaurant;
-  public readonly owners: User[] = [];
+  public readonly restaurant: IRestaurant;
+  public readonly owners: IUser[] = [];
 
   constructor(private readonly userService: UserService) {}
 

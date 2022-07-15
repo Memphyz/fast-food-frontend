@@ -1,5 +1,5 @@
 import { skeleton } from '../../shared/utils/skeleton';
-import { Restaurant } from './../../../core/interfaces/restaurant.interface';
+import { IRestaurant } from './../../../core/interfaces/restaurant.interface';
 import {
   RestaurantService
 } from './../../../core/services/restaurant/restaurant.service';
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { mergeMap, Observable, tap } from 'rxjs';
-import { Product } from 'src/app/core/interfaces/product.interface';
+import { IProduct } from 'src/app/core/interfaces/product.interface';
 import { ProductService } from 'src/app/core/services/product/product.service';
 
 @Component({
@@ -21,8 +21,8 @@ import { ProductService } from 'src/app/core/services/product/product.service';
 })
 export class RestaurantComponent implements OnInit {
 
-  public restaurant: Restaurant;
-  public products: Product[];
+  public restaurant: IRestaurant;
+  public products: IProduct[];
   public skeletons = skeleton(18);
   private currentPage: number = 0;
 
@@ -30,7 +30,7 @@ export class RestaurantComponent implements OnInit {
 
   public ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.restaurantService.findById(id).pipe(tap((restaurant) => this.restaurant = restaurant), mergeMap((restaurant): Observable<Product[]> => this.produtoService.findAllById({ id: restaurant.id }))).subscribe((products) => this.products = products);
+    this.restaurantService.findById(id).pipe(tap((restaurant) => this.restaurant = restaurant), mergeMap((restaurant): Observable<IProduct[]> => this.produtoService.findAllById({ id: restaurant.id }))).subscribe((products) => this.products = products);
   }
 
   public btnInfo() {
@@ -48,7 +48,7 @@ export class RestaurantComponent implements OnInit {
     this.fetch();
   }
 
-  public btnProduct(product: Product): void {
+  public btnProduct(product: IProduct): void {
     const config: ModalOptions<ProductDetailsComponent> = {
       class: 'modal-dialog-centered sm fast-product-modal',
       animated: true,

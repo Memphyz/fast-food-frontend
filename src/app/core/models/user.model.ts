@@ -1,5 +1,6 @@
 
-export class User {
+export class IUser {
+  public id!: string;
   public name!: string;
   public surname!: string;
   public password!: string;

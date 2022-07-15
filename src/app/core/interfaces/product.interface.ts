@@ -1,6 +1,7 @@
-import { Additional } from './restaurant.interface';
+import { IAdditional } from './restaurant.interface';
 
-export interface Product {
+export interface IProduct {
+  id?: string,
   name: string,
   description: string,
   price: number,
@@ -8,5 +9,6 @@ export interface Product {
   image: string,
   restaurant: string,
   client: string,
-  additionals: Additional[],
+  notes?: string,
+  additionals: IAdditional[],
 }

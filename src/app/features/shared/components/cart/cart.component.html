@@ -127,10 +127,14 @@
         </div>
       </form>
     </div>
-    <span class="d-flex justify-content-between">
-      <strong for="total">Total: </strong>
-      <code><strong>{{cart.total | currency}}</strong></code>
-    </span>
+    <div class="fast-address">
+    </div>
+    <div class="fast-total-container">
+      <span class="d-flex justify-content-between">
+        <strong for="total">Total: </strong>
+        <code><strong>{{cart.total | currency}}</strong></code>
+      </span>
+    </div>
   </div>
 
 </main>
@@ -145,6 +149,7 @@
       (click)="modalRef.hide()">Fechar</button>
     <button type="button"
       [disabled]="selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD' ? form.invalid : !selected"
-      class="primary w-50">Pagar</button>
+      class="primary w-50"
+      (click)="pay()">Pagar</button>
   </div>
 </footer>

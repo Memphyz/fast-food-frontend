@@ -1,4 +1,4 @@
-import { HeaderButton } from './../../../../core/interfaces/header-button.interface';
+import { IHeaderButton } from './../../../../core/interfaces/header-button.interface';
 import { user } from './../../utils/local-storage';
 import { loggedHeaderButtons, unloggedHeaderButtons } from './header';
 import { Component, DoCheck, HostListener } from '@angular/core';
@@ -16,7 +16,7 @@ export class HeaderComponent implements DoCheck {
       || window.location.pathname.includes('forgot-password');
   }
 
-  public leftButtons: HeaderButton[] = [
+  public leftButtons: IHeaderButton[] = [
 
   ]
 

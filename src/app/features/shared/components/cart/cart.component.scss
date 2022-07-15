@@ -204,9 +204,10 @@
     .fast-payment-method {
       width: 100%;
       overflow: auto;
+      position: relative;
       border: 1px solid var(--bs-gray-200);
       border-radius: 5px;
-      padding: 10px;
+      padding: 10px 10px 45px 10px;
       display: flex;
       overflow-x: hidden;
       flex-direction: column;
@@ -237,6 +238,22 @@
             gap: 10px;
             align-items: center;
           }
+        }
+      }
+
+      .fast-total-container {
+        height: 45px;
+        display: flex;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+
+        span {
+          align-items: center;
+          width: 100%;
+          justify-content: space-between;
         }
       }
 

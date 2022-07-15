@@ -1,4 +1,4 @@
-import { User } from './../../../../core/models/user.model';
+import { IUser } from './../../../../core/models/user.model';
 import { UserService } from './../../../../core/services/user/user.service';
 import { isValidCpf } from './../../../shared/validators/cpf';
 import { Component } from '@angular/core';
@@ -24,7 +24,7 @@ export class RegisterComponent {
   constructor(private readonly userService: UserService, private readonly router: Router) {}
 
   public btnSave(): void {
-    this.userService.save({ ...this.form.value } as User).subscribe();
+    this.userService.save({ ...this.form.value } as IUser).subscribe();
 
   }
 

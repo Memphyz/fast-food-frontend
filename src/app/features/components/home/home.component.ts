@@ -1,4 +1,4 @@
-import { Restaurant } from './../../../core/interfaces/restaurant.interface';
+import { IRestaurant } from './../../../core/interfaces/restaurant.interface';
 import {
   RestaurantService
 } from './../../../core/services/restaurant/restaurant.service';
@@ -14,7 +14,7 @@ const ADDITIONAL_SIZE_PER_PRODUCT = 10;
 })
 export class HomeComponent implements OnInit {
 
-  public restaurants: Restaurant[] = [];
+  public restaurants: IRestaurant[] = [];
   public page = 0;
 
   constructor(private readonly restaurantService: RestaurantService) {}

@@ -1,7 +1,7 @@
-import { Product } from './../../../../core/interfaces/product.interface';
+import { IProduct } from './../../../../core/interfaces/product.interface';
 import {
-  Additional,
-  Restaurant
+  IAdditional,
+  IRestaurant
 } from './../../../../core/interfaces/restaurant.interface';
 import { Cart } from './../../../shared/components/cart/cart';
 import { Component, HostBinding } from '@angular/core';
@@ -14,8 +14,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ProductDetailsComponent {
 
-  public readonly restaurant: Restaurant;
-  public product: Product;
+  public readonly restaurant: IRestaurant;
+  public product: IProduct;
   public total: number;
 
   @HostBinding('style.--image')
@@ -35,7 +35,7 @@ export class ProductDetailsComponent {
     this.btnClose();
   }
 
-  public btnMinusAdictional(addictional: Additional): void {
+  public btnMinusAdictional(addictional: IAdditional): void {
     if (addictional.quantity > 0) {
       (this.total = (this.total || this.product.price) - addictional.unitPrice);
       addictional.quantity = addictional.quantity - 1;
@@ -43,7 +43,7 @@ export class ProductDetailsComponent {
     addictional.total = addictional.unitPrice * addictional.quantity;
   }
 
-  public btnAddAdictional(addictional: Additional): void {
+  public btnAddAdictional(addictional: IAdditional): void {
     (this.total = (this.total || this.product.price) + addictional.unitPrice);
     addictional.quantity = addictional.quantity + 1;
     addictional.total = addictional.unitPrice * addictional.quantity;

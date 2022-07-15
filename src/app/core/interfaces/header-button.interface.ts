@@ -1,4 +1,4 @@
-export interface HeaderButton {
+export interface IHeaderButton {
   label?: string;
   routerlink?: string[];
   class?: string;

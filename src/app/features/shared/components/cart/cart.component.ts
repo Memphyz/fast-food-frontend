@@ -1,6 +1,9 @@
 import { detectCardFlag } from '../../utils/card-flag.utils';
-import { Payment } from './../../../../core/interfaces/payment.interface';
-import { Product } from './../../../../core/interfaces/product.interface';
+import { ALPHA } from '../../utils/regex.utils';
+import { IOrder, IProductOrder } from './../../../../core/interfaces/order.interface';
+import { IPayment } from './../../../../core/interfaces/payment.interface';
+import { IProduct } from './../../../../core/interfaces/product.interface';
+import { userId } from './../../utils/local-storage';
 import { Cart } from './cart';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
@@ -26,7 +29,7 @@ export class CartComponent implements OnInit {
     base64: (options?) => Promise<string>;
     image?: string;
   };
-  public payments: Payment[] = [
+  public payments: IPayment[] = [
     {
       name: 'Pix',
       type: 'PIX',
@@ -60,10 +63,21 @@ export class CartComponent implements OnInit {
     card: [undefined, [Validators.required, Validators.minLength(16), Validators.pattern(/^\d/)]],
     limit: [undefined, Validators.required],
     cvc: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
-    name: [undefined, [Validators.required, Validators.minLength(2)]]
+    name: [undefined, [Validators.required, Validators.minLength(2)]],
+    address: new FormBuilder().group({
+      postalCode: [undefined, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      street: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
+      number: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(8), Validators.pattern(ALPHA)]],
+      district: [undefined, [Validators.minLength(5), Validators.maxLength(80)]],
+      city: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(ALPHA)]],
+      state: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(ALPHA)]],
+      complement: [undefined, Validators.maxLength(60)],
+      reference: [undefined, [Validators.minLength(2), Validators.maxLength(100)]],
+      type: [undefined, [Validators.required, Validators.pattern(/^(COMMERCIAL|RESIDENTIAL|KINSHIP)$/)]]
+    })
   })
 
-  public selected: Payment;
+  public selected: IPayment;
 
   constructor(public readonly modalRef: BsModalRef, private clipboard: Clipboard, private readonly toastr: ToastrService) {
   }
@@ -94,8 +108,22 @@ export class CartComponent implements OnInit {
     this.toastr.success('', 'Código copiado com sucesso!');
   }
 
-  public productTotalPrice(product: Product): number {
+  public productTotalPrice(product: IProduct): number {
     const totalAddictionals = product.additionals?.map((addictional => addictional.total)).reduce((acumulator, totalAddictionals): number => acumulator + totalAddictionals, 0)
     return product.price + totalAddictionals;
+  }
+
+  public pay(): void {
+    if (this.selected.type === 'CREDIT_CARD' || this.selected.type === 'DEBIT_CARD') {
+      // Validate card, not implemented because payment its fake!
+    }
+    const order: IOrder = {
+      user: userId(),
+      products: this.cart.products.map((product): IProductOrder => Object.create({ id: product.id, notes: product.notes })),
+      payment: this.selected.type,
+      address: this.form.get('address').value,
+    }
+    console.log(order);
+
   }
 }

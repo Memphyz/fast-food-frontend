@@ -1,6 +1,6 @@
-import { Product } from './product.interface';
+import { IProduct } from './product.interface';
 
 export interface ICart {
-  products: Product[];
+  products: IProduct[];
   total: number;
 }

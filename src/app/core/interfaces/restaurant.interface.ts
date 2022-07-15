@@ -1,29 +1,7 @@
-import { Payments } from '../enums/payment.enum';
+import { PaymentsType } from '../enums/payment.enum';
+import { IAddress } from './address.interface';
 
-export interface Address {
-  postalCode: string;
-  street: string;
-  number: number;
-  neighborhood: string;
-  city: string;
-  state: string;
-  complement?: string;
-  reference?: any;
-  district: string;
-}
-
-export interface Product {
-  name: string,
-  description: string,
-  price: number,
-  active: boolean,
-  payment: Payments[],
-  restaurant: string,
-  client: string,
-  additionals: Additional,
-}
-
-export interface Additional {
+export interface IAdditional {
   unitPrice: number,
   total: number,
   description: string,
@@ -32,18 +10,18 @@ export interface Additional {
   notes: string
 }
 
-export interface Restaurant {
+export interface IRestaurant {
   name: string;
   freight: number;
   id: string;
   rate: number;
   kitchen: string;
-  address: Address;
+  address: IAddress;
   active: boolean;
   photo: string;
   open: string;
   close: string;
-  payments: Payments[];
+  payments: PaymentsType[];
   owners: string[];
   products: any[];
 }

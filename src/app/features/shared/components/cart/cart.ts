@@ -1,10 +1,10 @@
 import { ICart } from './../../../../core/interfaces/cart.interface';
 import { cloneDeep } from 'lodash';
-import { Product } from 'src/app/core/interfaces/product.interface';
+import { IProduct } from 'src/app/core/interfaces/product.interface';
 
 export class Cart {
 
-  public static add(product: Product, total: number): void {
+  public static add(product: IProduct, total: number): void {
     const cart: ICart = JSON.parse(sessionStorage.getItem('cart')) || { products: [], total: 0 };
     const productCopy = cloneDeep(product)
     productCopy.additionals = productCopy.additionals.filter((addictional): boolean => addictional.quantity > 0)
