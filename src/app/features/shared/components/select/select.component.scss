@@ -1,9 +1,100 @@
 :host {
   position: relative;
+  margin: 15px 0px;
 
-  fast-icon {
-    position: absolute !important;
-    right: 10px;
-    top: 10px;
+  .fast-options-container {
+    animation: 0.5s cubic-bezier(0.25, 1, 0.3, 1) wipe-out-up both;
+    width: 100%;
+    min-height: 40px;
+    background-color: white;
+    z-index: 10;
+    border: 1px solid var(--bs-gray-500);
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--bs-secondary);
+    max-height: 150px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    @keyframes wipe-out-up {
+      from {
+        clip-path: inset(0 0 0 0);
+      }
+      to {
+        clip-path: inset(0 0 100% 0);
+      }
+    }
+
+    .fast-select-option {
+      display: flex;
+      flex-direction: column;
+      padding: 5px 10px;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+
+      &.fast-add {
+        flex-direction: row;
+        gap: 10px;
+        background-color: var(--primary-light);
+        color: white;
+        fast-icon {
+          background-color: white !important;
+        }
+
+        &:hover {
+          background-color: var(--primary);
+          filter: brightness(1.05);
+        }
+      }
+
+      &.fast-option-selected {
+        background-color: var(--primary);
+        color: white;
+
+        span {
+          color: white;
+        }
+
+        &:hover {
+          color: unset;
+          span {
+            color: var(--bs-gray-500);
+          }
+        }
+      }
+
+      span {
+        font-size: 13px;
+        color: var(--bs-gray-500);
+      }
+
+      > * {
+        transition: all 0.1s;
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: var(--bs-gray-200);
+      }
+    }
+  }
+
+  &.fast-select-open > .fast-options-container {
+    animation: 0.5s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-down both;
+    @keyframes wipe-in-down {
+      from {
+        clip-path: inset(0 0 100% 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+  }
+
+  .fast-options-container {
+    position: absolute;
+    top: 0;
   }
 }

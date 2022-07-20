@@ -7,6 +7,16 @@ fast-icon {
   top: 8px;
   left: 5px;
   z-index: 10;
+
+  &.right {
+    right: 5px;
+    top: 6px;
+    left: unset;
+
+    ~ mdb-form-control > input {
+      padding-right: 30px !important;
+    }
+  }
 }
 
 input.left-icon {

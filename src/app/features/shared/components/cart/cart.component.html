@@ -128,7 +128,12 @@
       </form>
     </div>
     <div class="fast-address">
-      <fast-select></fast-select>
+      <fast-select label="Endereço"
+        [options]="enderecos"
+        [autocomplete]="true"
+        [sign]="true"
+        (signEvent)="newAdress()"
+        [(ngModel)]="endereco"></fast-select>
     </div>
     <div class="fast-total-container">
       <span class="d-flex justify-content-between">

@@ -1,3 +1,4 @@
+import { SelectOption } from '../../../../core/models/select-option.interface';
 import { detectCardFlag } from '../../utils/card-flag.utils';
 import { ALPHA } from '../../utils/regex.utils';
 import { IOrder, IProductOrder } from './../../../../core/interfaces/order.interface';
@@ -8,6 +9,7 @@ import { Cart } from './cart';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { uniqueId } from 'lodash';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -24,6 +26,34 @@ export class CartComponent implements OnInit {
 
   public cart = Cart.cart();
   public flag: string;
+  public endereco: number;
+  public enderecos: SelectOption<number>[] = [
+    {
+      label: 'Endereco 3',
+      sublabel: '03978400',
+      value: 3
+    },
+    {
+      label: 'Endereco 4',
+      sublabel: '03978400',
+      value: 4
+    },
+    {
+      label: 'Endereco 5',
+      sublabel: '03978400',
+      value: 5
+    },
+    {
+      label: 'Endereco 6',
+      sublabel: '03978400',
+      value: 6
+    },
+    {
+      label: 'Endereco 7',
+      sublabel: '03978400',
+      value: 7
+    }
+  ]
   public pix: {
     payload: () => string;
     base64: (options?) => Promise<string>;
@@ -79,11 +109,16 @@ export class CartComponent implements OnInit {
 
   public selected: IPayment;
 
-  constructor(public readonly modalRef: BsModalRef, private clipboard: Clipboard, private readonly toastr: ToastrService) {
+  constructor(public readonly modalRef: BsModalRef, private clipboard: Clipboard, private readonly toastr: ToastrService, private readonly router: Router) {
   }
 
   public ngOnInit(): void {
     this.form.get('card').valueChanges.pipe(untilDestroyed(this)).subscribe((card: string): string => this.flag = detectCardFlag(card))
+  }
+
+  public newAdress(): void {
+    this.router.navigate(['new-address']);
+    this.modalRef.hide();
   }
 
   public async generatePix(): Promise<void> {

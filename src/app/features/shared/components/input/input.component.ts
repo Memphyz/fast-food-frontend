@@ -1,4 +1,13 @@
-import { Component, HostBinding, Input, OnInit, Optional, Self } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Optional,
+  Output,
+  Self
+} from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms';
 import { uniqueId } from 'lodash';
 import { noop } from 'rxjs';
@@ -18,11 +27,17 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public maxLength!: string;
   @Input() public mask!: string;
   @Input() public leftIcon!: string;
+  @Input() public rightIcon!: string;
   @Input() public readonly!: boolean;
   @Input() public color!: string;
+  @Input() public visibleValue!: string;
   @Input() public type: InputType = 'text';
 
   public readonly id = window.btoa(uniqueId());
+
+  @Output() public readonly rightIconEvent = new EventEmitter<void>();
+  @Output() public readonly inputValueChange = new EventEmitter<string>();
+  @Output() public readonly leftIconEvent = new EventEmitter<void>();
 
   @HostBinding('class.disabled')
   public disabled: boolean;

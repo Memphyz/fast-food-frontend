@@ -1,14 +1,24 @@
-<fast-icon [icon]="leftIcon"
+<fast-icon *ngIf="leftIcon"
+  [icon]="leftIcon"
   [color]="color"
+  (click)="leftIconEvent.emit()"
+  [size]="28"></fast-icon>
+<fast-icon *ngIf="rightIcon"
+  class="right"
+  [icon]="rightIcon"
+  [color]="color"
+  (click)="rightIconEvent.emit()"
   [size]="28"></fast-icon>
 <mdb-form-control>
   <input mdbInput
+    #inputRef
     [class.left-icon]="leftIcon"
     type="{{type}}"
     id="{{id}}"
     [readonly]="readonly"
     placeholder="{{placeholder}}"
-    [(ngModel)]="inputValue"
+    (input)="inputValueChange.emit(inputRef.value)"
+    [(ngModel)]="inputValue || visibleValue"
     [mask]="mask"
     class="form-control" />
   <label mdbLabel

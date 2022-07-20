@@ -207,7 +207,7 @@
       position: relative;
       border: 1px solid var(--bs-gray-200);
       border-radius: 5px;
-      padding: 10px 10px 45px 10px;
+      padding: 10px;
       display: flex;
       overflow-x: hidden;
       flex-direction: column;
@@ -246,7 +246,7 @@
         display: flex;
         width: 100%;
         position: absolute;
-        bottom: 0;
+        top: calc(100% + 150px);
         left: 0;
         padding: 10px;
 

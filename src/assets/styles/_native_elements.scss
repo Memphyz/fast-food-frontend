@@ -102,6 +102,20 @@ ngb-datepicker {
   }
 }
 
+fast-select {
+  fast-icon.right {
+    cursor: pointer;
+  }
+  &.fast-select-open {
+    fast-icon.right {
+      transform: rotate(180deg);
+    }
+  }
+  > div > fast-input input {
+    background-color: white !important;
+  }
+}
+
 ngx-spinner > div > div {
   display: flex;
   flex-direction: column;

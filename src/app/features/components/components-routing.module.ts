@@ -2,6 +2,7 @@ import { LoginGuard } from './../../core/guards/logged.guard';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
+import { NewAddressComponent } from './new-address/new-address.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'new-address',
+    component: NewAddressComponent
   },
   {
     path: 'register',

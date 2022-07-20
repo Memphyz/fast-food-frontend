@@ -1,3 +1,31 @@
-<fast-input [readonly]="true"></fast-input>
-<fast-icon icon="chevron-down"
-  [size]="18"></fast-icon>
+<div #inputContainer>
+  <fast-input [readonly]="!autocomplete"
+    [label]="label"
+    (rightIconEvent)="(!open && selected) && !(selectedOption = undefined)"
+    [visibleValue]="selectedOption?.label"
+    (inputValueChange)="filter = $event"
+    color="var(--bs-gray-500)"
+    [rightIcon]="open || !selected ? 'chevron-down' : 'close'"></fast-input>
+</div>
+<div class="fast-options-container"
+  [style]="'top:' + offsetHeight(inputContainer) + 'px'">
+  <ng-container *ngIf="filtered?.length else empty">
+    <div *ngIf="sign || (signLabel && signLabel !== 'Cadastro')"
+      class="fast-select-option fast-add"
+      (click)="signEvent.emit($event)">
+      <fast-icon icon="plus"></fast-icon>
+      <strong>{{signLabel}}</strong>
+    </div>
+    <ng-container *ngFor="let option of filtered">
+      <div class="fast-select-option"
+        [class.fast-option-selected]="isSelected(option)"
+        (click)="selectedOption = option">
+        <strong>{{option.label}}</strong>
+        <span>{{option.sublabel}}</span>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #empty>
+    <div class="fast-select-empty">Nenhuma opção encontrada</div>
+  </ng-template>
+</div>
