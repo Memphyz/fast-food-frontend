@@ -15,10 +15,13 @@
     [class.left-icon]="leftIcon"
     type="{{type}}"
     id="{{id}}"
+    [maxlength]="maxLength"
+    [minlength]="minLength"
+    [value]="visibleValue"
     [readonly]="readonly"
     placeholder="{{placeholder}}"
     (input)="inputValueChange.emit(inputRef.value)"
-    [(ngModel)]="inputValue || visibleValue"
+    [(ngModel)]="inputValue"
     [mask]="mask"
     class="form-control" />
   <label mdbLabel

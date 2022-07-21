@@ -7,6 +7,7 @@ import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
 import { SwitchComponent } from './components/switch/switch.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
+import { SafePipe } from './pipes/safe-url.pipe';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -30,6 +31,7 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -54,11 +56,20 @@ import { NgxMaskModule } from 'ngx-mask';
     MdbRippleModule,
     MdbScrollspyModule,
     MdbTabsModule,
+    ReactiveFormsModule,
     MdbTooltipModule,
     MdbValidationModule,
     NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      preventDuplicates: true,
+      countDuplicates: true,
+      includeTitleDuplicates: true,
+      progressAnimation: 'decreasing',
+      progressBar: true
+    })
   ],
-  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent],
+  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent, SafePipe],
   declarations: [
     HeaderComponent,
     InputComponent,
@@ -69,6 +80,7 @@ import { NgxMaskModule } from 'ngx-mask';
     IconComponent,
     CartComponent,
     SelectComponent,
+    SafePipe
   ],
 })
 export class SharedModule {}

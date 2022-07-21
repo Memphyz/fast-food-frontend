@@ -1,0 +1,60 @@
+<form class="fast-form"
+  [formGroup]="form">
+  <img src="./../../../../../assets/images/illus/locale-illus.svg"
+    alt="locale">
+  <div class="fast-form-controls">
+    <div class="row">
+      <div class="col-12 col-lg-4 mt-3">
+        <fast-input label="CEP"
+          [minLength]="9"
+          formControlName="cep"
+          mask="00000-000"
+          errorMessage
+          [maxLength]="9"></fast-input>
+      </div>
+      <div class="col-12 col-lg-8 mt-3">
+        <fast-input label="Logradouro"
+          formControlName="address"
+          errorMessage
+          [maxLength]="80"></fast-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-5 mt-3">
+        <fast-input label="Bairro"
+          formControlName="district"
+          errorMessage
+          [maxLength]="60"></fast-input>
+      </div>
+      <div class="col-12 col-lg-7 mt-3">
+        <fast-input label="Número"
+          [minLength]="1"
+          formControlName="number"
+          errorMessage
+          [maxLength]="5"></fast-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4 mt-3">
+        <fast-select label="Cidade"
+          formControlName="city"></fast-select>
+      </div>
+      <div class="col-12 col-lg-4 mt-3">
+        <fast-select label="Estado"
+          formControlName="state"></fast-select>
+      </div>
+      <div class="col-12 col-lg-4 mt-3">
+        <fast-input label="Complemento"
+          formControlName="reference"></fast-input>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="fast-info">
+  <iframe loading="lazy"
+    #map
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+
+</div>

@@ -1,4 +1,5 @@
 import { SharedModule } from '../shared/shared.module';
+import { AddressModule } from './address/address.module';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
@@ -16,7 +17,6 @@ import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
-import { NewAddressComponent } from './new-address/new-address.component';
 
 registerLocaleData(localePt);
 
@@ -28,12 +28,12 @@ registerLocaleData(localePt);
     RestaurantComponent,
     RestaurantDetailsModalComponent,
     ProductDetailsComponent,
-    NewAddressComponent,
   ],
   imports: [
     ComponentsRoutingModule,
     FormsModule,
     CommonModule,
+    AddressModule,
     InfiniteScrollModule,
     ReactiveFormsModule,
     SharedModule,

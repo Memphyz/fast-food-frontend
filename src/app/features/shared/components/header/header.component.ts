@@ -11,8 +11,7 @@ import { Component, DoCheck, HostListener } from '@angular/core';
 export class HeaderComponent implements DoCheck {
 
   public get show(): boolean {
-    return window.location.pathname.includes('register')
-      || window.location.pathname.includes('sign-in')
+    return window.location.pathname.includes('sign-in')
       || window.location.pathname.includes('forgot-password');
   }
 

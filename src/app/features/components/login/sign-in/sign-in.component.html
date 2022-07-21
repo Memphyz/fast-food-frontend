@@ -12,6 +12,7 @@
       </ng-container>
       <ng-template #cpfRef>
         <div class="col-12">
+          {{form.value | json}}
           <fast-input formControlName="cpf"
             type="text"
             errorMessage

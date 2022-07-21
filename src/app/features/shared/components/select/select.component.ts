@@ -2,6 +2,7 @@ import { SelectOption } from './../../../../core/models/select-option.interface'
 import { equals } from './../../utils/equals';
 import { StringUtils } from './../../utils/string-utils';
 import {
+  AfterViewChecked,
   Component,
   ElementRef,
   EventEmitter,
@@ -20,7 +21,7 @@ import { noop } from 'rxjs';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, AfterViewChecked {
 
   @Input() public label: string;
   @Input() public autocomplete: boolean;
@@ -36,6 +37,8 @@ export class SelectComponent implements ControlValueAccessor {
   public cache: SelectOption<unknown>;
   public filter: string;
   public index: number;
+
+  private started: boolean;
 
   public get selectedOption(): SelectOption<unknown> {
     return this.selected;
@@ -59,6 +62,11 @@ export class SelectComponent implements ControlValueAccessor {
   constructor(private readonly el: ElementRef, @Optional() @Self() private readonly ngControl: NgControl) {
     this.ngControl && !this.ngControl.valueAccessor && (this.ngControl.valueAccessor = this);
   }
+
+  public ngAfterViewChecked(): void {
+    this.started = true;
+  }
+
   public writeValue(selected: unknown): void {
     this.onTouched(selected);
     this.onChange(selected);
@@ -82,8 +90,6 @@ export class SelectComponent implements ControlValueAccessor {
 
   @HostListener('document:click', ['$event.target'])
   public click(target: HTMLElement): void {
-    console.log((this.el.nativeElement as HTMLElement).contains(target));
-
     (this.el.nativeElement as HTMLElement).contains(target) ? this.toggle() : this.open = false
   }
 
@@ -92,7 +98,7 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   public offsetHeight(element: HTMLDivElement): number {
-    return element.offsetHeight + 5;
+    return this.started ? element.offsetHeight + 5 : 45;
   }
 
 }

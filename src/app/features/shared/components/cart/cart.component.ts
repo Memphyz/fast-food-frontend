@@ -117,7 +117,7 @@ export class CartComponent implements OnInit {
   }
 
   public newAdress(): void {
-    this.router.navigate(['new-address']);
+    this.router.navigate(['address', 'register']);
     this.modalRef.hide();
   }
 

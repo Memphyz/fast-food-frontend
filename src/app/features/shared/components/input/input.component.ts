@@ -23,8 +23,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   @Input() public label!: string;
   @Input() public placeholder!: string;
-  @Input() public minLength!: string;
-  @Input() public maxLength!: string;
+  @Input() public minLength!: string | number;
+  @Input() public maxLength!: string | number;
   @Input() public mask!: string;
   @Input() public leftIcon!: string;
   @Input() public rightIcon!: string;
@@ -50,7 +50,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   public set inputValue(value: string) {
     if (!this.disabled) {
-      this.value = value;
+      this.writeValue(value);
       this.onChange(value);
       this.onTouched(value);
     }

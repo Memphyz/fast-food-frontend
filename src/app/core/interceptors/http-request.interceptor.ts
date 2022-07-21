@@ -8,7 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, filter, Observable, of, tap } from 'rxjs';
+import { catchError, filter, Observable, of, tap, throwError } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
@@ -29,7 +29,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       this.spinner.hide();
       this.toastr.error(error.error?.message, error.error?.title);
       console.error(error);
-      return of(error)
+      return throwError(error)
     }), filter((response) => response instanceof HttpResponse), tap((response: HttpResponse<any>): void => {
       this.spinner.hide();
       (response.body?.message || response.body?.title) && this.toastr.success(response.body?.message, response.body?.title)

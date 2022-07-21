@@ -10,7 +10,7 @@
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
 
 // BOOTSTRAP
-@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap/scss/bootstrap";
 
 // regular style toast
 @import "~ngx-toastr/toastr";
@@ -77,7 +77,3 @@ bs-datepicker-container {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
