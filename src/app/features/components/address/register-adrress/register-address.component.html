@@ -1,5 +1,6 @@
 <form class="fast-form"
-  [formGroup]="form">
+  [formGroup]="form"
+  (ngSubmit)="save()">
   <img src="./../../../../../assets/images/illus/locale-illus.svg"
     alt="locale">
   <div class="fast-form-controls">
@@ -7,15 +8,17 @@
       <div class="col-12 col-lg-4 mt-3">
         <fast-input label="CEP"
           [minLength]="9"
-          formControlName="cep"
+          formControlName="postalCode"
           mask="00000-000"
           errorMessage
+          [white]="true"
           [maxLength]="9"></fast-input>
       </div>
       <div class="col-12 col-lg-8 mt-3">
         <fast-input label="Logradouro"
           formControlName="address"
           errorMessage
+          [white]="true"
           [maxLength]="80"></fast-input>
       </div>
     </div>
@@ -24,37 +27,75 @@
         <fast-input label="Bairro"
           formControlName="district"
           errorMessage
+          [white]="true"
           [maxLength]="60"></fast-input>
       </div>
-      <div class="col-12 col-lg-7 mt-3">
+      <div class="col-12 col-lg-3 mt-3">
         <fast-input label="Número"
           [minLength]="1"
           formControlName="number"
           errorMessage
+          [white]="true"
           [maxLength]="5"></fast-input>
+      </div>
+      <div class="col-12 col-lg-4 mt-3">
+        <fast-select label="Tipo de Endereço"
+          errorMessage
+          [white]="true"
+          formControlName="type"
+          [options]="types"></fast-select>
       </div>
     </div>
     <div class="row">
       <div class="col-12 col-lg-4 mt-3">
+        <fast-select label="Estado"
+          [autocomplete]="true"
+          formControlName="state"
+          errorMessage
+          [white]="true"
+          [options]="states"></fast-select>
+      </div>
+      <div class="col-12 col-lg-4 mt-3">
         <fast-select label="Cidade"
+          [options]="cities"
+          errorMessage
+          [white]="true"
           formControlName="city"></fast-select>
       </div>
       <div class="col-12 col-lg-4 mt-3">
-        <fast-select label="Estado"
-          formControlName="state"></fast-select>
-      </div>
-      <div class="col-12 col-lg-4 mt-3">
         <fast-input label="Complemento"
+          errorMessage
+          [white]="true"
           formControlName="reference"></fast-input>
       </div>
     </div>
   </div>
+  <div class="fast-footer">
+    <button class="position-relative mt-5"
+      [disabled]="form.invalid">Salvar</button>
+  </div>
 </form>
 <div class="fast-info">
-  <iframe loading="lazy"
-    #map
-    allowfullscreen
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-
+  <div class="fast-map">
+    <iframe loading="lazy"
+      #map
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  <div class="fast-addresses">
+    <ng-container *ngFor="let address of addresses">
+      <div class="fast-address-in-list">
+        <span>
+          <strong>
+            {{address.address}}, {{address.number}}
+          </strong>
+        </span>
+        <span>
+          <strong>CEP: </strong>
+          <label for="postalCode">{{address.postalCode+'' | mask: '00000-000'}}</label>
+        </span>
+      </div>
+    </ng-container>
+  </div>
 </div>

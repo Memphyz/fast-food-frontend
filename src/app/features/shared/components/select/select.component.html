@@ -10,7 +10,7 @@
 <div class="fast-options-container"
   [style]="'top:' + offsetHeight(inputContainer) + 'px'">
   <ng-container *ngIf="filtered?.length else empty">
-    <div *ngIf="sign || (signLabel && signLabel !== 'Cadastro')"
+    <div *ngIf="register || (signLabel && signLabel !== 'Cadastrar')"
       class="fast-select-option fast-add"
       (click)="signEvent.emit($event)">
       <fast-icon icon="plus"></fast-icon>

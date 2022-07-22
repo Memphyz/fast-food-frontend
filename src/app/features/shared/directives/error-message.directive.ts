@@ -20,6 +20,7 @@ export class ErrorMessageDirective
   extends ErrorMessage
   implements DoCheck, OnDestroy {
   @Input() public field!: string
+  @Input() public white!: boolean;
   @Input() public declare customErrors: { [key: string]: string };
 
   public errorMessageWrapperElement: HTMLElement;
@@ -106,7 +107,8 @@ export class ErrorMessageDirective
       this.errorMessageWrapperElement,
       'fast-form-control-error-wrapper'
     );
-    this.renderer.addClass(this.errorMessageElement, 'fast-form-control-error');
+    this.renderer.addClass(this.errorMessageElement, `fast-form-control-error`);
+    this.white && this.renderer.addClass(this.errorMessageElement, `fast-msg-white`);
     this.renderer.appendChild(
       this.errorMessageWrapperElement,
       this.errorMessageElement

@@ -5,6 +5,10 @@
 .fast-form-control-error {
   font-size: 10px;
   color: var(--primary);
+
+  &.fast-msg-white {
+    color: var(--bs-gray-100);
+  }
 }
 
 .fast-ellipsis,

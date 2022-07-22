@@ -16,6 +16,7 @@ export class CepService {
       postalCode: address.cep,
       address: address.address,
       state: address.state,
+      city: address.city,
       district: address.district
     } as IAddress))
   }
