@@ -127,13 +127,45 @@
         </div>
       </form>
     </div>
-    <div class="fast-address">
+    <div class="fast-address"
+      [formGroup]="form">
       <fast-select label="Endereço"
-        [options]="enderecos"
+        [options]="addresses"
         [autocomplete]="true"
+        formControlName="address"
         [register]="true"
-        (signEvent)="newAdress()"
-        [(ngModel)]="endereco"></fast-select>
+        (signEvent)="newAdress()"></fast-select>
+    </div>
+    <div class="fast-address-detail">
+      <ng-container *ngIf="address else noSelected">
+        <div class="fast-address-detail-data">
+          <strong>Rua: </strong>
+          <label for="street">{{address.address}} - {{address.number}}</label>
+        </div>
+        <div class="fast-address-detail-data">
+          <strong>CEP: </strong>
+          <label for="street">{{address.postalCode || '-'}}</label>
+        </div>
+        <div class="fast-address-detail-data">
+          <strong>Bairro: </strong>
+          <label for="street">{{address.district || '-'}}</label>
+        </div>
+        <div class="fast-address-detail-data">
+          <strong>Cidade: </strong>
+          <label for="street">{{address.city || '-'}}</label>
+        </div>
+        <div class="fast-address-detail-data">
+          <strong>State: </strong>
+          <label for="street">{{address.state || '-'}}</label>
+        </div>
+        <div class="fast-address-detail-data">
+          <strong>Complemento: </strong>
+          <label for="street">{{address.complement || '-'}}</label>
+        </div>
+      </ng-container>
+      <ng-template #noSelected>
+        Selecione um endereço
+      </ng-template>
     </div>
     <div class="fast-total-container">
       <span class="d-flex justify-content-between">
@@ -154,7 +186,7 @@
       class="outline w-50"
       (click)="modalRef.hide()">Fechar</button>
     <button type="button"
-      [disabled]="selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD' ? form.invalid : !selected"
+      [disabled]="!address || (selected?.type === 'DEBIT_CARD' || selected?.type === 'CREDIT_CARD' ? form.invalid : !selected)"
       class="primary w-50"
       (click)="pay()">Pagar</button>
   </div>

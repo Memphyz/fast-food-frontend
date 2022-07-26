@@ -61,7 +61,7 @@ export class RegisterAddressComponent implements OnInit, DoCheck {
   }
 
   private findAddresses() {
-    this.addressService.findAll().subscribe((address) => this.addresses = address);
+    this.addressService.findAll().subscribe((address) => this.addresses = address.splice(0, 5));
   }
   private stateValueChanges(): void {
     this.form.get('state').valueChanges.pipe(untilDestroyed(this), tap(() => this.form.get('city').reset())).subscribe((state) =>
@@ -70,9 +70,10 @@ export class RegisterAddressComponent implements OnInit, DoCheck {
   }
 
   private cepValueChanges(): void {
-    this.form.get('postalCode').valueChanges.pipe(untilDestroyed(this), filter((cep: string): boolean => cep?.length === 8), mergeMap((cep: string) => this.cepService.findCep(cep)), tap(() => this.form.markAllAsTouched())).subscribe({
-      next: (address: IAddress) => this.form.patchValue({ ...address, cep: address.postalCode }, { emitEvent: false }),
-      error: (error: any) => error.status === 404 && this.form.reset()
-    });
+    this.form.get('postalCode').valueChanges.pipe(untilDestroyed(this), filter((cep: string): boolean => cep?.length === 8),
+      mergeMap((cep: string) => this.cepService.findCep(cep)), tap(() => this.form.markAllAsTouched())).subscribe({
+        next: (address: IAddress) => this.form.patchValue({ ...address, cep: address.postalCode }, { emitEvent: false }),
+        error: (error: any) => error.status === 404 && this.form.reset()
+      });
   }
 }

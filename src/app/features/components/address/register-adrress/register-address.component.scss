@@ -3,11 +3,19 @@
   padding: 20px 30px;
   display: flex;
 
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+
   .fast-form {
     width: 100%;
 
     .fast-form-controls {
       width: 43vw;
+
+      @media screen and (max-width: 992px) {
+        width: 100%;
+      }
     }
     .fast-footer {
       width: 100%;
@@ -15,6 +23,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      @media screen and (max-width: 992px) {
+        max-width: unset;
+      }
+
       button {
         width: 100%;
         background-color: white;
@@ -36,6 +49,10 @@
       left: 10vw;
       left: calc(10vw - 100px);
       margin-bottom: 40px;
+
+      @media screen and (max-width: 992px) {
+        display: none;
+      }
     }
 
     &::before {
@@ -47,6 +64,10 @@
       background-color: var(--primary-light-100);
       border-radius: 100% 100%;
       transform: translate(60%, -22%);
+      z-index: -1;
+      @media screen and (max-width: 992px) {
+        transform: translate(110%, -50%);
+      }
     }
   }
   .fast-illus {
@@ -80,16 +101,32 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      position: relative;
 
       .fast-address-in-list {
         width: 100%;
-        min-height: 60px;
         padding: 5px 15px;
         background-color: var(--bs-gray-400);
         border-radius: 5px;
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        :nth-child(2) {
+          gap: 10px;
+          flex-direction: column;
+        }
+      }
+      .fast-footer-buttons {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+          width: 100%;
+          max-width: 300px;
+        }
       }
     }
   }

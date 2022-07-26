@@ -1,9 +1,11 @@
 import { SelectOption } from '../../../../core/models/select-option.interface';
 import { detectCardFlag } from '../../utils/card-flag.utils';
-import { ALPHA } from '../../utils/regex.utils';
+import { IAddress } from './../../../../core/interfaces/address.interface';
 import { IOrder, IProductOrder } from './../../../../core/interfaces/order.interface';
 import { IPayment } from './../../../../core/interfaces/payment.interface';
 import { IProduct } from './../../../../core/interfaces/product.interface';
+import { AddressService } from './../../../../core/services/address/address.service';
+import { OrderService } from './../../../../core/services/order/order.service';
 import { userId } from './../../utils/local-storage';
 import { Cart } from './cart';
 import { Clipboard } from '@angular/cdk/clipboard';
@@ -15,6 +17,7 @@ import { uniqueId } from 'lodash';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { QrCodePix } from 'qrcode-pix';
+import { map } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -26,34 +29,8 @@ export class CartComponent implements OnInit {
 
   public cart = Cart.cart();
   public flag: string;
-  public endereco: number;
-  public enderecos: SelectOption<number>[] = [
-    {
-      label: 'Endereco 3',
-      sublabel: '03978400',
-      value: 3
-    },
-    {
-      label: 'Endereco 4',
-      sublabel: '03978400',
-      value: 4
-    },
-    {
-      label: 'Endereco 5',
-      sublabel: '03978400',
-      value: 5
-    },
-    {
-      label: 'Endereco 6',
-      sublabel: '03978400',
-      value: 6
-    },
-    {
-      label: 'Endereco 7',
-      sublabel: '03978400',
-      value: 7
-    }
-  ]
+  public page = 0;
+  public addresses: SelectOption<IAddress>[]
   public pix: {
     payload: () => string;
     base64: (options?) => Promise<string>;
@@ -94,26 +71,27 @@ export class CartComponent implements OnInit {
     limit: [undefined, Validators.required],
     cvc: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
     name: [undefined, [Validators.required, Validators.minLength(2)]],
-    address: new FormBuilder().group({
-      postalCode: [undefined, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      street: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
-      number: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(8), Validators.pattern(ALPHA)]],
-      district: [undefined, [Validators.minLength(5), Validators.maxLength(80)]],
-      city: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(ALPHA)]],
-      state: [undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(ALPHA)]],
-      complement: [undefined, Validators.maxLength(60)],
-      reference: [undefined, [Validators.minLength(2), Validators.maxLength(100)]],
-      type: [undefined, [Validators.required, Validators.pattern(/^(COMMERCIAL|RESIDENTIAL|KINSHIP)$/)]]
-    })
+    address: [undefined, [Validators.required]]
   })
 
   public selected: IPayment;
 
-  constructor(public readonly modalRef: BsModalRef, private clipboard: Clipboard, private readonly toastr: ToastrService, private readonly router: Router) {
+  public get address(): IAddress {
+    return this.form.get('address').value;
+  }
+
+  constructor(
+    public readonly modalRef: BsModalRef,
+    private readonly clipboard: Clipboard,
+    private readonly toastr: ToastrService,
+    private readonly addressService: AddressService,
+    private readonly orderService: OrderService,
+    private readonly router: Router) {
   }
 
   public ngOnInit(): void {
-    this.form.get('card').valueChanges.pipe(untilDestroyed(this)).subscribe((card: string): string => this.flag = detectCardFlag(card))
+    this.form.get('card').valueChanges.pipe(untilDestroyed(this)).subscribe((card: string): string => this.flag = detectCardFlag(card));
+    this.addressService.findAll({ page: this.page, limit: 5 }).pipe(map((addresses) => addresses.map((address) => new SelectOption(`${address.address}, ${address.number}`, address, address.postalCode.replace(/^(\d{5})(\d{3})+?$/, `$1-$2`))))).subscribe((address) => this.addresses = address)
   }
 
   public newAdress(): void {
@@ -156,9 +134,9 @@ export class CartComponent implements OnInit {
       user: userId(),
       products: this.cart.products.map((product): IProductOrder => Object.create({ id: product.id, notes: product.notes })),
       payment: this.selected.type,
-      address: this.form.get('address').value,
+      address: this.form.get('address').value?.id,
     }
-    console.log(order);
+    this.orderService.save(order).subscribe(() => this.toastr.success('Pedido criado com sucesso!', 'Sucesso!'))
 
   }
 }

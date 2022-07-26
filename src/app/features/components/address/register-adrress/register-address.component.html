@@ -71,11 +71,11 @@
     </div>
   </div>
   <div class="fast-footer">
-    <button class="position-relative mt-5"
+    <button class="position-relative mt-3 mt-md-5"
       [disabled]="form.invalid">Salvar</button>
   </div>
 </form>
-<div class="fast-info">
+<div class="fast-info mb-3 mb-md-0 mt-3 mt-md-0">
   <div class="fast-map">
     <iframe loading="lazy"
       #map
@@ -91,11 +91,28 @@
             {{address.address}}, {{address.number}}
           </strong>
         </span>
-        <span>
-          <strong>CEP: </strong>
-          <label for="postalCode">{{address.postalCode+'' | mask: '00000-000'}}</label>
-        </span>
+        <div class="d-flex">
+          <span>
+            <strong>CEP: </strong>
+            <label for="postalCode">{{address.postalCode+'' | mask: '00000-000'}}</label>
+          </span>
+          <span>
+            <strong>Cidade: </strong>
+            <label for="city">{{address.address}}</label>
+          </span>
+          <span>
+            <strong>Estado: </strong>
+            <label for="city">{{address.state}}</label>
+          </span>
+          <span>
+            <strong>Bairro: </strong>
+            <label for="city">{{address.district}}</label>
+          </span>
+        </div>
       </div>
     </ng-container>
+    <div class="fast-footer-buttons">
+      <button [routerLink]="['../..', 'address']">Gerenciar</button>
+    </div>
   </div>
 </div>
