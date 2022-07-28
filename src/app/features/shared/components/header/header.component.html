@@ -21,14 +21,38 @@
       </div>
       <div class="right">
         <ng-container *ngFor="let button of leftButtons">
+          <input type="checkbox"
+            #inputRef
+            title="toggle"
+            hidden>
           <button [routerLink]="button.routerlink"
             [class]="button.class"
+            #fatherBtn
+            [class.position-relative]="button.dropdown?.length"
             [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : ''"
-            (click)="button.onClick ? button.onClick() : null">{{button.label}}
+            (click)="(button.onClick ? button.onClick() : null); inputRef.click()">{{button.label}}
             <fast-icon *ngIf="button.icon"
               [icon]="button.icon"
               [size]="20"
-              color="white"></fast-icon>
+              (click)="(button.onClick ? button.onClick() : null); inputRef.click()"
+              [color]="button.iconColor || 'white'"></fast-icon>
+            <div class="fast-header-btn-dropdown"
+              fastFastClickOutside
+              [ignore]="fatherBtn"
+              (outside)="inputRef.click()"
+              *ngIf="button.dropdown?.length && inputRef.checked">
+              <ng-container *ngFor="let drop of button.dropdown">
+                <button [routerLink]="drop.routerlink"
+                  [class]="drop.class"
+                  [style]="drop.badgeCalc ? '--badge: ' + drop.badgeCalc() : ''"
+                  (click)="(drop.onClick ? drop.onClick() : null); inputRef.click()">{{drop.label}}
+                  <fast-icon *ngIf="drop.icon"
+                    [icon]="drop.icon"
+                    [size]="20"
+                    [color]="drop.iconColor || 'white'"></fast-icon>
+                </button>
+              </ng-container>
+            </div>
           </button>
         </ng-container>
       </div>

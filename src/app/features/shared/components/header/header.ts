@@ -18,10 +18,10 @@ export const unloggedHeaderButtons: IHeaderButton[] = [
 
 export const loggedHeaderButtons: IHeaderButton[] = [
   {
-    label: 'Sair',
-    onClick: () => { localStorage.removeItem('token'); localStorage.removeItem('user'), localStorage.removeItem('id'); },
-    routerlink: ['/home'],
-    class: 'outline'
+    icon: 'home',
+    class: 'outline',
+    iconColor: 'var(--bs-gray-600)',
+    routerlink: ['/home']
   },
   {
     icon: 'cart',
@@ -36,7 +36,33 @@ export const loggedHeaderButtons: IHeaderButton[] = [
           ignoreBackdropClick: true
         });
       }
-
     }
-  }
+  },
+  {
+    icon: 'profile',
+    dropdown: [
+      {
+        label: 'Sair',
+        onClick: () => { localStorage.removeItem('token'); localStorage.removeItem('user'), localStorage.removeItem('id'); },
+        routerlink: ['/home'],
+        icon: 'logout',
+        iconColor: 'var(--bs-gray-600)',
+        class: 'outline'
+      },
+      {
+        label: 'Pedidos',
+        icon: 'order',
+        routerlink: ['/orders'],
+        iconColor: 'var(--bs-gray-600)',
+        class: 'outline'
+      },
+      {
+        label: 'Endereços',
+        icon: 'location',
+        routerlink: ['/address'],
+        iconColor: 'var(--bs-gray-600)',
+        class: 'outline'
+      }
+    ]
+  },
 ];

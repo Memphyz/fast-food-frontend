@@ -17,6 +17,7 @@ import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
+import { OrdersComponent } from './orders/orders.component';
 
 registerLocaleData(localePt);
 
@@ -28,6 +29,7 @@ registerLocaleData(localePt);
     RestaurantComponent,
     RestaurantDetailsModalComponent,
     ProductDetailsComponent,
+    OrdersComponent,
   ],
   imports: [
     ComponentsRoutingModule,

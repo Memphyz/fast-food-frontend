@@ -32,6 +32,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { FastClickOutsideDirective } from './directives/fast-click-outside.directive';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { ToastrModule } from 'ngx-toastr';
     IconComponent,
     CartComponent,
     SelectComponent,
-    SafePipe
+    SafePipe,
+    FastClickOutsideDirective
   ],
 })
 export class SharedModule {}

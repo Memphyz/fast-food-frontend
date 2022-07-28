@@ -4,6 +4,7 @@ import {
 } from './address/register-adrress/register-address.component';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
+import { OrdersComponent } from './orders/orders.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent
   },
   {
     path: 'address',

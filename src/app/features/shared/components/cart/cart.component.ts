@@ -130,13 +130,15 @@ export class CartComponent implements OnInit {
     if (this.selected.type === 'CREDIT_CARD' || this.selected.type === 'DEBIT_CARD') {
       // Validate card, not implemented because payment its fake!
     }
+
     const order: IOrder = {
       user: userId(),
-      products: this.cart.products.map((product): IProductOrder => Object.create({ id: product.id, notes: product.notes })),
+      products: this.cart.products.map((product): IProductOrder => { return { id: product.id, notes: product.notes } }),
       payment: this.selected.type,
       address: this.form.get('address').value?.id,
     }
-    this.orderService.save(order).subscribe(() => this.toastr.success('Pedido criado com sucesso!', 'Sucesso!'))
+    console.log(order);
+    this.orderService.save(order).subscribe()
 
   }
 }
