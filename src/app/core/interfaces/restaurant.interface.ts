@@ -1,4 +1,4 @@
-import { PaymentsType } from '../enums/payment.enum';
+import { PaymentType } from '../enums/payment.enum';
 import { IAddress } from './address.interface';
 
 export interface IAdditional {
@@ -21,7 +21,7 @@ export interface IRestaurant {
   photo: string;
   open: string;
   close: string;
-  payments: PaymentsType[];
+  payments: PaymentType[];
   owners: string[];
   products: any[];
 }

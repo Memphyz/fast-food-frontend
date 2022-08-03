@@ -1,1 +1,26 @@
-<p>orders works!</p>
+<div class="fast-orders">
+  <ng-container *ngFor="let order of orders">
+    <div class="fast-order">
+      <span>
+        <label for="number">Pedido: </label>
+        <strong>{{order.number}}</strong>
+      </span>
+      <span>
+        <label for="created">Criado:</label>
+        <strong>{{order.created | date: 'dd/MM/yyyy HH:mm'}}</strong>
+      </span>
+      <span>
+        <label for="recept">Quem recebe: </label>
+        <strong>{{order.createdBy}}</strong>
+      </span>
+      <span>
+        <label for="payment">Pagamento:</label>
+        <strong>{{paymentType(order.payment)}}</strong>
+      </span>
+      <span>
+        <label for="status">Status: </label>
+        <strong>{{orderStatus(order.status)}}</strong>
+      </span>
+    </div>
+  </ng-container>
+</div>

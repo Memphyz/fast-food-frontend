@@ -34,7 +34,6 @@
             <fast-icon *ngIf="button.icon"
               [icon]="button.icon"
               [size]="20"
-              (click)="(button.onClick ? button.onClick() : null); inputRef.click()"
               [color]="button.iconColor || 'white'"></fast-icon>
             <div class="fast-header-btn-dropdown"
               fastFastClickOutside

@@ -1,8 +1,9 @@
+import { PaymentType } from '../enums/payment.enum';
+
 export interface IPayment {
   name: string;
-  type: PaymentTypes,
+  type: PaymentType,
   icon: string;
   color: string;
 }
 
-export type PaymentTypes = 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'CHECK' | 'PIX'

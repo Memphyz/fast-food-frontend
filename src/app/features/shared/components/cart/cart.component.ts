@@ -18,6 +18,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { QrCodePix } from 'qrcode-pix';
 import { map } from 'rxjs';
+import { PaymentType } from 'src/app/core/enums/payment.enum';
 
 @UntilDestroy()
 @Component({
@@ -39,25 +40,25 @@ export class CartComponent implements OnInit {
   public payments: IPayment[] = [
     {
       name: 'Pix',
-      type: 'PIX',
+      type: PaymentType.PIX,
       icon: 'pix',
       color: '#4ab2a4'
     },
     {
       name: 'Dinheiro',
-      type: 'CASH',
+      type: PaymentType.CASH,
       icon: 'cash',
       color: '#4fba6f'
     },
     {
       name: 'Débito',
-      type: 'DEBIT_CARD',
+      type: PaymentType.DEBIT_CARD,
       icon: 'debit',
       color: '#0152cc'
     },
     {
       name: 'Crédito',
-      type: 'CREDIT_CARD',
+      type: PaymentType.CREDIT_CARD,
       icon: 'credit',
       color: '#d22f2f'
     },

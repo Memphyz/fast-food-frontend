@@ -1,17 +1,20 @@
+import { OrderStatusType } from '../enums/order-status.enum';
+import { PaymentType } from '../enums/payment.enum';
 import { IAddress } from './address.interface';
-import { PaymentTypes } from './payment.interface';
+import { IAudit } from './audit.interface';
 
-export interface IOrder {
+export interface IOrder extends IAudit {
   started?: Date,
   deliveryTime?: Date,
   ended?: Date,
   user: string,
   products: IProductOrder[],
-  payment: PaymentTypes,
+  payment: PaymentType,
   address: IAddress,
+  number?: number,
   rating?: number,
   overview?: string,
-  status?: 'CONFIRM_ORDER' | 'START_PREPARATION' | 'READY_PICKUP' | 'DISPATCH' | 'CANCEL_REQUEST' | 'CANCELLED' | 'DENY_CANCEL'
+  status?: OrderStatusType
 }
 
 export interface IProductOrder {
