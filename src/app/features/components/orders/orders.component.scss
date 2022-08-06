@@ -7,6 +7,21 @@
     flex-direction: column;
     gap: 20px;
     padding: 10px;
+    input:checked ~ .fast-order.fast-order-view > span {
+      fast-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &.fast-skeleton {
+      width: 100%;
+      .fast-order {
+        border-radius: 10px;
+        span {
+          min-height: 60px;
+        }
+      }
+    }
 
     :last-child::after {
       content: unset !important;

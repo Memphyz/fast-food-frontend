@@ -30,7 +30,7 @@ export class RestaurantComponent implements OnInit {
 
   public ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.restaurantService.findById(id).pipe(tap((restaurant) => this.restaurant = restaurant), mergeMap((restaurant): Observable<IProduct[]> => this.produtoService.findAllById({ id: restaurant.id }))).subscribe((products) => this.products = products);
+    this.restaurantService.findById(id).pipe(tap((restaurant) => this.restaurant = restaurant), mergeMap((restaurant): Observable<IProduct[]> => this.produtoService.findAllByIdCustomSuffix({ id: restaurant.id }, `/restaurant/${restaurant.id}`))).subscribe((products) => this.products = products);
   }
 
   public btnInfo() {
@@ -61,7 +61,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   private fetch(): void {
-    this.produtoService.findAllById({ id: this.restaurant.id, page: this.currentPage }).subscribe({
+    this.produtoService.findAllByIdCustomSuffix({ id: this.restaurant.id, page: this.currentPage }, `/restaurant/${this.restaurant.id}`).subscribe({
       next: (products) => this.products.push(...products)
     })
   }

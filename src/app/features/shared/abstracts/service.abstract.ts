@@ -46,9 +46,21 @@ export abstract class AbstractService<Model> {
     return this.get(params);
   }
 
+  public findManyById(params: ({ [key: string]: any } & { ids: any })): Observable<Model[]> {
+    this.resetSuffix();
+    this.urlSuffix = `/many/${params.ids}`;
+    return this.get(params);
+  }
+
   public findAllById(params: ({ [key: string]: any } & { id: any })): Observable<Model[]> {
     this.resetSuffix();
     this.urlSuffix = `/${params.id}`;
+    return this.get(params);
+  }
+
+  public findAllByIdCustomSuffix(params: ({ [key: string]: any } & { id: any }), urlSuffix: string): Observable<Model[]> {
+    this.resetSuffix();
+    this.urlSuffix = urlSuffix;
     return this.get(params);
   }
 

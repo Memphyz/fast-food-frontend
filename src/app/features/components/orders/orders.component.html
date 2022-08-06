@@ -1,6 +1,13 @@
-<div class="fast-orders">
+<div class="fast-orders"
+  *ngIf="searched else skeletons">
   <ng-container *ngFor="let order of orders">
-    <div class="fast-order">
+    <input type="checkbox"
+      hidden
+      #detailsInput>
+    <div class="fast-order"
+      [class.fast-order-view]="detailsInput.checked"
+      (click)="detailsInput.click()"
+      (click)="detail(order)">
       <span>
         <label for="number">Pedido: </label>
         <strong>{{order.number}}</strong>
@@ -21,6 +28,53 @@
         <label for="status">Status: </label>
         <strong>{{orderStatus(order.status)}}</strong>
       </span>
+      <span detail
+        class="align-items-center">
+        <label for="detail">
+          Detalhes
+        </label>
+        <fast-icon icon="chevron-down"
+          [size]="20"
+          color="var(--primary)"></fast-icon>
+      </span>
+      <div class="fast-order-detail"
+        *ngIf="detailsInput.checked">
+
+      </div>
     </div>
   </ng-container>
 </div>
+<ng-template #skeletons>
+  <div class="fast-orders fast-skeleton">
+    <ng-container *ngFor="let skeleton of skeletonSize">
+      <div class="fast-order"
+        skeleton>
+        <span>
+          <label for="number"
+            skeleton></label>
+          <strong skeleton></strong>
+        </span>
+        <span>
+          <label for="created"
+            skeleton></label>
+          <strong skeleton></strong>
+        </span>
+        <span>
+          <label for="recept"
+            skeleton></label>
+          <strong skeleton></strong>
+        </span>
+        <span>
+          <label for="payment"
+            skeleton></label>
+          <strong skeleton></strong>
+        </span>
+        <span>
+          <label for="status"
+            skeleton></label>
+          <strong skeleton></strong>
+        </span>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

@@ -32,9 +32,12 @@
             [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : ''"
             (click)="(button.onClick ? button.onClick() : null); inputRef.click()">{{button.label}}
             <fast-icon *ngIf="button.icon"
+              #iconRef
               [icon]="button.icon"
               [size]="20"
-              [color]="button.iconColor || 'white'"></fast-icon>
+              [color]="button.iconColor || 'white'"
+              (click)="$event.preventDefault(); $event.stopPropagation();fatherBtn.click()">
+            </fast-icon>
             <div class="fast-header-btn-dropdown"
               fastFastClickOutside
               [ignore]="fatherBtn"
