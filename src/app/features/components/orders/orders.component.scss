@@ -42,6 +42,131 @@
         font-size: 1.2em;
       }
 
+      .fast-order-detail {
+        display: flex;
+        flex-direction: column;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        gap: 40px;
+
+        :last-child::before {
+          content: unset !important;
+        }
+        .fast-order-detail-restaurant {
+          display: flex;
+          flex-direction: column;
+          padding: 15px 0px;
+          position: relative;
+          padding: 10px;
+          border-radius: 6px;
+
+          &:hover {
+            background-color: var(--bs-gray-200);
+          }
+          &::before {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background-color: var(--bs-gray-300);
+            z-index: 10;
+            top: calc(100% + 20px);
+          }
+          .fast-restaurant-order-info {
+            display: flex;
+            justify-content: space-between;
+            .fast-restaurant-photo-name {
+              display: flex;
+              gap: 10px;
+              .fast-order-restaurant-name {
+                label {
+                  font-size: 1.4rem;
+                  font-weight: 600;
+                  color: var(--bs-gray-dark);
+                }
+
+                span {
+                  padding: 10px 0px;
+                }
+              }
+
+              .fast-restaurant-order-photo > img {
+                width: 80px;
+                height: 80px;
+                border-radius: 1000px;
+                border: 2px solid var(--primary);
+              }
+            }
+
+            .fast-restaurant-order-rate {
+              position: relative;
+              font-size: 30px;
+              color: var(--bs-warning);
+
+              &::before {
+                content: "⭐" !important;
+                position: absolute;
+                right: calc(100% + 10px);
+                height: 45px;
+                width: 40px;
+                font-size: 30px;
+                bottom: 53%;
+              }
+            }
+          }
+
+          .fast-restaurant-products {
+            display: flex;
+            flex-direction: column;
+            width: calc(90% - 8px);
+            align-self: end;
+            margin-top: 20px;
+            gap: 15px;
+
+            :last-child.fast-order-restaurant-product::after {
+              content: unset !important;
+            }
+
+            .fast-order-restaurant-product {
+              position: relative;
+
+              .fast-order-restaurant-product-info {
+                img {
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 100px;
+                  border: 2px solid var(--secondary);
+                }
+
+                .fast-order-restaurant-product-details {
+                  p {
+                    font-size: 10px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-width: 445px;
+                    margin-bottom: 0px;
+                  }
+
+                  strong {
+                    font-size: 13px;
+                  }
+                }
+              }
+              &::after {
+                content: "" !important;
+                height: 1px;
+                background-color: var(--bs-gray-300);
+                width: 80%;
+                display: flex;
+                position: absolute;
+                top: calc(100% + 7.5px);
+              }
+            }
+          }
+        }
+      }
+
       &::after {
         content: "";
         position: absolute;

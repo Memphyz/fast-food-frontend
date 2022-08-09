@@ -10,22 +10,44 @@
   (click)="rightIconEvent.emit()"
   [size]="28"></fast-icon>
 <mdb-form-control>
-  <input mdbInput
-    #inputRef
-    [class.left-icon]="leftIcon"
-    type="{{type}}"
-    id="{{id}}"
-    [maxlength]="maxLength"
-    [minlength]="minLength"
-    [value]="visibleValue"
-    [readonly]="readonly"
-    placeholder="{{placeholder}}"
-    (input)="inputValueChange.emit(inputRef.value)"
-    [(ngModel)]="inputValue"
-    [mask]="mask"
-    class="form-control" />
-  <label mdbLabel
-    #testf
-    class="form-label"
-    for="typeText">{{label}}</label>
+  <ng-container *ngIf="type !== 'textarea' else textarearef">
+    <input mdbInput
+      #inputRef
+      [class.left-icon]="leftIcon"
+      type="{{type}}"
+      id="{{id}}"
+      [maxlength]="maxLength"
+      [minlength]="minLength"
+      [value]="visibleValue"
+      [readonly]="readonly"
+      placeholder="{{placeholder}}"
+      (input)="inputValueChange.emit(inputRef.value)"
+      [(ngModel)]="inputValue"
+      [mask]="mask"
+      class="form-control" />
+    <label mdbLabel
+      #testf
+      class="form-label"
+      for="typeText">{{label}}</label>
+  </ng-container>
+  <ng-template #textarearef>
+    <textarea mdbInput
+      #inputRef
+      [class.left-icon]="leftIcon"
+      id="{{id}}"
+      [maxlength]="maxLength"
+      [minlength]="minLength"
+      [value]="visibleValue"
+      [readonly]="readonly"
+      placeholder="{{placeholder}}"
+      (input)="inputValueChange.emit(inputRef.value)"
+      [(ngModel)]="inputValue"
+      [mask]="mask"
+      class="form-control"></textarea>
+    <label mdbLabel
+      #testf
+      class="form-label"
+      for="typeText">{{label}}</label>
+  </ng-template>
+
 </mdb-form-control>

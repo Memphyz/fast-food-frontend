@@ -134,12 +134,12 @@ export class CartComponent implements OnInit {
 
     const order: IOrder = {
       user: userId(),
-      products: this.cart.products.map((product): IProductOrder => { return { id: product.id, notes: product.notes } }),
+      products: this.cart.products.map((product): IProductOrder => { return { id: product.id, notes: product.notes, addictionals: product.additionals } }),
       payment: this.selected.type,
       address: this.form.get('address').value?.id,
     }
     console.log(order);
-    this.orderService.save(order).subscribe()
+    this.orderService.save(order).subscribe(() => { Cart.clear(); this.modalRef.hide() })
 
   }
 }

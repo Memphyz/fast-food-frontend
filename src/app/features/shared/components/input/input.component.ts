@@ -12,7 +12,7 @@ import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms
 import { uniqueId } from 'lodash';
 import { noop } from 'rxjs';
 
-type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | 'select';
+type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | 'select' | 'textarea';
 
 @Component({
   selector: 'fast-input',

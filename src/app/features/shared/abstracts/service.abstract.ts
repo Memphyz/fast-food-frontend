@@ -12,6 +12,7 @@ export abstract class AbstractService<Model> {
   public urlSuffix = '';
 
   protected abstract endpont: string;
+  private many: boolean;
 
   public get<T>(params?: object): Observable<T> {
     return this.httpClient.get<T>(this.BASE_URL + this.endpont + this.urlSuffix, {
@@ -19,8 +20,8 @@ export abstract class AbstractService<Model> {
         authorization: `Bearer ${localStorage.getItem('token')}`
       },
       params: {
-        ...params
-      }
+        ...params,
+      },
     })
   }
 
@@ -48,7 +49,8 @@ export abstract class AbstractService<Model> {
 
   public findManyById(params: ({ [key: string]: any } & { ids: any })): Observable<Model[]> {
     this.resetSuffix();
-    this.urlSuffix = `/many/${params.ids}`;
+    this.endpont += 's';
+    this.many = true;
     return this.get(params);
   }
 
@@ -65,6 +67,7 @@ export abstract class AbstractService<Model> {
   }
 
   private resetSuffix(...args): void {
+    this.many && this.endpont && this.endpont[this.endpont.length - 1] === 's' && (this.endpont = this.endpont.substring(0, this.endpont.length - 1));
     this.urlSuffix = ''
   }
 

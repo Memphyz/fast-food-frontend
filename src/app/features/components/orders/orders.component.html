@@ -5,9 +5,7 @@
       hidden
       #detailsInput>
     <div class="fast-order"
-      [class.fast-order-view]="detailsInput.checked"
-      (click)="detailsInput.click()"
-      (click)="detail(order)">
+      [class.fast-order-view]="detailsInput.checked">
       <span>
         <label for="number">Pedido: </label>
         <strong>{{order.number}}</strong>
@@ -29,7 +27,8 @@
         <strong>{{orderStatus(order.status)}}</strong>
       </span>
       <span detail
-        class="align-items-center">
+        (click)="detailsInput.click(); detail(order)"
+        class="align-items-center cursor-pointer">
         <label for="detail">
           Detalhes
         </label>
@@ -37,10 +36,70 @@
           [size]="20"
           color="var(--primary)"></fast-icon>
       </span>
-      <div class="fast-order-detail"
-        *ngIf="detailsInput.checked">
+      <ng-container *ngIf="detailsInput.checked && order.cache">
+        <span>
+          <label for="detail">
+            Total:
+          </label>
+          <strong>{{total(order.cache?.products) | currency}}</strong>
+        </span>
+        <span>
+          <label for="detail">
+            Produtos:
+          </label>
+          <strong>{{order.products.length}}</strong>
+        </span>
+        <div class="fast-order-detail">
+          <ng-container *ngFor="let restaurant of order.cache?.restaurants">
+            <div class="fast-order-detail-restaurant">
+              <div class="fast-restaurant-order-info">
+                <div class="fast-restaurant-photo-name">
+                  <div class="fast-restaurant-order-photo">
+                    <img [src]="restaurant.photo"
+                      alt="restaurant_photo">
+                  </div>
+                  <div class="fast-order-restaurant-name">
+                    <label for="restaurant_name">{{restaurant.name}}</label>
+                    <span>{{restaurant.kitchen}}</span>
+                  </div>
+                </div>
+                <div class="fast-restaurant-order-rate">
+                  <h3>
+                    <strong>
+                      {{restaurant.rate | number: '1.1-2'}}
+                    </strong>
+                  </h3>
+                </div>
+              </div>
+              <div class="fast-restaurant-products">
+                <ng-container *ngFor="let product of order.cache?.products">
+                  <div class="fast-order-restaurant-product">
+                    <span class="fast-order-restaurant-product-info">
+                      <img [src]="product.image"
+                        alt="product_image">
+                      <div class="fast-order-restaurant-product-details">
+                        <label for="product-label">
+                          {{product.name}}
+                        </label>
+                        <p>{{product.description}}</p>
+                        <strong>Observações: {{productNote(product.id, order)}}</strong>
+                      </div>
+                    </span>
+                    <div class="fast-order-restaurant-addictionals"
+                      *ngIf="!!addictionals(product.id, order)?.length">
+                      <span class="align-items-center">Adicionais <fast-icon
+                          icon="square-arrow-right"
+                          [size]="18"
+                          color="gray"></fast-icon></span>
+                    </div>
+                  </div>
+                </ng-container>
 
-      </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
     </div>
   </ng-container>
 </div>

@@ -28,7 +28,7 @@ export const loggedHeaderButtons: IHeaderButton[] = [
     badgeCalc: Cart.itemsLengthString,
     onClick: () => {
       const modalService: BsModalService = AppModule.get(BsModalService);
-      if (Cart.cart().products) {
+      if (Cart.cart()?.products) {
         modalService.show(CartComponent, {
           animated: true,
           backdrop: true,
