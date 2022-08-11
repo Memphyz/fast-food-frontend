@@ -3,6 +3,7 @@ import { AppModule } from './../../../../app.module';
 import { IHeaderButton } from './../../../../core/interfaces/header-button.interface';
 import { Cart } from './../cart/cart';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 export const unloggedHeaderButtons: IHeaderButton[] = [
   {
@@ -35,7 +36,10 @@ export const loggedHeaderButtons: IHeaderButton[] = [
           class: 'modal-dialog-centered fast-cart justify-content-center',
           ignoreBackdropClick: true
         });
+        return undefined;
       }
+      const alert: ToastrService = AppModule.get(ToastrService);
+      alert.info('Seu carrinho está vazio!', 'Ops!')
     }
   },
   {

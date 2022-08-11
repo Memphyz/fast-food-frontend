@@ -59,8 +59,9 @@
                       alt="restaurant_photo">
                   </div>
                   <div class="fast-order-restaurant-name">
-                    <label for="restaurant_name">{{restaurant.name}}</label>
-                    <span>{{restaurant.kitchen}}</span>
+                    <label for="restaurant_name"
+                      class="ellipsis">{{restaurant.name}}</label>
+                    <span class="ellipsis">{{restaurant.kitchen}}</span>
                   </div>
                 </div>
                 <div class="fast-restaurant-order-rate">
@@ -73,7 +74,9 @@
               </div>
               <div class="fast-restaurant-products">
                 <ng-container *ngFor="let product of order.cache?.products">
-                  <div class="fast-order-restaurant-product">
+                  <div class="fast-order-restaurant-product"
+                    #productContainer
+                    [style.--size.px]="productContainer.offsetHeight">
                     <span class="fast-order-restaurant-product-info">
                       <img [src]="product.image"
                         alt="product_image">
@@ -82,15 +85,56 @@
                           {{product.name}}
                         </label>
                         <p>{{product.description}}</p>
-                        <strong>Observações: {{productNote(product.id, order)}}</strong>
+                        <strong *ngIf="productNote(product.id, order)">Observações:
+                          {{productNote(product.id, order)}}</strong>
                       </div>
                     </span>
+                    <input type="checkbox"
+                      title="hidden"
+                      hidden
+                      #inputAddictionalRef>
                     <div class="fast-order-restaurant-addictionals"
                       *ngIf="!!addictionals(product.id, order)?.length">
-                      <span class="align-items-center">Adicionais <fast-icon
+                      <span class="align-items-center"
+                        (click)="inputAddictionalRef.click()">Adicionais <fast-icon
                           icon="square-arrow-right"
                           [size]="18"
                           color="gray"></fast-icon></span>
+                      <div class="fast-addictional-product-order-list">
+                        <table>
+                          <thead>
+                            <th>Nome</th>
+                            <th>Quantidade</th>
+                            <th>Valor</th>
+                            <th>Total</th>
+                          </thead>
+                          <tbody>
+                            <tr
+                              *ngFor="let addictional of addictionals(product.id, order)">
+                              <td>
+                                <label class="ellipsis"
+                                  for="addictionsl_name">
+                                  {{addictional.name}}
+                                </label>
+                              </td>
+                              <td>
+                                {{addictional.quantity}}
+                              </td>
+                              <td>
+                                <strong>
+                                  {{addictional.unitPrice | currency}}
+                                </strong>
+                              </td>
+                              <td>
+                                <strong>
+                                  {{addictional.total | currency}}
+                                </strong>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
                     </div>
                   </div>
                 </ng-container>

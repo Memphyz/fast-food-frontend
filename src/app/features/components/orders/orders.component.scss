@@ -35,6 +35,12 @@
       cursor: pointer;
       position: relative;
 
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+      }
+
       span {
         padding: 5px;
         display: flex;
@@ -61,7 +67,7 @@
           border-radius: 6px;
 
           &:hover {
-            background-color: var(--bs-gray-200);
+            background-color: var(--bs-gray-100);
           }
           &::before {
             content: "";
@@ -75,9 +81,12 @@
           .fast-restaurant-order-info {
             display: flex;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
             .fast-restaurant-photo-name {
               display: flex;
               gap: 10px;
+              overflow: hidden;
               .fast-order-restaurant-name {
                 label {
                   font-size: 1.4rem;
@@ -102,16 +111,18 @@
               position: relative;
               font-size: 30px;
               color: var(--bs-warning);
+            }
 
-              &::before {
-                content: "⭐" !important;
-                position: absolute;
-                right: calc(100% + 10px);
-                height: 45px;
-                width: 40px;
-                font-size: 30px;
-                bottom: 53%;
-              }
+            &::after {
+              content: "";
+              position: absolute;
+              left: 35px;
+              border-left: 1px solid var(--bg);
+              border-bottom: 1px solid var(--bg);
+              width: 55px;
+              height: 55px;
+              top: 100%;
+              border-bottom-left-radius: 37px;
             }
           }
 
@@ -123,8 +134,11 @@
             margin-top: 20px;
             gap: 15px;
 
-            :last-child.fast-order-restaurant-product::after {
-              content: unset !important;
+            :last-child.fast-order-restaurant-product {
+              span::after,
+              &::after {
+                content: unset !important;
+              }
             }
 
             .fast-order-restaurant-product {
@@ -136,9 +150,26 @@
                   height: 50px;
                   border-radius: 100px;
                   border: 2px solid var(--secondary);
+                  position: relative;
+                  display: flex;
+                  flex-grow: 0;
+                  flex-shrink: 0;
+                }
+                &::after {
+                  content: "";
+                  position: absolute;
+                  left: 0;
+                  width: 1px;
+                  height: calc(var(--size) - 38px);
+                  left: 29px;
+                  top: 57px;
+                  background-color: var(--bg);
+                  z-index: 10;
                 }
 
                 .fast-order-restaurant-product-details {
+                  width: 100%;
+                  overflow: hidden;
                   p {
                     font-size: 10px;
                     white-space: nowrap;
@@ -153,11 +184,54 @@
                   }
                 }
               }
+
+              input[type="checkbox"]:checked
+                ~ .fast-order-restaurant-addictionals {
+                span > fast-icon {
+                  transition: all 0.5s;
+                  transform: rotate(90deg);
+                }
+                .fast-addictional-product-order-list {
+                  display: flex;
+                  animation: 0.5s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-down
+                    both;
+                  @keyframes wipe-in-down {
+                    from {
+                      clip-path: inset(0 0 100% 0);
+                    }
+                    to {
+                      clip-path: inset(0 0 0 0);
+                    }
+                  }
+                }
+              }
+              .fast-order-restaurant-addictionals {
+                width: 92%;
+                display: flex;
+                flex-direction: column;
+                float: right;
+                .fast-addictional-product-order-list {
+                  display: none;
+                  flex-direction: column;
+                  gap: 20px;
+                  padding: 5px;
+
+                  table > tbody > tr {
+                    :first-child > label {
+                      width: calc(100% - 20px);
+                    }
+                    td {
+                      min-height: 40px;
+                    }
+                  }
+                }
+              }
               &::after {
                 content: "" !important;
                 height: 1px;
                 background-color: var(--bs-gray-300);
-                width: 80%;
+                width: 91%;
+                right: 0;
                 display: flex;
                 position: absolute;
                 top: calc(100% + 7.5px);
