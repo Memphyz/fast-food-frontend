@@ -5,6 +5,12 @@ import {
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { OrdersComponent } from './orders/orders.component';
+import {
+  RestaurantManagerComponent
+} from './restaurant/restaurant-manager/restaurant-manager.component';
+import {
+  RestaurantRegisterComponent
+} from './restaurant/restaurant-register/restaurant-register.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -44,8 +50,16 @@ const routes: Routes = [
     component: SignInComponent
   },
   {
-    path: 'restaurant/:id',
+    path: 'restaurant/view/:id',
     component: RestaurantComponent
+  },
+  {
+    path: 'restaurant/manager',
+    component: RestaurantManagerComponent
+  },
+  {
+    path: 'restaurant/register',
+    component: RestaurantRegisterComponent
   }
 ]
 

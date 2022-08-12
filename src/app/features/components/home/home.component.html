@@ -7,7 +7,7 @@
   <ng-container *ngFor="let restaurant of restaurants">
     <div class="fast-restaurant"
       [class.closed]="!restaurant.active"
-      [routerLink]="['../', 'restaurant', restaurant.id]">
+      [routerLink]="['../', 'restaurant', 'view', restaurant.id]">
       <div class="fast-image"
         style="background-image: url({{restaurant.photo}});">
       </div>

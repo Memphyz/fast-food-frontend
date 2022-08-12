@@ -41,7 +41,7 @@
           <label for="detail">
             Total:
           </label>
-          <strong>{{total(order.cache?.products) | currency}}</strong>
+          <strong>{{total(order, order.cache?.products) | currency}}</strong>
         </span>
         <span>
           <label for="detail">
@@ -87,6 +87,10 @@
                         <p>{{product.description}}</p>
                         <strong *ngIf="productNote(product.id, order)">Observações:
                           {{productNote(product.id, order)}}</strong>
+                        <span class="fast-product-price">
+                          <label for="product_value">Valor: </label>
+                          <strong>{{product.price | currency}}</strong>
+                        </span>
                       </div>
                     </span>
                     <input type="checkbox"
@@ -101,7 +105,7 @@
                           [size]="18"
                           color="gray"></fast-icon></span>
                       <div class="fast-addictional-product-order-list">
-                        <table>
+                        <table *ngIf="!isSmallMobile else additionalMobile">
                           <thead>
                             <th>Nome</th>
                             <th>Quantidade</th>
@@ -110,29 +114,61 @@
                           </thead>
                           <tbody>
                             <tr
-                              *ngFor="let addictional of addictionals(product.id, order)">
+                              *ngFor="let additional of addictionals(product.id, order)">
                               <td>
                                 <label class="ellipsis"
                                   for="addictionsl_name">
-                                  {{addictional.name}}
+                                  {{additional.name}}
                                 </label>
                               </td>
                               <td>
-                                {{addictional.quantity}}
+                                {{additional.quantity}}
                               </td>
                               <td>
                                 <strong>
-                                  {{addictional.unitPrice | currency}}
+                                  {{additional.unitPrice | currency}}
                                 </strong>
                               </td>
                               <td>
                                 <strong>
-                                  {{addictional.total | currency}}
+                                  {{additional.total | currency}}
                                 </strong>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+
+                        <ng-template #additionalMobile>
+                          <div class="fast-product-additional-mobile"
+                            *ngFor="let additional of addictionals(product.id, order)">
+                            <span>
+                              <label for="nome">Nome</label>
+                              <strong class="ellipsis">{{additional.name}}</strong>
+                            </span>
+                            <span>
+                              <label for="quantidade">Quantidade</label>
+                              <strong class="ellipsis">{{additional.quantity}}</strong>
+                            </span>
+                            <span>
+                              <label for="valor">Valor</label>
+                              <strong class="ellipsis">{{additional.unitPrice |
+                                currency}}</strong>
+                            </span>
+                            <span>
+                              <label for="total">Total</label>
+                              <strong class="ellipsis">{{additional.total |
+                                currency}}</strong>
+                            </span>
+                          </div>
+                        </ng-template>
+                      </div>
+                      <div class="fast-product-order-total">
+                        <span>
+                          <label for="product_total_price">Total: </label>
+                          <strong>
+                            {{productTotal(order, product) | currency}}
+                          </strong>
+                        </span>
                       </div>
 
                     </div>

@@ -134,6 +134,10 @@
             margin-top: 20px;
             gap: 15px;
 
+            @media screen and (max-width: 576px) {
+              width: 98%;
+            }
+
             :last-child.fast-order-restaurant-product {
               span::after,
               &::after {
@@ -182,6 +186,16 @@
                   strong {
                     font-size: 13px;
                   }
+
+                  .fast-product-price {
+                    align-items: center;
+                    font-size: 16px;
+                    padding: 10px 0px;
+
+                    strong {
+                      font-size: 16px;
+                    }
+                  }
                 }
               }
 
@@ -206,7 +220,7 @@
                 }
               }
               .fast-order-restaurant-addictionals {
-                width: 92%;
+                width: calc(100% - 62px);
                 display: flex;
                 flex-direction: column;
                 float: right;
@@ -216,12 +230,35 @@
                   gap: 20px;
                   padding: 5px;
 
+                  @media screen and(max-width: 478px) {
+                    gap: 5px;
+                  }
+
                   table > tbody > tr {
                     :first-child > label {
                       width: calc(100% - 20px);
                     }
                     td {
                       min-height: 40px;
+                    }
+                  }
+
+                  .fast-product-additional-mobile {
+                    border: 1px solid var(--bg);
+                    border-radius: 8px;
+                    padding: 10px;
+
+                    span {
+                      justify-content: space-between;
+
+                      label {
+                        font-weight: 100;
+                        color: var(--bs-gray-600);
+                      }
+
+                      strong {
+                        color: var(--bs-gray-600);
+                      }
                     }
                   }
                 }

@@ -9,20 +9,23 @@ import {
   RestaurantService
 } from './../../../core/services/restaurant/restaurant.service';
 import { Cart } from './../../shared/components/cart/cart';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { finalize, mergeMap, tap } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product/product.service';
+
+const SMALL_MOBILE = 478;
 
 @Component({
   selector: 'fast-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, AfterContentChecked {
 
   public readonly orders: IOrderView[] = [];
   public searched: boolean;
   public readonly skeletonSize = Array(5).fill(1);
+  public isSmallMobile = window.innerWidth < SMALL_MOBILE;
 
   constructor(private readonly orderService: OrderService,
     private readonly productService: ProductService,
@@ -33,6 +36,10 @@ export class OrdersComponent implements OnInit {
     this.fetch();
   }
 
+  public ngAfterContentChecked(): void {
+    this.isSmallMobile = window.innerWidth < SMALL_MOBILE;
+  }
+
   public fetch(): void {
     this.searched = false;
     this.orderService.findAll().pipe(finalize(() => this.searched = true)).subscribe((orders) => this.orders.push(...orders));
@@ -40,8 +47,6 @@ export class OrdersComponent implements OnInit {
 
   public detail(order: IOrderView): void {
     if (!order.cache) {
-      console.log(order);
-
       order.cache = {}
       this.addressService.findById(order.address).pipe(
         tap((address) => order.cache.address = address),
@@ -56,8 +61,19 @@ export class OrdersComponent implements OnInit {
     return PaymentNameType[type];
   }
 
-  public total(products: IProduct[]): number {
-    return Cart.total(products);
+  public total(order: IOrderView, products: IProduct[]): number {
+    const productsCopy = products?.map((product): IProduct => {
+      return {
+        ...product,
+        additionals: order.products.find((oproduct) => oproduct.id === product.id).addictionals
+      }
+    })
+    return Cart.total(productsCopy);
+  }
+
+  public productTotal(order: IOrderView, product: IProduct): number {
+    const addictionals = order.products.find((oproduct) => oproduct.id === product.id).addictionals;
+    return product.price + addictionals.map((additional) => additional.total).reduce((acc, current) => { return acc + current }, 0)
   }
 
   public productNote(id: string, order: IOrderView): string {

@@ -12,7 +12,6 @@ export class Cart {
     const productCopy = cloneDeep(product)
     productCopy.additionals = productCopy.additionals.filter((addictional): boolean => addictional.quantity > 0)
     cart.products = [...(cart?.products || []), productCopy];
-    console.log(cart);
     cart.total = Cart.total(cart.products);
 
     sessionStorage.setItem('cart', JSON.stringify(cart));
@@ -28,6 +27,8 @@ export class Cart {
   }
 
   public static total(products: IProduct[]): number {
+    console.log(products);
+
     return products?.map((product) => product.price + product.additionals.map(addictional => addictional.total)?.reduce((acumulator, value) => acumulator + value, 0)).reduce((acumulator, total) => acumulator + total, 0)
   }
 

@@ -25,6 +25,26 @@ export const loggedHeaderButtons: IHeaderButton[] = [
     routerlink: ['/home']
   },
   {
+    icon: 'restaurant',
+    iconColor: 'white',
+    dropdown: [
+      {
+        label: 'Cadastrar',
+        icon: 'plus_outline',
+        routerlink: ['/restaurant', 'register'],
+        iconColor: 'var(--bs-gray-600)',
+        class: 'outline'
+      },
+      {
+        label: 'Gerênciar',
+        icon: 'config',
+        routerlink: ['/restaurant', 'manager'],
+        iconColor: 'var(--bs-gray-600)',
+        class: 'outline'
+      }
+    ]
+  },
+  {
     icon: 'cart',
     badgeCalc: Cart.itemsLengthString,
     onClick: () => {
