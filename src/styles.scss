@@ -33,13 +33,12 @@ html {
 
 @font-face {
   font-family: "Loader";
-  src: url("./assets/fonts/Coffee-Extra.ttf");
+  src: url("./assets/fonts/hotpizza.ttf");
 }
 
 * {
-  transition: all 0.5s;
   scroll-behavior: smooth;
-  font-family: "patrick";
+  font-family: sans-serif;
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: var(--bg);

@@ -10,10 +10,11 @@ import {
 } from './../../../core/services/restaurant/restaurant.service';
 import { Cart } from './../../shared/components/cart/cart';
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
-import { finalize, mergeMap, tap } from 'rxjs';
+import { finalize, map, mergeMap, tap } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product/product.service';
 
 const SMALL_MOBILE = 478;
+const SIZE = 6;
 
 @Component({
   selector: 'fast-orders',
@@ -26,6 +27,7 @@ export class OrdersComponent implements OnInit, AfterContentChecked {
   public searched: boolean;
   public readonly skeletonSize = Array(5).fill(1);
   public isSmallMobile = window.innerWidth < SMALL_MOBILE;
+  private page = 0;
 
   constructor(private readonly orderService: OrderService,
     private readonly productService: ProductService,
@@ -33,6 +35,7 @@ export class OrdersComponent implements OnInit, AfterContentChecked {
     private readonly restaurantService: RestaurantService) {}
 
   public ngOnInit(): void {
+    this.searched = false;
     this.fetch();
   }
 
@@ -40,9 +43,15 @@ export class OrdersComponent implements OnInit, AfterContentChecked {
     this.isSmallMobile = window.innerWidth < SMALL_MOBILE;
   }
 
+  public scroll(): void {
+    this.page++;
+    this.fetch();
+  }
+
   public fetch(): void {
-    this.searched = false;
-    this.orderService.findAll().pipe(finalize(() => this.searched = true)).subscribe((orders) => this.orders.push(...orders));
+    this.orderService.findAllResponse({ limit: SIZE, page: this.page }).pipe(finalize(() => this.searched = true), map(data => data.body)).subscribe((orders) => {
+      this.orders.push(...orders)
+    });
   }
 
   public detail(order: IOrderView): void {
@@ -53,7 +62,9 @@ export class OrdersComponent implements OnInit, AfterContentChecked {
         mergeMap(() => this.productService.findManyById({ ids: order.products.map((product) => product.id) })),
         tap((products) => order.cache.products = products),
         tap(console.log),
-        mergeMap(() => this.restaurantService.findManyById({ ids: order.cache.products.map((product) => product.restaurant) }))).subscribe((restaurants) => order.cache.restaurants = restaurants)
+        mergeMap(() => this.restaurantService.findManyById({ ids: order.cache.products.map((product) => product.restaurant) }))).subscribe({
+          next: (restaurants) => order.cache.restaurants = restaurants
+        })
     }
   }
 

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   public restaurants: IRestaurant[] = [];
   public page = 0;
+  public search: string;
 
   constructor(private readonly restaurantService: RestaurantService) {}
 
@@ -28,8 +29,14 @@ export class HomeComponent implements OnInit {
     this.fetch();
   }
 
+  public find(search: string): void {
+    this.search = search;
+    this.restaurants = [];
+    this.fetch();
+  }
+
   private fetch(): void {
-    this.restaurantService.findAll({ page: this.page, limit: 10, sort: '-active' }).subscribe({
+    this.restaurantService.findAll({ page: this.page, limit: 10, sort: '-active', search: this.search || '' }).subscribe({
       next: (restaurants) => {
         this.restaurants.push(...restaurants);
       }

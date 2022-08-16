@@ -44,6 +44,8 @@ fast-input.ng-invalid.ng-touched > mdb-form-control {
 mdb-form-control > input:focus ~ {
   .form-label {
     color: var(--primary) !important;
+    background-color: white;
+    z-index: 1;
   }
   .form-notch div {
     border-color: var(--primary) !important;

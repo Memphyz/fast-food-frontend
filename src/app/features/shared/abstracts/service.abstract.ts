@@ -1,11 +1,12 @@
 import { AppModule } from './../../../app.module';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
 
 export abstract class AbstractService<Model> {
 
   protected readonly httpClient = AppModule.injector.get(HttpClient);
+
 
   private readonly BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -22,6 +23,18 @@ export abstract class AbstractService<Model> {
       params: {
         ...params,
       },
+    })
+  }
+
+  public getResponse<T>(params?: object): Observable<HttpResponse<T>> {
+    return this.httpClient.get<T>(this.BASE_URL + this.endpont + this.urlSuffix, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: {
+        ...params,
+      },
+      observe: 'response'
     })
   }
 
@@ -42,9 +55,14 @@ export abstract class AbstractService<Model> {
     return this.get().pipe(tap(this.resetSuffix));
   }
 
-  public findAll(params?: object): Observable<Model[]> {
+  public findAll(params?: object, response?: boolean): Observable<Model[]> {
     this.resetSuffix();
     return this.get(params);
+  }
+
+  public findAllResponse(params?: object, response?: boolean): Observable<HttpResponse<Model[]>> {
+    this.resetSuffix();
+    return this.getResponse(params);
   }
 
   public findManyById(params: ({ [key: string]: any } & { ids: any })): Observable<Model[]> {
