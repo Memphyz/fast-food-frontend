@@ -47,6 +47,7 @@ export abstract class ErrorMessage {
       minMaxDate: `Data inválida`,
       minMaxDateTime: `Data/Hora Inválida`,
       mask: `O ${nome || 'campo'} está inválido`,
+      hour: 'Informe uma hora válida',
       required: 'Este campo é obrigatório',
       specialCharacters: `Não são permitidos a utilização de caracteres especiais`,
       cpf: 'O CPF está inválido',

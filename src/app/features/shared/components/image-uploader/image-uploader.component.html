@@ -1,0 +1,12 @@
+<input type="file"
+  hidden
+  (input)="upload($event.target['files'][0])"
+  #inputRef
+  accept="image/png, image/jpeg, image/jpg">
+<div class="fast-uploader"
+  [class.fast-image-loaded]="!!image"
+  style="background-image: url({{image}});"
+  (click)="image ? upload(undefined) : inputRef.click()">
+  <label for="title">Foto</label>
+  <span>Clique para fazer o upload</span>
+</div>

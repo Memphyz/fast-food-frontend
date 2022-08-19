@@ -1,21 +1,85 @@
 <div class="container-fluid">
   <h2 class="fast-page-title">Cadastrar Restaurante</h2>
-  <form>
+  <form [formGroup]="form">
     <div class="row">
+      <div class="col-12 col-md-1">
+        <fast-switch label="Status"
+          formControlName="active"
+          class="flex-column-reverse align-items-start"
+          errorMessage></fast-switch>
+      </div>
+      <div class="col-12 col-md-2">
+        <fast-image-uploader formControlName="photo"
+          errorMessage></fast-image-uploader>
+      </div>
     </div>
     <div class="row">
       <div class="col-12 col-md-6">
         <fast-input label="Nome"
-          errorMessage></fast-input>
+          errorMessage
+          formControlName="name"></fast-input>
       </div>
       <div class="col-12 col-md-6">
         <fast-input label="Descrição"
+          errorMessage
+          formControlName="kitchen"></fast-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <fast-input label="Valor mínimo de frete"
+          errorMessage
+          type="currency"
+          [maxlength]="5"
+          [customErrors]="{
+            max: 'O valor de frete não pode ser maior que R$ 999,99'
+          }"
+          formControlName="freight"></fast-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <fast-input label="Horário de abertura"
+          formControlName="open"
+          mask="00:00"
+          errorMessage></fast-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <fast-input label="Horário de fechamento"
+          formControlName="close"
+          mask="00:00"
           errorMessage></fast-input>
       </div>
     </div>
     <div class="row">
-
+      <div class="col-12 col-md-6">
+        <fast-select label="Endereço"
+          [options]="address"
+          errorMessage></fast-select>
+      </div>
+      <div class="col-12 col-md-6">
+        <fast-select label="Sócios"
+          [options]="owners"
+          errorMessage></fast-select>
+      </div>
     </div>
+    <div class="register-product"
+      fastCollapse
+      title="Produtos">
+      <form>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <fast-input label="Nome"></fast-input>
+          </div>
+          <div class="col-12 col-md-4">
+            <fast-input label="Descrição"></fast-input>
+          </div>
+          <div class="col-12 col-md-4">
+            <fast-input label="Preço"></fast-input>
+          </div>
+        </div>
+        <div class="row">
 
+        </div>
+      </form>
+    </div>
   </form>
 </div>

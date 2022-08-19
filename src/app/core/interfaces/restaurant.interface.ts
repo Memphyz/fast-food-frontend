@@ -1,5 +1,4 @@
 import { PaymentType } from '../enums/payment.enum';
-import { IAddress } from './address.interface';
 
 export interface IAdditional {
   unitPrice: number,
@@ -16,7 +15,7 @@ export interface IRestaurant {
   id: string;
   rate: number;
   kitchen: string;
-  address: IAddress;
+  address: string;
   active: boolean;
   photo: string;
   open: string;

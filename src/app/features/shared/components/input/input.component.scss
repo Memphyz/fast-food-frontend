@@ -7,6 +7,7 @@ fast-icon {
   top: 8px;
   left: 5px;
   z-index: 10;
+  transition: all 0.5s;
 
   &.right {
     right: 5px;
@@ -17,6 +18,13 @@ fast-icon {
       padding-right: 30px !important;
     }
   }
+}
+
+input[currencymask] ~ label,
+input.fast-hide-label:not(:focus) ~ label {
+  transform: translateY(-1.25rem) translateY(0.1rem) scale(0.8);
+  background-color: white;
+  z-index: 1;
 }
 
 textarea:focus ~ label {

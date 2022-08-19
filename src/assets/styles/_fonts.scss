@@ -18,3 +18,42 @@
 .fast-page-title {
   color: var(--primary);
 }
+
+.fast-collapse:not(.fast-collapse-open) > * {
+  display: none !important;
+}
+
+.form-outline .form-control:focus ~ .form-label,
+.form-outline .form-control.active ~ .form-label {
+  transform: translateY(-1.25rem) translateY(0.1rem) scale(0.8) !important;
+}
+
+.fast-collapse {
+  width: 100%;
+  position: relative;
+
+  &.fast-collapse-open {
+    > * {
+      margin-top: 15px;
+      display: block;
+    }
+  }
+
+  &::before {
+    content: attr(title);
+    font-size: 22px;
+    width: 100%;
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    height: 1px;
+    left: 0px;
+    width: 67%;
+    background-color: var(--primary);
+  }
+}

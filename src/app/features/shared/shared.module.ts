@@ -3,10 +3,15 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
 import { FilterComponent } from './components/filter/filter.component';
 import { HeaderComponent } from './components/header/header.component';
 import { IconComponent } from './components/icon/icon.component';
+import {
+  ImageUploaderComponent
+} from './components/image-uploader/image-uploader.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
 import { SwitchComponent } from './components/switch/switch.component';
+import { CollapseDirective } from './directives/collapse.directive';
 import { ErrorMessageDirective } from './directives/error-message.directive';
+import { FastClickOutsideDirective } from './directives/fast-click-outside.directive';
 import { SafePipe } from './pipes/safe-url.pipe';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,15 +34,16 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
-import { FastClickOutsideDirective } from './directives/fast-click-outside.directive';
 
 @NgModule({
   imports: [
     RouterModule,
     CommonModule,
+    CurrencyMaskModule,
     FormsModule,
     NgxMaskModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -70,7 +76,7 @@ import { FastClickOutsideDirective } from './directives/fast-click-outside.direc
       progressBar: true
     })
   ],
-  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent, SafePipe],
+  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent, SafePipe, CollapseDirective, ImageUploaderComponent, SwitchComponent],
   declarations: [
     HeaderComponent,
     InputComponent,
@@ -82,7 +88,10 @@ import { FastClickOutsideDirective } from './directives/fast-click-outside.direc
     CartComponent,
     SelectComponent,
     SafePipe,
-    FastClickOutsideDirective
+    FastClickOutsideDirective,
+    CollapseDirective,
+    ImageUploaderComponent,
+    SwitchComponent
   ],
 })
 export class SharedModule {}

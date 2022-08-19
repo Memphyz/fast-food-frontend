@@ -25,6 +25,7 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -63,6 +64,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     ModalModule,
     ReactiveFormsModule,
     NgbModule,
+    CurrencyMaskModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       preventDuplicates: true,

@@ -8,7 +8,6 @@ export interface IProduct {
   active: boolean,
   image: string,
   restaurant: string,
-  client: string,
   notes?: string,
   additionals: IAdditional[],
 }

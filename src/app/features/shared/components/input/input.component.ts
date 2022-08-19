@@ -8,11 +8,11 @@ import {
   Output,
   Self
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { uniqueId } from 'lodash';
 import { noop } from 'rxjs';
 
-type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | 'select' | 'textarea';
+type InputType = 'button' | 'checkbox' | 'color' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | 'select' | 'textarea' | 'currency';
 
 @Component({
   selector: 'fast-input',
@@ -59,8 +59,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   public onChange: (value: any) => void = noop;
   public onTouched: (value: any) => void = noop;
 
-  private get control(): AbstractControl | null {
-    return this.ngControl?.control;
+  public get control(): FormControl | null {
+    return this.ngControl?.control as any;
   }
 
   constructor(
