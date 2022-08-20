@@ -27,9 +27,17 @@ input.fast-hide-label:not(:focus) ~ label {
   z-index: 1;
 }
 
-textarea:focus ~ label {
-  background-color: white;
-  z-index: 1;
+textarea {
+  ~ span {
+    position: absolute;
+    right: 0px;
+    color: var(--bs-gray-500);
+    font-size: 12px;
+  }
+  &:focus ~ label {
+    background-color: white;
+    z-index: 1;
+  }
 }
 
 input.left-icon {

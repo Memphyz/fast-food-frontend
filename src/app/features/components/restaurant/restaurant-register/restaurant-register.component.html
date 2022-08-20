@@ -53,33 +53,102 @@
       <div class="col-12 col-md-6">
         <fast-select label="Endereço"
           [options]="address"
+          (search)="searchAddress($event)"
+          [autocomplete]="true"
+          (scroll)="scrollAddress()"
           errorMessage></fast-select>
       </div>
       <div class="col-12 col-md-6">
         <fast-select label="Sócios"
           [options]="owners"
+          [autocomplete]="true"
+          (scroll)="scrollUser()"
+          (search)="searchUser($event)"
           errorMessage></fast-select>
       </div>
     </div>
     <div class="register-product"
       fastCollapse
       title="Produtos">
-      <form>
-        <div class="row">
-          <div class="col-12 col-md-4">
-            <fast-input label="Nome"></fast-input>
+      <div class="fast-form-container">
+        <div class="fast-form"
+          formGroupName="product">
+          <div class="row">
+            <div class="col-12 col-md-1">
+              <fast-switch label="Status"
+                class="flex-column-reverse align-items-start"
+                formControlName="active"
+                errorMessage></fast-switch>
+            </div>
+            <div class="col-12 col-md-2">
+              <fast-image-uploader errorMessage
+                formControlName="image"
+                errorMessage></fast-image-uploader>
+            </div>
           </div>
-          <div class="col-12 col-md-4">
-            <fast-input label="Descrição"></fast-input>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <fast-input label="Nome"
+                errorMessage
+                formControlName="name"></fast-input>
+            </div>
+            <div class="col-12 col-md-6">
+              <fast-input label="Preço"
+                errorMessage
+                [customErrors]="{
+                              max: 'O valor do produto não pode ser maior que R$ 999,99'
+                            }"
+                type="currency"
+                formControlName="price"></fast-input>
+            </div>
           </div>
-          <div class="col-12 col-md-4">
-            <fast-input label="Preço"></fast-input>
+          <div class="row">
+            <div class="col-12">
+              <fast-input label="Descrição"
+                [maxLength]="255"
+                errorMessage
+                formControlName="description"
+                type="textarea"></fast-input>
+            </div>
+          </div>
+          <div formGroupName="additional"
+            class="fast-form">
+            <div class="row">
+              <h5 class="fast-page-title">Adicionais</h5>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <fast-input label="Nome"
+                  errorMessage
+                  formControlName="name"></fast-input>
+              </div>
+              <div class="col-12 col-md-6">
+                <fast-input label="Preço"
+                  errorMessage
+                  [customErrors]="{
+                                        max: 'O valor do produto não pode ser maior que R$ 999,99'
+                                      }"
+                  type="currency"
+                  formControlName="unitPrice"></fast-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <fast-input label="Descrição"
+                  [maxLength]="255"
+                  errorMessage
+                  formControlName="description"
+                  type="textarea"></fast-input>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-
-        </div>
-      </form>
+      </div>
+    </div>
+    <div class="fast-buttons d-flex justify-content-center">
+      <button class="w-50"
+        type="button"
+        (click)="submit()">Cadastrar</button>
     </div>
   </form>
 </div>

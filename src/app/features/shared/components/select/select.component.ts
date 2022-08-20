@@ -10,19 +10,24 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnInit,
   Optional,
   Output,
   Self
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { noop } from 'rxjs';
+import { debounceTime, noop, Subject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+
+const DEBOUNCE_SCROLL = 100;
+const DEBOUNCE_SEARCH = 500;
 
 @Component({
   selector: 'fast-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements ControlValueAccessor, AfterViewChecked, DoCheck {
+export class SelectComponent implements ControlValueAccessor, AfterViewChecked, DoCheck, OnInit {
 
   @Input() public label: string;
   @Input() public autocomplete: boolean;
@@ -33,6 +38,8 @@ export class SelectComponent implements ControlValueAccessor, AfterViewChecked, 
   @Input() public pk: string;
 
   @Output() public readonly signEvent = new EventEmitter();
+  @Output() public readonly search = new EventEmitter<string>();
+  @Output() public readonly scroll = new EventEmitter();
 
   public selected: SelectOption<unknown>;
   public formValue: unknown;
@@ -41,6 +48,9 @@ export class SelectComponent implements ControlValueAccessor, AfterViewChecked, 
   public index: number;
 
   private started: boolean;
+  private shouldFilter: boolean;
+  private readonly scrollEvent = new Subject<number>();
+  private readonly searchEvent = new Subject<string>();
 
   public get selectedOption(): SelectOption<unknown> {
     return this.selected;
@@ -58,11 +68,21 @@ export class SelectComponent implements ControlValueAccessor, AfterViewChecked, 
   public onTouched: (value: any) => void = noop;
 
   public get filtered(): SelectOption<unknown>[] {
-    return this.filter ? this.options?.filter((option) => StringUtils.removeAccent(option?.label?.toLowerCase()).includes(StringUtils.removeAccent(this.filter?.toLowerCase()))) : this.options;
+    return this.filter && this.shouldFilter ? this.options?.filter((option) => StringUtils.removeAccent(option?.label?.toLowerCase()).includes(StringUtils.removeAccent(this.filter?.toLowerCase()))) : this.options;
   }
 
   constructor(private readonly el: ElementRef, @Optional() @Self() private readonly ngControl: NgControl) {
     this.ngControl && !this.ngControl.valueAccessor && (this.ngControl.valueAccessor = this);
+  }
+
+  public ngOnInit(): void {
+    this.shouldFilter = !!this.search.observers.length;
+    this.scrollEvent.pipe(debounceTime(DEBOUNCE_SCROLL), distinctUntilChanged()).subscribe(() => this.scroll.emit())
+    this.searchEvent.pipe(debounceTime(DEBOUNCE_SEARCH)).subscribe((search: string) => this.search.emit(search))
+  }
+
+  public emitScroll(event: { currentScrollPosition: number }): void {
+    this.scrollEvent.next(event.currentScrollPosition);
   }
 
   public ngDoCheck(): void {
@@ -73,6 +93,10 @@ export class SelectComponent implements ControlValueAccessor, AfterViewChecked, 
     if (this.selected && !this.formValue) {
       this.selected = undefined;
     }
+  }
+
+  public searchEmit(search: string): void {
+    this.shouldFilter && this.searchEvent.next(search)
   }
 
   public ngAfterViewChecked(): void {

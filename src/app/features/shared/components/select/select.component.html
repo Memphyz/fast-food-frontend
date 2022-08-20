@@ -3,11 +3,16 @@
     [label]="label"
     (rightIconEvent)="(!open && selected) && !(selectedOption = undefined)"
     [visibleValue]="selectedOption?.label"
-    (inputValueChange)="filter = $event"
+    (inputValueChange)="filter = $event; searchEmit($event)"
     color="var(--bs-gray-500)"
     [rightIcon]="open || !selected ? 'chevron-down' : 'close'"></fast-input>
 </div>
 <div class="fast-options-container"
+  infiniteScroll
+  [infiniteScrollDistance]="0.5"
+  [infiniteScrollThrottle]="100"
+  [scrollWindow]="false"
+  (scrolled)="emitScroll($event)"
   [style]="'top:' + offsetHeight(inputContainer) + 'px'">
   <ng-container *ngIf="filtered?.length else empty">
     <div *ngIf="register || (signLabel && signLabel !== 'Cadastrar')"

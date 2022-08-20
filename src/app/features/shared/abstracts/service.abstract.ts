@@ -56,6 +56,7 @@ export abstract class AbstractService<Model> {
   }
 
   public findAll(params?: object, response?: boolean): Observable<Model[]> {
+    params = this.removeNullableParams(params);
     this.resetSuffix();
     return this.get(params);
   }
@@ -87,6 +88,16 @@ export abstract class AbstractService<Model> {
   private resetSuffix(...args): void {
     this.many && this.endpont && this.endpont[this.endpont.length - 1] === 's' && (this.endpont = this.endpont.substring(0, this.endpont.length - 1));
     this.urlSuffix = ''
+  }
+
+  private removeNullableParams(object: { [x: string]: any }): { [x: string]: any } {
+    const params = {};
+    Object.entries(object).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        params[key] = value;
+      }
+    });
+    return params
   }
 
 }

@@ -46,7 +46,7 @@
         [class.left-icon]="leftIcon"
         id="{{id}}"
         [maxlength]="maxLength"
-        [minlength]="minLength"
+        [minlength]="minLength || 999"
         [value]="visibleValue"
         [readonly]="readonly"
         placeholder="{{placeholder}}"
@@ -58,6 +58,7 @@
         #testf
         class="form-label"
         for="typeText">{{label}}</label>
+      <span>{{inputValue?.length || 0}} / {{maxLength || 999}}</span>
     </ng-container>
     <ng-container *ngSwitchDefault>
       <input mdbInput

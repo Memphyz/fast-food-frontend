@@ -36,6 +36,7 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -62,6 +63,7 @@ import { ToastrModule } from 'ngx-toastr';
     MdbRangeModule,
     MdbRippleModule,
     MdbScrollspyModule,
+    InfiniteScrollModule,
     MdbTabsModule,
     ReactiveFormsModule,
     MdbTooltipModule,
