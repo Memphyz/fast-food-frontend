@@ -3,6 +3,7 @@ import {
   RegisterAddressComponent
 } from './address/register-adrress/register-address.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './login/register/register.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { OrdersComponent } from './orders/orders.component';
 import {
@@ -40,9 +41,14 @@ const routes: Routes = [
     loadChildren: () => import('./address/address-routing.module').then((module) => module.AddressRoutingModule)
   },
   {
-    path: 'register',
+    path: 'address/register',
     canActivate: [LoginGuard],
     component: RegisterAddressComponent
+  },
+  {
+    path: 'register',
+    canActivate: [LoginGuard],
+    component: RegisterComponent
   },
   {
     path: 'sign-in',

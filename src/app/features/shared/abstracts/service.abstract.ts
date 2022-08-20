@@ -38,15 +38,23 @@ export abstract class AbstractService<Model> {
     })
   }
 
-  public post<T>(body: T): Observable<any> {
+  public post<T>(body: T): Observable<HttpResponse<T>> {
     return this.httpClient.post<any>(this.BASE_URL + this.endpont + this.urlSuffix, body, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`
-      }
+      },
+      observe: 'response'
     });
   }
 
-  public save<T>(body: T): Observable<any> {
+  public save<T>(body: T): Observable<HttpResponse<T>> {
+    return this.post(body);
+  }
+
+  public saveAll<T>(body: T): Observable<HttpResponse<T>> {
+    this.resetSuffix();
+    this.endpont += 's';
+    this.many = true;
     return this.post(body);
   }
 

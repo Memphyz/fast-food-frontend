@@ -1,0 +1,22 @@
+<span (click)="someTagEditing? update.emit(indexEditingTag) : add.emit()">
+  <fast-icon icon="plus_outline"
+    [size]="24"></fast-icon>
+  {{someTagEditing? updateTitle : title}}
+</span>
+<div class="fast-multiple-tags-container">
+  <div class="fast-multiple-tag"
+    *ngFor="let tag of tags; let index = index"
+    [class.fast-tag-editing]="tag.editing">
+    <span>
+      {{tag.titile}}
+    </span>
+    <fast-icon [icon]="tag.editing ? 'update' : 'edit'"
+      (click)="uneditAllTags(); tag.editing = !tag.editing; tag.editing ? edit.emit(tag) : update.emit(index)"
+      [size]="15"
+      color="white"></fast-icon>
+    <fast-icon icon="close"
+      [size]="15"
+      color="white"
+      (click)="tags.splice(index, 1); remove.emit(index)"></fast-icon>
+  </div>
+</div>

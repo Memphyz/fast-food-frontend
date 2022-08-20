@@ -7,6 +7,9 @@ import {
   ImageUploaderComponent
 } from './components/image-uploader/image-uploader.component';
 import { InputComponent } from './components/input/input.component';
+import {
+  MultipleTagsComponent
+} from './components/multiple-tags/multiple-tags.component';
 import { SelectComponent } from './components/select/select.component';
 import { SwitchComponent } from './components/switch/switch.component';
 import { CollapseDirective } from './directives/collapse.directive';
@@ -78,7 +81,7 @@ import { ToastrModule } from 'ngx-toastr';
       progressBar: true
     })
   ],
-  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent, SafePipe, CollapseDirective, ImageUploaderComponent, SwitchComponent],
+  exports: [HeaderComponent, InputComponent, ErrorMessageDirective, DatePickerComponent, SwitchComponent, FilterComponent, IconComponent, SelectComponent, SafePipe, CollapseDirective, ImageUploaderComponent, SwitchComponent, MultipleTagsComponent],
   declarations: [
     HeaderComponent,
     InputComponent,
@@ -93,7 +96,8 @@ import { ToastrModule } from 'ngx-toastr';
     FastClickOutsideDirective,
     CollapseDirective,
     ImageUploaderComponent,
-    SwitchComponent
+    SwitchComponent,
+    MultipleTagsComponent
   ],
 })
 export class SharedModule {}

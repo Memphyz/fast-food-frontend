@@ -25,6 +25,9 @@
       overflow: auto;
       height: 100%;
       max-height: 470px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       .fast-product-name {
         display: flex;
         justify-content: space-between;

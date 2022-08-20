@@ -1,0 +1,40 @@
+:host {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  span {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+
+  .fast-multiple-tags-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .fast-multiple-tag {
+      display: flex;
+      padding: 5px 15px;
+      gap: 10px;
+      align-items: center;
+      transition: all 0.5s;
+      background-color: var(--primary-light);
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+
+      &.fast-tag-editing {
+        background-color: var(--primary);
+      }
+
+      fast-icon {
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -46,6 +46,7 @@
         [class.left-icon]="leftIcon"
         id="{{id}}"
         [maxlength]="maxLength"
+        [class.fast-hide-label]="!!inputValue || !!visibleValue"
         [minlength]="minLength || 999"
         [value]="visibleValue"
         [readonly]="readonly"

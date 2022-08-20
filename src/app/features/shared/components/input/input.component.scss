@@ -21,13 +21,14 @@ fast-icon {
 }
 
 input[currencymask] ~ label,
-input.fast-hide-label:not(:focus) ~ label {
+.fast-hide-label:not(:focus) ~ label {
   transform: translateY(-1.25rem) translateY(0.1rem) scale(0.8);
   background-color: white;
   z-index: 1;
 }
 
 textarea {
+  transition: none !important;
   ~ span {
     position: absolute;
     right: 0px;

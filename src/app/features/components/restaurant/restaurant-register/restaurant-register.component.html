@@ -53,6 +53,7 @@
       <div class="col-12 col-md-6">
         <fast-select label="Endereço"
           [options]="address"
+          formControlName="address"
           (search)="searchAddress($event)"
           [autocomplete]="true"
           (scroll)="scrollAddress()"
@@ -61,6 +62,7 @@
       <div class="col-12 col-md-6">
         <fast-select label="Sócios"
           [options]="owners"
+          formControlName="owner"
           [autocomplete]="true"
           (scroll)="scrollUser()"
           (search)="searchUser($event)"
@@ -141,14 +143,28 @@
                   type="textarea"></fast-input>
               </div>
             </div>
+            <div class="row">
+              <fast-multiple-tags [tags]="addictionalTags"
+                (add)="form.get('product.additional').valid && canAddAddictional ? btnAddAddictional() : form.get('product.additional').markAllAsTouched()"
+                (edit)="form.get('product.additional').reset({active: true}); form.get('product.additional').patchValue($event.value)"
+                (update)="addictionalTags[$event] = mountTagAdditional();  addictionals.at($event).setValue(form.get('product.additional')); form.get('product.additional').reset({active: true})"
+                (remove)="products.removeAt($event)">
+              </fast-multiple-tags>
+            </div>
           </div>
         </div>
       </div>
+      <fast-multiple-tags [tags]="productTags"
+        (add)="form.get('product').valid ? btnAddProduct() : form.get('product').markAllAsTouched()"
+        (edit)="form.get('product').reset({active: true}); form.get('product').patchValue($event.value)"
+        (update)="productTags[$event] = mountTag(); products.at($event).setValue(form.get('product')); form.get('product').reset({active: true});"
+        (remove)="products.removeAt($event)">
+      </fast-multiple-tags>
     </div>
     <div class="fast-buttons d-flex justify-content-center">
       <button class="w-50"
         type="button"
-        (click)="submit()">Cadastrar</button>
+        (click)="form.valid ? submit() : form.markAllAsTouched()">Cadastrar</button>
     </div>
   </form>
 </div>
