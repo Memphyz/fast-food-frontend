@@ -147,7 +147,7 @@
               <fast-multiple-tags [tags]="addictionalTags"
                 (add)="form.get('product.additional').valid && canAddAddictional ? btnAddAddictional() : form.get('product.additional').markAllAsTouched()"
                 (edit)="form.get('product.additional').reset({active: true}); form.get('product.additional').patchValue($event.value)"
-                (update)="addictionalTags[$event] = mountTagAdditional();  addictionals.at($event).setValue(form.get('product.additional')); form.get('product.additional').reset({active: true})"
+                (update)="update($event, addictionalTags, mountTagAdditional(), 'product.additional', addictionals)"
                 (remove)="products.removeAt($event)">
               </fast-multiple-tags>
             </div>
@@ -156,8 +156,8 @@
       </div>
       <fast-multiple-tags [tags]="productTags"
         (add)="form.get('product').valid ? btnAddProduct() : form.get('product').markAllAsTouched()"
-        (edit)="form.get('product').reset({active: true}); form.get('product').patchValue($event.value)"
-        (update)="productTags[$event] = mountTag(); products.at($event).setValue(form.get('product')); form.get('product').reset({active: true});"
+        (edit)="pathEdit($event)"
+        (update)="update($event, productTags, mountTag(), 'product', products, true)"
         (remove)="products.removeAt($event)">
       </fast-multiple-tags>
     </div>

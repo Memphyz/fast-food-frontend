@@ -78,6 +78,10 @@ export class RestaurantRegisterComponent implements OnInit {
   private addressPage = 0;
   private addressSearch: string;
 
+  public get console() {
+    return console;
+  }
+
   public get canAddAddictional(): boolean {
     return Object.values(this.form.get('product.additional').value).every((value => !!value))
   }
@@ -118,6 +122,7 @@ export class RestaurantRegisterComponent implements OnInit {
   public btnAddProduct(): void {
     this.productTags.push(this.mountTag());
     this.products.push(cloneDeep(this.form.get('product')));
+    this.addictionalTags = [];
     this.form.get('product').reset({ active: true });
   }
 
@@ -125,6 +130,26 @@ export class RestaurantRegisterComponent implements OnInit {
     this.addictionalTags.push(this.mountTagAdditional());
     this.addictionals.push(cloneDeep(this.form.get('product.additional')));
     this.form.get('product.additional').reset({ active: true });
+  }
+
+  public update(index: number, tagList: MultipleTag<unknown>[], tag: MultipleTag<unknown>, path: string, list: FormArray, clearTags = false): void {
+    tagList[index] = tag as any;
+    list.at(index).patchValue(this.form.get(path).value)
+    this.form.get(path).reset({ active: true });
+    clearTags && (this.addictionalTags = []);
+  }
+
+  public pathEdit(tag: MultipleTag<any>) {
+    this.form.get('product').reset({ active: true });
+    this.form.get('product').patchValue(tag.value);
+    tag.value.addictionals.forEach(additional => {
+      this.addictionalTags.push({
+        editing: false,
+        titile: additional.name,
+        value: additional
+      });
+    });
+    this.form.get('product.additional').reset();
   }
 
   public mountTag(): MultipleTag<IProduct> {

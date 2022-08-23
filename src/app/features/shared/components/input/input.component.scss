@@ -22,7 +22,11 @@ fast-icon {
 
 input[currencymask] ~ label,
 .fast-hide-label:not(:focus) ~ label {
-  transform: translateY(-1.25rem) translateY(0.1rem) scale(0.8);
+  transform: translateY(-1.45rem) translateY(0.1rem) scale(0.8);
+  border: 2px solid var(--bs-gray-300);
+  border-bottom: 0px;
+  padding: 0px 5px;
+  border-radius: 5px 5px 0px 1px;
   background-color: white;
   z-index: 1;
 }

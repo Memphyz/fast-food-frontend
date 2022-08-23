@@ -25,7 +25,11 @@
 
 .form-outline .form-control:focus ~ .form-label,
 .form-outline .form-control.active ~ .form-label {
-  transform: translateY(-1.25rem) translateY(0.1rem) scale(0.8) !important;
+  transform: translateY(-1.5rem) translateY(0.1rem) scale(0.8) !important;
+  border: 3px solid var(--primary);
+  border-bottom: 0px;
+  padding: 0px 5px;
+  border-radius: 5px 5px 0px 1px;
 }
 
 .fast-collapse {
@@ -56,4 +60,10 @@
     width: 67%;
     background-color: var(--primary);
   }
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-trailing {
+  border-top: 0.125rem solid var(--primary);
+  border-bottom: 0.125rem solid var(--primary);
+  border-right: 0.125rem solid var(--primary) f1;
 }

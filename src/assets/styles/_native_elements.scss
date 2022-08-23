@@ -26,6 +26,53 @@ input {
   background: white !important;
 }
 
+.fast-page-title {
+  color: var(--primary);
+}
+
+.fast-collapse:not(.fast-collapse-open) > * {
+  display: none !important;
+}
+
+.form-outline .form-control:focus ~ .form-label,
+.form-outline .form-control.active ~ .form-label {
+  transform: translateY(-1.5rem) translateY(0.1rem) scale(0.8) !important;
+  border: 3px solid var(--primary);
+  border-bottom: 0px;
+  padding: 0px 5px;
+  border-radius: 5px 5px 0px 1px;
+}
+
+.fast-collapse {
+  width: 100%;
+  position: relative;
+
+  &.fast-collapse-open {
+    > * {
+      margin-top: 15px;
+      display: block;
+    }
+  }
+
+  &::before {
+    content: attr(title);
+    font-size: 22px;
+    width: 100%;
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    height: 1px;
+    left: 0px;
+    width: 67%;
+    background-color: var(--primary);
+  }
+}
+
 mdb-form-control > .form-label {
   top: 3px !important;
 }
@@ -40,7 +87,7 @@ fast-input.ng-invalid.ng-touched > mdb-form-control {
     animation: 1s border-animation;
   }
 }
-
+mdb-form-control > textarea:focus ~,
 mdb-form-control > input:focus ~ {
   .form-label {
     color: var(--primary) !important;
@@ -49,6 +96,10 @@ mdb-form-control > input:focus ~ {
   }
   .form-notch div {
     border-color: var(--primary) !important;
+
+    &.form-notch-trailing {
+      border-right: 0.125rem solid var(--primary) !important;
+    }
   }
 }
 
