@@ -1,0 +1,81 @@
+:host {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+
+  .fast-addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 250px;
+
+    @media screen and (max-width: 768px) {
+      max-height: unset;
+    }
+
+    .fast-address {
+      width: 100%;
+      border: 1px solid var(--bs-gray-400);
+      border-radius: 10px;
+      display: flex;
+      position: relative;
+      gap: 20px;
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 25px;
+        height: 25px;
+        mask-image: url(./../../../../assets/images/icons/config.svg);
+        mask-position: center;
+        mask-repeat: no-repeat;
+        background-color: var(--bs-gray-500);
+      }
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .fast-address-map {
+        height: 250px;
+        border-radius: 10px 0px 0px 10px;
+        @media screen and (max-width: 768px) {
+          height: unset;
+        }
+        iframe {
+          height: 250px;
+
+          @media screen and (max-width: 768px) {
+            height: 210px;
+            width: 100%;
+          }
+        }
+      }
+
+      .fast-address-main-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 8px;
+        max-width: calc(100% - 100px);
+        padding: 10px 0px;
+
+        @media screen and (max-width: 768px) {
+          max-width: unset;
+        }
+
+        strong,
+        span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          display: block;
+        }
+      }
+    }
+  }
+}

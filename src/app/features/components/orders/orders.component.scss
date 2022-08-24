@@ -8,8 +8,18 @@
     gap: 20px;
     padding: 10px;
 
-    &:empty::before {
-      // no Order illus
+    &:empty {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem;
+
+      &::before {
+        content: "Sem pedidos realizados";
+        text-align: center;
+      }
     }
     input:checked ~ .fast-order.fast-order-view > span {
       fast-icon {

@@ -1,1 +1,27 @@
-<p>address works!</p>
+<div class="fast-addresses">
+  <ng-container *ngFor="let address of addresses">
+    <div class="fast-address"
+      [routerLink]="['/address', 'edit', address.id]">
+      <div class="fast-address-map overflow-hidden">
+        <iframe loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          [src]="ifurl(address)">
+        </iframe>
+      </div>
+      <div class="fast-address-main-info">
+        <strong>{{address.address}}, {{address.number}}</strong>
+        <span>{{address.postalCode | mask: '00000-000'}}</span>
+        <span>
+          {{address.city}}, {{address.state}}
+        </span>
+        <span>
+          {{address.district}}
+        </span>
+        <span>
+          {{address.reference}}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</div>

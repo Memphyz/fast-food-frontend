@@ -100,7 +100,7 @@ export abstract class AbstractService<Model> {
 
   private removeNullableParams(object: { [x: string]: any }): { [x: string]: any } {
     const params = {};
-    Object.entries(object).forEach(([key, value]) => {
+    Object.entries(object || {}).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         params[key] = value;
       }

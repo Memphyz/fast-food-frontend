@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterAddressComponent
+  },
+  {
+    path: 'edit/:id',
+    component: RegisterAddressComponent
   }
 ]
 
