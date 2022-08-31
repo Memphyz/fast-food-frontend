@@ -30,8 +30,11 @@
         top: 10px;
         width: 25px;
         height: 25px;
+        -webkit-mask-image: url(./../../../../assets/images/icons/config.svg);
         mask-image: url(./../../../../assets/images/icons/config.svg);
+        -webkit-mask-position: center;
         mask-position: center;
+        -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
         background-color: var(--bs-gray-500);
       }

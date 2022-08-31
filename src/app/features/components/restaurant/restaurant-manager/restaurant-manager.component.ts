@@ -1,3 +1,8 @@
+import { IRestaurant } from './../../../../core/interfaces/restaurant.interface';
+import {
+  RestaurantService
+} from './../../../../core/services/restaurant/restaurant.service';
+import { userId } from './../../../shared/utils/local-storage';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantManagerComponent implements OnInit {
 
-  constructor() { }
+  public restaurants: IRestaurant[] = [];
 
-  ngOnInit(): void {
+  constructor(private readonly restaurantResvice: RestaurantService) {}
+
+  public ngOnInit(): void {
+    this.fetch();
+  }
+
+  public fetch(): void {
+    this.restaurantResvice.findAll({ id: userId() }).subscribe((restaurants) => this.restaurants.push(...restaurants))
   }
 
 }

@@ -1,6 +1,6 @@
-import { AppModule } from './../../../app.module';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { AppModule } from './../../../app.module';
 
 
 export abstract class AbstractService<Model> {
@@ -46,9 +46,21 @@ export abstract class AbstractService<Model> {
       observe: 'response'
     });
   }
+  public path<T>(body: T): Observable<HttpResponse<T>> {
+    return this.httpClient.patch<any>(this.BASE_URL + this.endpont + this.urlSuffix, body, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      observe: 'response'
+    });
+  }
 
   public save<T>(body: T): Observable<HttpResponse<T>> {
     return this.post(body);
+  }
+
+  public update<T>(body: T): Observable<HttpResponse<T>> {
+    return this.path(body);
   }
 
   public saveAll<T>(body: T): Observable<HttpResponse<T>> {
@@ -56,6 +68,13 @@ export abstract class AbstractService<Model> {
     this.endpont += 's';
     this.many = true;
     return this.post(body);
+  }
+
+  public updateAll<T>(body: T): Observable<HttpResponse<T>> {
+    this.resetSuffix();
+    this.endpont += 's';
+    this.many = true;
+    return this.path(body);
   }
 
   public findById(id: string): Observable<Model> {

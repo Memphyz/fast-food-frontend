@@ -1,3 +1,12 @@
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { cloneDeep } from 'lodash';
+import { BehaviorSubject, map, mergeMap, tap } from 'rxjs';
+import { PaymentType } from 'src/app/core/enums/payment.enum';
+import { IProduct } from 'src/app/core/interfaces/product.interface';
+import { ProductService } from 'src/app/core/services/product/product.service';
+import { ALPHA } from 'src/app/features/shared/utils/regex.utils';
 import { IRestaurant } from './../../../../core/interfaces/restaurant.interface';
 import { MultipleTag } from './../../../../core/models/multiple-tag.model';
 import { SelectOption } from './../../../../core/models/select-option.interface';
@@ -12,14 +21,6 @@ import {
   requiredIfAnyFieldFormHasValue
 } from './../../../shared/validators/form';
 import { isHour } from './../../../shared/validators/hour';
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { cloneDeep } from 'lodash';
-import { map, mergeMap } from 'rxjs';
-import { PaymentType } from 'src/app/core/enums/payment.enum';
-import { IProduct } from 'src/app/core/interfaces/product.interface';
-import { ProductService } from 'src/app/core/services/product/product.service';
-import { ALPHA } from 'src/app/features/shared/utils/regex.utils';
 
 @Component({
   selector: 'fast-restaurant-register',
@@ -76,6 +77,7 @@ export class RestaurantRegisterComponent implements OnInit {
   private userPage = 0;
   private userSearch: string;
   private addressPage = 0;
+  private id = (this.route.params as BehaviorSubject<{ id: string }>).value?.id
   private addressSearch: string;
 
   public get console() {
@@ -94,11 +96,14 @@ export class RestaurantRegisterComponent implements OnInit {
     return this.form.get('product.addictionals') as FormArray;
   }
 
-  constructor(private readonly addressService: AddressService, private readonly userService: UserService, public readonly restaurantService: RestaurantService, private readonly productService: ProductService) {}
+  constructor(private readonly addressService: AddressService, private readonly userService: UserService, public readonly restaurantService: RestaurantService, private readonly productService: ProductService, private readonly route: ActivatedRoute) {}
 
   public ngOnInit(): void {
     this.fetchAddresses();
     this.fetchUsers();
+    if (this.id) {
+      this.restaurantService.findById(this.id).pipe(tap(restaurant => this.form.patchValue(restaurant)), mergeMap(restaurant => this.productService.findAllByIdCustomSuffix({ id: restaurant.id }, `/restaurant/${restaurant.id}`))).subscribe(this.pathValue.bind(this))
+    }
   }
 
   public submit(): void {
@@ -115,6 +120,10 @@ export class RestaurantRegisterComponent implements OnInit {
     }
     delete (body as any).owner
     delete (body as any).product
+    if (this.id) {
+      this.restaurantService.update(body).pipe(map((restaurant) => products.map((product): IProduct => { return { ...product, restaurant: restaurant.body.id } })), mergeMap((products) => this.productService.updateAll(products))).subscribe()
+      return undefined;
+    }
     this.restaurantService.save(body).pipe(map((restaurant) => products.map((product): IProduct => { return { ...product, restaurant: restaurant.body.id } })), mergeMap((products) => this.productService.saveAll(products))).subscribe()
 
   }
@@ -142,7 +151,7 @@ export class RestaurantRegisterComponent implements OnInit {
   public pathEdit(tag: MultipleTag<any>) {
     this.form.get('product').reset({ active: true });
     this.form.get('product').patchValue(tag.value);
-    tag.value.addictionals.forEach(additional => {
+    tag.value.addictionals?.forEach(additional => {
       this.addictionalTags.push({
         editing: false,
         titile: additional.name,
@@ -191,6 +200,16 @@ export class RestaurantRegisterComponent implements OnInit {
 
   private fetchUsers(): void {
     this.userService.findAll({ limit: 5, page: this.userPage, projection: 'name id cpf surname', search: this.userSearch }).subscribe((users) => this.owners.push(...users.map((user) => new SelectOption(`${user.name} ${user.surname}`, user.id, user.cpf))));
+  }
+
+  private pathValue(products: IProduct[]): void {
+    this.form.patchValue(products);
+    this.productTags.push(...products.map((product => new MultipleTag(product.name, product))));
+    this.products.controls = products.map(product => new FormControl(product))
+    this.products.setValue(products)
+    console.log(this.form);
+
+
   }
 
   private fetchAddresses(): void {

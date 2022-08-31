@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './../../core/guards/logged.guard';
 import {
   RegisterAddressComponent
@@ -13,8 +15,6 @@ import {
   RestaurantRegisterComponent
 } from './restaurant/restaurant-register/restaurant-register.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
@@ -65,6 +65,10 @@ const routes: Routes = [
   },
   {
     path: 'restaurant/register',
+    component: RestaurantRegisterComponent
+  },
+  {
+    path: 'restaurant/edit/:id',
     component: RestaurantRegisterComponent
   }
 ]

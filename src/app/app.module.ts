@@ -1,11 +1,6 @@
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpRequestInterceptor } from './core/interceptors/http-request.interceptor';
-import { ComponentsModule } from './features/components/components.module';
-import { SharedModule } from './features/shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Injector, NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandler, Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +25,12 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { GlobalErrorHandler } from './core/interceptors/global-error-handler';
+import { HttpRequestInterceptor } from './core/interceptors/http-request.interceptor';
+import { ComponentsModule } from './features/components/components.module';
+import { SharedModule } from './features/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -74,11 +75,16 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
       progressBar: true
     })
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpRequestInterceptor,
-    multi: true
-  }, BsModalService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    }, , BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

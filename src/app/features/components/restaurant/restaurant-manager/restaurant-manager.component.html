@@ -1,1 +1,34 @@
-<p>restaurant-manager works!</p>
+<div class="fast-restaurants">
+  <div class="fast-restaurant"
+    *ngFor="let restaurant of restaurants"
+    [routerLink]="['/restaurant', 'edit', restaurant.id]">
+    <div class="fast-restaurant-image">
+      <img src="{{restaurant.photo}}"
+        alt="restaurant_photo">
+    </div>
+    <div class="fast-restaurant-info">
+      <div class="fast-restaurant-name">
+        <strong>{{restaurant.name}}</strong>
+        <span>{{restaurant.rate | number: '1.1-2'}}</span>
+      </div>
+      <div class="fast-restaurant-kitchen">
+        {{restaurant.kitchen}}
+      </div>
+      <div class="fast-additional-info">
+        <div class="fast-restaurant-add-info">
+          <strong>Horário de Abertura/Fechamento:</strong>
+          <span>{{restaurant.open | mask: '00:00'}} até {{restaurant.close | mask:
+            '00:00'}}</span>
+        </div>
+        <div class="fast-restaurant-add-info">
+          <strong>Frete Mínimo:</strong>
+          <span>{{restaurant.freight | currency}}</span>
+        </div>
+        <div class="fast-restaurant-add-info">
+          <strong>Status:</strong>
+          <span>{{restaurant.active ? 'Ativo' : 'Inativo'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
