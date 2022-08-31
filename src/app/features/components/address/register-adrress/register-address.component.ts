@@ -1,3 +1,9 @@
+import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { BehaviorSubject, filter, mergeMap, tap } from 'rxjs';
+import { states } from 'src/app/features/shared/utils/city';
 import { AddressType } from './../../../../core/enums/address.enum';
 import { IAddress } from './../../../../core/interfaces/address.interface';
 import { SelectOption } from './../../../../core/models/select-option.interface';
@@ -5,11 +11,6 @@ import { AddressService } from './../../../../core/services/address/address.serv
 import { CepService } from './../../../../core/services/search/cep.service';
 import { addressTypes } from './../../../shared/utils/city';
 import { ALPHA } from './../../../shared/utils/regex.utils';
-import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter, mergeMap, tap } from 'rxjs';
-import { states } from 'src/app/features/shared/utils/city';
 
 @UntilDestroy()
 @Component({
@@ -34,6 +35,7 @@ export class RegisterAddressComponent implements OnInit, DoCheck {
   public cities: SelectOption<string>[] = [];
   public readonly types: SelectOption<AddressType>[] = addressTypes;
   public addresses: IAddress[];
+  private id = (this.route.params as BehaviorSubject<{ id: string }>).value?.id
 
   @ViewChild('map') mapRef: ElementRef<HTMLIFrameElement>;
 
@@ -42,7 +44,7 @@ export class RegisterAddressComponent implements OnInit, DoCheck {
     return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBJ0DBgKEpHbmhsC3jLNjBTedXaDCRbCTs&q=${this.form.get('address').value || 'Brasil'},${this.form.get('number').value || ''}, ${this.form.get('postalCode').value || ''}`;
   }
 
-  constructor(private readonly cepService: CepService, private readonly addressService: AddressService) {}
+  constructor(private readonly cepService: CepService, private readonly addressService: AddressService, private readonly route: ActivatedRoute, private readonly router: Router) {}
 
   public ngDoCheck(): void {
     this.mapRef?.nativeElement && this.srcCache !== this.src && (this.mapRef.nativeElement.src = this.src) && (this.srcCache = this.src);
@@ -52,12 +54,21 @@ export class RegisterAddressComponent implements OnInit, DoCheck {
     this.cepValueChanges();
     this.stateValueChanges();
     this.findAddresses();
+    this.findAddressById();
   }
 
   public save(): void {
+    if (this.id) {
+      this.form.valid && this.addressService.update({ ...this.form.value, country: 'BRAZIL' }).subscribe(() => this.router.navigate(['/address']))
+      return undefined;
+    }
     this.form.valid && this.addressService.save({ ...this.form.value, country: 'BRAZIL' }).subscribe({
       next: () => this.addresses.unshift({ ...this.form.value, country: 'BRAZIL' }) && this.form.reset(),
     })
+  }
+
+  private findAddressById(): void {
+    this.id && this.addressService.findById(this.id).subscribe((address) => this.form.patchValue(address))
   }
 
   private findAddresses() {
