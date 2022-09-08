@@ -1,9 +1,9 @@
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { CartComponent } from '../cart/cart.component';
 import { AppModule } from './../../../../app.module';
 import { IHeaderButton } from './../../../../core/interfaces/header-button.interface';
 import { Cart } from './../cart/cart';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 
 export const unloggedHeaderButtons: IHeaderButton[] = [
   {
@@ -21,11 +21,13 @@ export const loggedHeaderButtons: IHeaderButton[] = [
   {
     icon: 'home',
     class: 'outline',
+    label: 'Home',
     iconColor: 'var(--bs-gray-600)',
     routerlink: ['/home']
   },
   {
     icon: 'restaurant',
+    label: 'Restaurante',
     iconColor: 'white',
     dropdown: [
       {
@@ -46,6 +48,7 @@ export const loggedHeaderButtons: IHeaderButton[] = [
   },
   {
     icon: 'cart',
+    label: 'Carrinho',
     badgeCalc: Cart.itemsLengthString,
     onClick: () => {
       const modalService: BsModalService = AppModule.get(BsModalService);
@@ -64,6 +67,7 @@ export const loggedHeaderButtons: IHeaderButton[] = [
   },
   {
     icon: 'profile',
+    label: 'Perfil',
     dropdown: [
       {
         label: 'Sair',

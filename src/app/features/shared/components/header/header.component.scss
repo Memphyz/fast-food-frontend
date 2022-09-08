@@ -162,7 +162,7 @@
 
   .header-input:checked ~ .collapse {
     opacity: 1;
-    width: 100%;
+    width: calc(100%);
 
     @media screen and (min-width: 768px) {
       opacity: 0;
@@ -208,6 +208,43 @@
           mask-position: center;
           background-color: var(--disabled);
           background-size: contain;
+        }
+      }
+
+      .fast-collapse-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        input:checked ~ button {
+          border-radius: 5px 5px 0px 0px !important;
+        }
+
+        button {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: start;
+          gap: 10px;
+        }
+        .fast-header-btn-dropdown {
+          position: absolute;
+          top: 100%;
+          width: calc(100% + 2px);
+          left: -1px;
+          background: var(--primary);
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          button {
+            border: 1px solid white !important;
+
+            fast-icon {
+              background-color: white !important;
+            }
+          }
         }
       }
     }

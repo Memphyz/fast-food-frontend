@@ -1,6 +1,7 @@
+import { environment } from './../../../../environments/environment';
+import { AppModule } from './../../../app.module';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { AppModule } from './../../../app.module';
 
 
 export abstract class AbstractService<Model> {
@@ -8,7 +9,7 @@ export abstract class AbstractService<Model> {
   protected readonly httpClient = AppModule.injector.get(HttpClient);
 
 
-  private readonly BASE_URL = 'http://localhost:3000/api/v1';
+  private readonly BASE_URL = environment.api;
 
   public urlSuffix = '';
 

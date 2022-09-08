@@ -30,7 +30,7 @@
             #fatherBtn
             [class.position-relative]="button.dropdown?.length"
             [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : ''"
-            (click)="(button.onClick ? button.onClick() : null); inputRef.click()">{{button.label}}
+            (click)="(button.onClick ? button.onClick() : null); inputRef.click()">
             <fast-icon *ngIf="button.icon"
               #iconRef
               [icon]="button.icon"
@@ -73,6 +73,45 @@
       (click)="checkbox.click()"
       title="close"
       class="close"></button>
+    <div class="fast-collapse-items">
+      <ng-container *ngFor="let button of leftButtons">
+        <input type="checkbox"
+          #inputRef
+          title="toggle"
+          hidden>
+        <button [routerLink]="button.routerlink"
+          [class]="button.class"
+          #fatherBtn
+          [class.position-relative]="button.dropdown?.length"
+          [style]="button.badgeCalc ? '--badge: ' + button.badgeCalc() : ''"
+          (click)="(button.onClick ? button.onClick() : null); !button.dropdown ? checkbox.click() : inputRef.click()">{{button.label}}
+          <fast-icon *ngIf="button.icon"
+            #iconRef
+            [icon]="button.icon"
+            [size]="20"
+            [color]="button.iconColor || 'white'"
+            (click)="$event.preventDefault(); $event.stopPropagation();fatherBtn.click()">
+          </fast-icon>
+        </button>
+        <div class="fast-header-btn-dropdown"
+          fastFastClickOutside
+          [ignore]="fatherBtn"
+          (outside)="inputRef.click()"
+          *ngIf="button.dropdown?.length && inputRef.checked">
+          <ng-container *ngFor="let drop of button.dropdown">
+            <button [routerLink]="drop.routerlink"
+              [class]="drop.class"
+              [style]="drop.badgeCalc ? '--badge: ' + drop.badgeCalc() : ''"
+              (click)="(drop.onClick ? drop.onClick() : null); checkbox.click()">{{drop.label}}
+              <fast-icon *ngIf="drop.icon"
+                [icon]="drop.icon"
+                [size]="20"
+                [color]="drop.iconColor || 'white'"></fast-icon>
+            </button>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>
 <div class="fast-content">
