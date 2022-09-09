@@ -42,6 +42,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   imports: [
@@ -97,7 +98,8 @@ import { ToastrModule } from 'ngx-toastr';
     CollapseDirective,
     ImageUploaderComponent,
     SwitchComponent,
-    MultipleTagsComponent
+    MultipleTagsComponent,
+    WelcomeComponent
   ],
 })
 export class SharedModule {}

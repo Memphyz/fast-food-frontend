@@ -1,18 +1,21 @@
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 import { CartComponent } from '../cart/cart.component';
 import { AppModule } from './../../../../app.module';
 import { IHeaderButton } from './../../../../core/interfaces/header-button.interface';
 import { Cart } from './../cart/cart';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 export const unloggedHeaderButtons: IHeaderButton[] = [
   {
     label: 'Cadastrar',
+    icon: 'register',
+    iconColor: 'var(--bs-gray-700)',
     routerlink: ['/register'],
     class: 'outline'
   },
   {
     label: 'Entrar',
+    icon: 'sign-up',
     routerlink: ['/sign-in']
   }
 ];

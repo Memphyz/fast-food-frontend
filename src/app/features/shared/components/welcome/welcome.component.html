@@ -1,0 +1,28 @@
+<div class="fast-illus">&nbsp;</div>
+<h3><strong>Bem vindo!</strong></h3>
+<strong>UM AVISO IMPORTANTE!</strong>
+<p class="fast-warn">Esse projeto é piramente um projeto didático, ou seja, não é possivel
+  realizar pedidos reais e nem informações pessoais serão armazenadas com excessão dos
+  dados de login, ou seja, dados de cartão de crédito (não aconselhável usar dados reais)
+  <strong>NÃO serão armazenados no front e nem no backend!</strong>
+</p>
+<p>Esse é um projeto que foi criado com o propósito de aprender um pouquinho do
+  <strong>backend</strong>, mas apesar do projeto ser focado no backend que foi feito em
+  node e em breve tentarei refazer o mesmo em outras linguagens, eu não deixei o front
+  totalmente de lado, então apesar de ter ficado "apresentavel" o mesmo pode conter bugs
+  pois não foi testado 100%, mas acredito que os possiveis bugs não vão interferir na
+  experiência.
+</p>
+
+<div class="fast-once"
+  (click)="check.click()">
+  <input type="checkbox"
+    #check
+    title="Não mostrar noivamente">
+  <label for="nao mostrar novamente">Não mostrar novamente</label>
+</div>
+
+<div class="w-100 d-flex justify-content-center">
+  <button (click)="modalRef.hide(); localStorage.setItem('welcome', check.checked + '')"
+    class="w-50">Entendi</button>
+</div>
