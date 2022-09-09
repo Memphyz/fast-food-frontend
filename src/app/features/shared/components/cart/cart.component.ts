@@ -77,6 +77,10 @@ export class CartComponent implements OnInit {
 
   public selected: IPayment;
 
+  public get isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
+
   public get address(): IAddress {
     return this.form.get('address').value;
   }

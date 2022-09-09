@@ -39,22 +39,51 @@
                 <fast-icon icon="square-arrow-right"
                   [size]="18"></fast-icon>
               </legend>
-              <table class="fast-additionals-container">
-                <tr>
-                  <th>Nome</th>
-                  <th>Quantidade</th>
-                  <th class="fast-ellipsis">Preço unitário</th>
-                  <th>Total</th>
-                </tr>
-                <tr *ngFor="let adictional of product.additionals"
-                  class="fast-additional-item">
-                  <th class="fast-ellipsis">{{adictional.name}}</th>
-                  <th>{{adictional.quantity}}</th>
-                  <th><code><strong>{{adictional.unitPrice | currency}}</strong></code>
-                  </th>
-                  <th> <code><strong>{{adictional.total | currency}}</strong></code></th>
-                </tr>
-              </table>
+              <ng-container *ngIf="!isMobile else additionals">
+                <table class="fast-additionals-container">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th class="fast-ellipsis">Preço unitário</th>
+                    <th>Total</th>
+                  </tr>
+                  <tr *ngFor="let adictional of product.additionals"
+                    class="fast-additional-item">
+                    <th class="fast-ellipsis">{{adictional.name}}</th>
+                    <th>{{adictional.quantity}}</th>
+                    <th><code><strong>{{adictional.unitPrice | currency}}</strong></code>
+                    </th>
+                    <th> <code><strong>{{adictional.total | currency}}</strong></code>
+                    </th>
+                  </tr>
+                </table>
+
+              </ng-container>
+              <ng-template #additionals>
+                <ng-container *ngFor="let adictional of product.additionals">
+                  <div class="fast-additional-mobile-container">
+                    <div class="fast-additional-info">
+                      <span>Nome</span>
+                      <strong for="name">{{adictional.name}}</strong>
+                    </div>
+                    <div class="fast-additional-info">
+                      <span>Quantidade</span>
+                      <strong for="quantity">{{adictional.quantity}}</strong>
+                    </div>
+                    <div class="fast-additional-info">
+                      <span>Preço unitário</span>
+                      <strong for="unit price">{{adictional.unitPrice |
+                        currency}}</strong>
+                    </div>
+                    <div class="fast-additional-info">
+                      <span>Total</span>
+                      <strong for="total">{{adictional.total | currency}}</strong>
+                    </div>
+                  </div>
+                </ng-container>
+
+              </ng-template>
+
             </div>
           </div>
         </div>

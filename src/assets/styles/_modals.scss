@@ -4,6 +4,8 @@ modal-container {
   }
 
   .fast-cart {
-    max-width: 70vw !important;
+    @media screen and (min-width: 768px) {
+      max-width: 70vw !important;
+    }
   }
 }
