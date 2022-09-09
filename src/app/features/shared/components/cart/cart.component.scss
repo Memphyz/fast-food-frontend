@@ -51,7 +51,9 @@
       }
 
       :last-child {
-        border-bottom: unset !important;
+        @media screen and (min-width: 768px) {
+          border-bottom: unset !important;
+        }
         padding-bottom: 0px !important;
       }
 
@@ -133,6 +135,7 @@
                 border: 1px solid var(--bs-gray-400);
                 border-radius: 5px;
                 padding: 10px;
+                margin-bottom: 10px;
 
                 .fast-additional-info {
                   display: flex;

@@ -142,7 +142,6 @@ export class CartComponent implements OnInit {
       payment: this.selected.type,
       address: this.form.get('address').value?.id,
     }
-    console.log(order);
     this.orderService.save(order).subscribe(() => { Cart.clear(); this.modalRef.hide() })
 
   }

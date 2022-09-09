@@ -13,7 +13,7 @@ import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { finalize, map, mergeMap, tap } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product/product.service';
 
-const SMALL_MOBILE = 478;
+const SMALL_MOBILE = 768;
 const SIZE = 6;
 
 @Component({
@@ -61,7 +61,6 @@ export class OrdersComponent implements OnInit, AfterContentChecked {
         tap((address) => order.cache.address = address),
         mergeMap(() => this.productService.findManyById({ ids: order.products.map((product) => product.id) })),
         tap((products) => order.cache.products = products),
-        tap(console.log),
         mergeMap(() => this.restaurantService.findManyById({ ids: order.cache.products.map((product) => product.restaurant) }))).subscribe({
           next: (restaurants) => order.cache.restaurants = restaurants
         })
