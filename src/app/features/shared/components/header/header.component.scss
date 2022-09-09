@@ -228,18 +228,19 @@
           gap: 10px;
         }
         .fast-header-btn-dropdown {
-          position: absolute;
           top: 100%;
-          width: calc(100% + 2px);
-          left: -1px;
+          width: 100%;
           background: var(--primary);
           padding: 10px;
           display: flex;
           flex-direction: column;
           gap: 10px;
+          position: relative;
+          top: -11px;
 
           button {
             border: 1px solid white !important;
+            color: white;
 
             fast-icon {
               background-color: white !important;
