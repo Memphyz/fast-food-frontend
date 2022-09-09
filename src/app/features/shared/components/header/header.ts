@@ -17,7 +17,26 @@ export const unloggedHeaderButtons: IHeaderButton[] = [
     label: 'Entrar',
     icon: 'sign-up',
     routerlink: ['/sign-in']
-  }
+  },
+  {
+    icon: 'cart',
+    label: 'Carrinho',
+    badgeCalc: Cart.itemsLengthString,
+    onClick: () => {
+      const modalService: BsModalService = AppModule.get(BsModalService);
+      if (Cart.cart()?.products) {
+        modalService.show(CartComponent, {
+          animated: true,
+          backdrop: true,
+          class: 'modal-dialog-centered fast-cart justify-content-center',
+          ignoreBackdropClick: true
+        });
+        return undefined;
+      }
+      const alert: ToastrService = AppModule.get(ToastrService);
+      alert.info('Seu carrinho está vazio!', 'Ops!')
+    }
+  },
 ];
 
 export const loggedHeaderButtons: IHeaderButton[] = [
