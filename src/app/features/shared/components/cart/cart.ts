@@ -5,8 +5,6 @@ import { IProduct } from 'src/app/core/interfaces/product.interface';
 export class Cart {
 
   public static add(product: IProduct, total: number): void {
-    console.log(sessionStorage.getItem('cart'));
-
     const cart: ICart = sessionStorage.getItem('cart') ? JSON.parse(window.atob(sessionStorage.getItem('cart'))) : { products: [], total: 0 };
     if (!cart) {
       return undefined;
@@ -25,7 +23,7 @@ export class Cart {
   }
 
   public static clear(): void {
-    sessionStorage.setItem('cart', null);
+    sessionStorage.removeItem('cart')
   }
 
   public static total(products: IProduct[]): number {
